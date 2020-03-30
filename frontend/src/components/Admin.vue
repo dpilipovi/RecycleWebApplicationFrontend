@@ -1,0 +1,234 @@
+<template>
+    <div class="wrapper">
+    <div class="columns">
+      <aside class="column is-2 aside">
+        <nav class="menu">
+          <p class="menu-label">
+            General
+          </p>
+          <ul class="menu-list">
+            <li><a class="is-active" href="#"><span class="icon is-small"><i class="fa fa-tachometer"></i></span> Dashboard</a></li>
+          </ul>
+          <p class="menu-label">
+            Administration
+          </p>
+          <ul class="menu-list">
+            <li><a href="/bulma-admin-dashboard-template/forms.html"><span class="icon is-small"><i class="fa fa-pencil-square-o"></i></span> Forms</a></li>
+            <li><a href="/bulma-admin-dashboard-template/ui-elements.html"><span class="icon is-small"><i class="fa fa-desktop"></i></span> UI Elements</a></li>
+            <li><a href="/bulma-admin-dashboard-template/tables.html"><span class="icon is-small"><i class="fa fa-table"></i></span> Tables</a></li>
+            <li><a href="/bulma-admin-dashboard-template/presentations.html"><span class="icon is-small"><i class="fa fa-bar-chart"></i></span> Presentations</a></li>
+
+            <li>
+              <a class=""><i class="fa fa-cog"></i> Settings</a>
+              <ul>
+                <li><a>Members</a></li>
+                <li><a>Plugins</a></li>
+                <li><a>Add a member</a></li>
+              </ul>
+            </li>
+          </ul>
+          <p class="menu-label">
+            Live On
+          </p>
+          <ul class="menu-list">
+            <li><a><span class="icon is-small"><i class="fa fa-bug"></i></span> Additional Pages</a></li>
+            <li><a><span class="icon is-small"><i class="fa fa-windows"></i></span> Extras</a></li>
+            <li><a><span class="icon is-small"><i class="fa fa-laptop"></i></span> Landing Page</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="column main">
+       
+
+        <div class="level">
+          <div class="level-left">
+            <div class="level-item">
+              <div class="title has-text-primary"><i class="fa fa-tachometer"></i> Dashboard</div>
+            </div>
+          </div>
+          <div class="level-right">
+            <div class="level-item">
+              <button type="button" class="button is-small">
+                {{datum}}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="columns is-multiline">
+          <div class="column">
+            <div class="box notification is-primary">
+              <div class="heading">Top Seller Total</div>
+              <div class="title">56,950</div>
+              <div class="level">
+                <div class="level-item">
+                  <div class="">
+                    <div class="heading">Sales $</div>
+                    <div class="title is-5">250K</div>
+                  </div>
+                </div>
+                <div class="level-item">
+                  <div class="">
+                    <div class="heading">Overall $</div>
+                    <div class="title is-5">750K</div>
+                  </div>
+                </div>
+                <div class="level-item">
+                  <div class="">
+                    <div class="heading">Sales %</div>
+                    <div class="title is-5">25%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="box notification is-warning">
+              <div class="heading">Revenue / Expenses</div>
+              <div class="title">55% / 45%</div>
+              <div class="level">
+                <div class="level-item">
+                  <div class="">
+                    <div class="heading">Rev Prod $</div>
+                    <div class="title is-5">30%</div>
+                  </div>
+                </div>
+                <div class="level-item">
+                  <div class="">
+                    <div class="heading">Rev Serv $</div>
+                    <div class="title is-5">25%</div>
+                  </div>
+                </div>
+                <div class="level-item">
+                  <div class="">
+                    <div class="heading">Exp %</div>
+                    <div class="title is-5">45%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="box notification is-info">
+              <div class="heading">Feedback Activity</div>
+              <div class="title">78% &uarr;</div>
+              <div class="level">
+                <div class="level-item">
+                  <div class="">
+                    <div class="heading">Pos</div>
+                    <div class="title is-5">1560</div>
+                  </div>
+                </div>
+                <div class="level-item">
+                  <div class="">
+                    <div class="heading">Neg</div>
+                    <div class="title is-5">368</div>
+                  </div>
+                </div>
+                <div class="level-item">
+                  <div class="">
+                    <div class="heading">Pos/Neg %</div>
+                    <div class="title is-5">77% / 23%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="box notification is-danger">
+              <div class="heading">Orders / Returns</div>
+              <div class="title">75% / 25%</div>
+              <div class="level">
+                <div class="level-item">
+                  <div class="">
+                    <div class="heading">Orders $</div>
+                    <div class="title is-5">425K</div>
+                  </div>
+                </div>
+                <div class="level-item">
+                  <div class="">
+                    <div class="heading">Returns $</div>
+                    <div class="title is-5">106K</div>
+                  </div>
+                </div>
+                <div class="level-item">
+                  <div class="">
+                    <div class="heading">Success %</div>
+                    <div class="title is-5">+ 28,5%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="columns is-multiline">
+          <div class="column is-6">
+            <article class="message is-dark">
+              <div class="message-header">
+                <p>Chart</p>
+              </div>
+              <div class="message-body">
+                <div id="chartLine" style="width: 100%;"></div>
+              </div>
+            </article>
+          </div>
+          <div class="column is-6">
+            <article class="message is-dark">
+              <div class="message-header">
+                <p>Chart</p>
+              </div>
+              <div class="message-body">
+                <div id="chartScatter" style="width: 100%;"></div>
+              </div>
+            </article>
+          </div>
+          <div class="column is-6">
+            <article class="message is-dark">
+              <div class="message-header">
+                <p>Chart</p>
+              </div>
+              <div class="message-body">
+                <div id="chartDoughnut" style="width: 100%;"></div>
+              </div>
+            </article>
+          </div>
+          <div class="column is-6">
+            <article class="message is-dark">
+              <div class="message-header">
+                <p>Chart</p>
+              </div>
+              <div class="message-body">
+                <div id="chartBar" style="width: 100%;"></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+    data()
+    {
+        return
+        {
+            datum : ""
+        }
+    },
+    created()
+    {
+        let d = new Date()
+        this.datum = d.getDate() +"."+(d.getMonth()+1)+"."+d.getFullYear()+"."
+    },
+    name: 'Admin'
+}
+</script>
+<style scoped>
+.wrapper
+{
+    background: white;
+}
+</style>
