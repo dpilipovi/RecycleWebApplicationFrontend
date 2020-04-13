@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import http from "../http-common";   
+import http from "../http-common";
 
 Vue.use(Vuex);
 
@@ -12,13 +12,13 @@ export const store = new Vuex.Store({
         profile: localStorage.getItem('profile') || null
     },
     getters :
-    {   
+    {
         loggedIn(state)
         {
             //console.log("loggedIn "+state.token)
             return state.token!=null
         }
-       
+
     },
     mutations :
     {
@@ -37,7 +37,7 @@ export const store = new Vuex.Store({
         {
             state.profile=profile;
         },
-        
+
 
 
     },
@@ -52,7 +52,7 @@ export const store = new Vuex.Store({
                 localStorage.removeItem('profile');
                 //console.log(localStorage.getItem('token'));
                 context.commit('destroyToken');
-              
+
             }
         },
 
@@ -69,7 +69,7 @@ export const store = new Vuex.Store({
                     context.commit('retrieveToken', token);
                     //console.log("state token: "+this.state.token)
                     resolve(response);
-                /*   
+                /*
                 this.$store.state.token = response.data;
                 // console.log("response data "+response.data);
                 console.log("token: "+ this.$store.state.token)
@@ -112,10 +112,10 @@ export const store = new Vuex.Store({
                 http
                 .get("/schedule",{ params: {address: selectedAddress}})
                 .then(response => {
-                
-               // console.log(response.data); 
+
+               // console.log(response.data);
                 resolve(response.data);
-                
+
                 })
                 .catch(e => {
                 console.log(e);
@@ -125,19 +125,19 @@ export const store = new Vuex.Store({
             })
         },
 
-      
+
         getProfileDataForMonth(context,data)
         {
         return new Promise((resolve,reject) =>
             {
                 //console.log("year/month = "+data.year+"/"+data.month);
-                
+
                 http.get("/user/data_month", {params: {username: this.state.profile.username, year: data.year, month: data.month}})
                 .then(response => {
-                
-               // console.log(response.data); 
+
+               // console.log(response.data);
                 resolve(response.data);
-                
+
                 })
                 .catch(e => {
                 console.log(e);
@@ -150,13 +150,13 @@ export const store = new Vuex.Store({
         {
         return new Promise((resolve,reject) =>
             {
-                
+
                 http.get("/user/data_year", {params: {username: this.state.profile.username, year: data}})
                 .then(response => {
-                
-               // console.log(response.data); 
+
+               // console.log(response.data);
                 resolve(response.data);
-                
+
                 })
                 .catch(e => {
                 console.log(e);
@@ -169,13 +169,13 @@ export const store = new Vuex.Store({
         {
         return new Promise((resolve,reject) =>
             {
-                
+
                 http.get("/user/data", {params: {username: this.state.profile.username}})
                 .then(response => {
-                
-               // console.log(response.data); 
+
+               // console.log(response.data);
                 resolve(response.data);
-                
+
                 })
                 .catch(e => {
                 console.log(e);
@@ -189,11 +189,11 @@ export const store = new Vuex.Store({
         return new Promise((resolve,reject) =>
             {
                 console.log(data.user)
-                
-                http.post("/user/edit", data.user )
+
+                http.put("/user", data.user )
                 .then(response => {
 
-                console.log(response.data); 
+                console.log(response.data);
 
                /* if(data.flag) */
                context.dispatch('destroyToken')
@@ -203,7 +203,7 @@ export const store = new Vuex.Store({
                 context.commit('setProfile', profile);*/
 
                 resolve(response.data);
-                
+
                 })
                 .catch(e => {
                 console.log(e);
@@ -212,6 +212,6 @@ export const store = new Vuex.Store({
 
             })
         }
-        
+
     }
 })

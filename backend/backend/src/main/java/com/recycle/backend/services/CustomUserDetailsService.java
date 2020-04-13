@@ -2,7 +2,6 @@ package com.recycle.backend.services;
 
 import java.util.ArrayList;
 
-import com.recycle.backend.entities.User;
 import com.recycle.backend.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
        
-        User user = repository.findByUsername(username);
-        return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),new ArrayList<>());
+        return new org.springframework.security.core.userdetails.User(username,repository.findByUsername(username).getPassword(),new ArrayList<>());
     }
     
 }

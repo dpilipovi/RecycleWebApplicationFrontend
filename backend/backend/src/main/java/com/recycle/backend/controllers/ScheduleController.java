@@ -27,30 +27,16 @@ public class ScheduleController
     private ScheduleRepository repository ;
     
 
-   
-
-    public ScheduleController()
-    {  
-    }
-
-   /* @GetMapping("")
-    public List<Schedule> getAll()
-    {
-        System.out.println("get all");
-        return repository.findAll();
-    }*/
-
     @PostMapping("")
-    public String postMethodName(@RequestBody Schedule schedule) {
-        repository.save(schedule);
+    public Schedule saveSchedule(@RequestBody Schedule schedule) {
+
+      return repository.save(schedule);
         
-        return "schedule saved";
     }
     
     @GetMapping("")
     public List<Schedule> getByAddress(@RequestParam String address)
     {
-        //System.out.println(address);
         return repository.findByAddress(address);
     }
 

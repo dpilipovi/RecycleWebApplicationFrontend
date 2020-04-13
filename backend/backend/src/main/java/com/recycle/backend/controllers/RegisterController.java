@@ -19,33 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class RegisterController
 {
 
-     @Autowired
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private UserRepository repository;
 
     @PostMapping("")
-    public boolean addUser(@RequestBody User user) throws Exception
+    public User addUser(@RequestBody User user) throws Exception
     {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        System.out.println(user.getUsername());
-        System.out.println(user.getPassword());
-        System.out.println(user.getAddress());
-        System.out.println(user.getEmail());
-        System.out.println(user.getFirstname());
-        System.out.println(user.getLastname());
-        try
-        {
-            repository.save(user);
-            System.out.println("unosenje usera");
-        }
-        catch(Exception ex)
-        {
-            System.out.println(ex);
-        }
+        return  repository.save(user);
 
-        return true;
     }
 
 
