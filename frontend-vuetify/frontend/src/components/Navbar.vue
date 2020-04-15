@@ -1,81 +1,92 @@
 <template>
-  <nav data-aos="fade-down" data-aos-duration="1000">
-        <v-navigation-drawer color="teal" v-model="drawer" absolute class="hidden-md-and-up">
-        <v-app-bar-nav-icon @click="drawer=!drawer"> </v-app-bar-nav-icon>
-        <v-list>
+      <nav data-aos="fade-down" data-aos-duration="1000">
+        <v-navigation-drawer
+          color="teal"
+          v-model="drawer"
+          absolute
+          class="hidden-md-and-up"
+        >
+          <v-app-bar-nav-icon @click="drawer = !drawer"> </v-app-bar-nav-icon>
+          <v-list>
             <v-list-item to="/">
-                 <v-list-item-title>Home</v-list-item-title>
+              <v-list-item-title>Home</v-list-item-title>
             </v-list-item>
-              <v-list-item to="/about">
-                 <v-list-item-title>About us</v-list-item-title>
+            <v-list-item to="/about">
+              <v-list-item-title>About us</v-list-item-title>
             </v-list-item>
             <v-list-item v-if="!loggedIn" to="/login">
-                <v-list-item-title> Log in </v-list-item-title>
+              <v-list-item-title> Log in </v-list-item-title>
             </v-list-item>
-                <v-list-item v-if="loggedIn" to="/profile">
-                    <v-list-item-title>Profile </v-list-item-title>
-                </v-list-item>
+            <v-list-item v-if="loggedIn" to="/profile">
+              <v-list-item-title>Profile </v-list-item-title>
+            </v-list-item>
             <v-list-item v-if="loggedIn" to="/logout">
-                <v-list-item-title> Log out </v-list-item-title>
+              <v-list-item-title> Log out </v-list-item-title>
             </v-list-item>
             <v-list-item v-if="!loggedIn" to="/register">
-                <v-list-item-title> Register </v-list-item-title>
+              <v-list-item-title> Register </v-list-item-title>
             </v-list-item>
-        </v-list>
+          </v-list>
         </v-navigation-drawer>
 
         <v-toolbar dense color="teal">
-            <v-app-bar-nav-icon @click="drawer=!drawer"  class="hidden-md-and-up"> </v-app-bar-nav-icon>
-            <v-toolbar-title>Recycle</v-toolbar-title>
-            <v-spacer></v-spacer>
-            <div class="hidden-sm-and-down">
-                <v-btn text  to="/">
-                    Home
-                </v-btn>
+          <v-app-bar-nav-icon
+            @click="drawer = !drawer"
+            class="hidden-md-and-up"
+          >
+          </v-app-bar-nav-icon>
+          <v-toolbar-title>Recycle</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <div class="hidden-sm-and-down">
+            <v-btn text to="/">
+              Home
+            </v-btn>
 
-                <v-btn text  to="/about">
-                    About us
-                    </v-btn>
+            <v-btn text to="/about">
+              About us
+            </v-btn>
 
-                <v-menu icon bottom origin="center center" transition="scale-transition" >
-                    <template v-slot:activator="{ on }">
-                        <v-btn icon> <v-icon v-on="on" >mdi-account</v-icon></v-btn>
-                    </template>
-                    <v-list color="teal">
-                        <v-list-item v-if="!loggedIn" to="/login">
-                            <v-list-item-title> Log in </v-list-item-title>
-                        </v-list-item>
-                         <v-list-item v-if="loggedIn" to="/profile">
-                             <v-list-item-title>Profile </v-list-item-title>
-                         </v-list-item>
-                        <v-list-item v-if="loggedIn" to="/logout">
-                             <v-list-item-title> Log out </v-list-item-title>
-                         </v-list-item>
-                         <v-list-item v-if="!loggedIn" to="/register">
-                              <v-list-item-title> Register </v-list-item-title>
-                           </v-list-item>
-                     </v-list>
-                </v-menu>
-            </div>
+            <v-menu
+              icon
+              bottom
+              origin="center center"
+              transition="scale-transition"
+            >
+              <template v-slot:activator="{ on }">
+                <v-btn icon v-on="on"> <v-icon >mdi-account</v-icon></v-btn>
+              </template>
+              <v-list color="teal">
+                <v-list-item v-if="!loggedIn" to="/login">
+                  <v-list-item-title> Log in </v-list-item-title>
+                </v-list-item>
+                <v-list-item v-if="loggedIn" to="/profile">
+                  <v-list-item-title>Profile </v-list-item-title>
+                </v-list-item>
+                <v-list-item v-if="loggedIn" to="/logout">
+                  <v-list-item-title> Log out </v-list-item-title>
+                </v-list-item>
+                <v-list-item v-if="!loggedIn" to="/register">
+                  <v-list-item-title> Register </v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </div>
         </v-toolbar>
-    </nav>
+      </nav>
 </template>
 <script>
 export default {
-    data () {
-      return {
-        drawer: false
-      }},
-    computed:
-    {
-        loggedIn()
-        {
-            return this.$store.getters.loggedIn 
-        }
-
+  data() {
+    return {
+      drawer: false,
+    };
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.getters.loggedIn;
     },
-    name: 'Navbar'
-}
+  },
+  name: "Navbar",
+};
 </script>
-<style scoped>
-</style>
+<style scoped></style>

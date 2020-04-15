@@ -1,6 +1,6 @@
 <template>
 <v-content>
- <v-container data-aos="fade-up">
+ <v-container data-aos="fade-up" data-aos-duration="1000">
           <h2 class="display-2 font-weight-bold mb-3 text-uppercase text-center">Contact us</h2>
 
           <v-responsive
@@ -61,7 +61,7 @@
           </v-theme-provider>
         </v-container>
 
-        <div class="py-12"></div>
+        <div class="py-6"></div>
     </v-content>
 </template>
 <style scoped>
