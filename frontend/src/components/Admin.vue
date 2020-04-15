@@ -39,7 +39,6 @@
       </aside>
 
       <main class="column main">
-       
 
         <div class="level">
           <div class="level-left">
@@ -211,19 +210,15 @@
 </template>
 <script>
 export default {
-    data()
+  data () {
     {
-        return
-        {
-            datum : ""
-        }
-    },
-    created()
-    {
-        let d = new Date()
-        this.datum = d.getDate() +"."+(d.getMonth()+1)+"."+d.getFullYear()+"."
-    },
-    name: 'Admin'
+    }
+  },
+  created () {
+    let d = new Date()
+    this.datum = d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear() + '.'
+  },
+  name: 'Admin'
 }
 </script>
 <style scoped>

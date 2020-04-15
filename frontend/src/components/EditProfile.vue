@@ -65,75 +65,70 @@
              </button>
            </p>
          </div>
-       </div>       
+       </div>
     </div>
-    
+
 </template>
 <script>
 export default
 {
-    data()
-    {
-        return{
-             profile: this.$store.state.profile,
-             user : {
-             id : null,
-             password : "",
-             firstname : "",
-             lastname : "",
-             username : "",
-             email : "",
-             address : "",
-             level : null
-             },
-             pass2 : ""
-        }
-       
-    },
-    created()
-    {
-      this.user.id=this.profile.id;
-      this.user.firstname=this.profile.firstname;
-      this.user.lastname=this.profile.lastname;
-      this.user.username=this.profile.username;
-      this.user.email=this.profile.email;
-      this.user.address=this.profile.address;
-      this.user.level=this.profile.level;
+  data () {
+    return {
+      profile: this.$store.state.profile,
+      user: {
+        id: null,
+        password: '',
+        firstname: '',
+        lastname: '',
+        username: '',
+        email: '',
+        address: '',
+        level: null
+      },
+      pass2: ''
+    }
+  },
+  created () {
+    this.user.id = this.profile.id
+    this.user.firstname = this.profile.firstname
+    this.user.lastname = this.profile.lastname
+    this.user.username = this.profile.username
+    this.user.email = this.profile.email
+    this.user.address = this.profile.address
+    this.user.level = this.profile.level
+  },
 
-    },
-    
-    computed: {
-      isComplete () {
-      if(this.profile.username != "" && this.user.name != "" && this.user.lastname != "" && this.user.email != "" && this.user.address != "" && this.user.password==this.pass2 ) return true;
-      return false;
-      }
-    },
+  computed: {
+    isComplete () {
+      if (this.profile.username != '' && this.user.name != '' && this.user.lastname != '' && this.user.email != '' && this.user.address != '' && this.user.password == this.pass2) return true
+      return false
+    }
+  },
 
-    methods: {
+  methods: {
 
-      updateProfile()
-      {
-        //console.log(this.user.password +" "+this.pass2 +" "+this.user.firstname +" "+this.user.lastname +" "+this.user.username +" "+this.user.email +" "+this.user.address);
-        //console.log(this.$store.state.profile);
-       let flag= false;
-       if(this.pass2 != "") flag=true;
-       let data=
+    updateProfile () {
+      // console.log(this.user.password +" "+this.pass2 +" "+this.user.firstname +" "+this.user.lastname +" "+this.user.username +" "+this.user.email +" "+this.user.address);
+      // console.log(this.$store.state.profile);
+      let flag = false
+      if (this.pass2 != '') flag = true
+      let data =
         {
           user: this.user,
           flag: flag
         }
+      console.log(data)
 
-        this.$store.dispatch('editUser', data)
-            .then(response =>
+      /* this.$store.dispatch('editUser', data)
+            .then(
             {
               localStorage.setItem('redirected','1')
-             /*if(this.user.password != "") */
+             if(this.user.password != "")
              this.$router.push('/login');
-            })
+            }) */
+    }
 
-      }
-
-    },
+  },
   name: 'EditProfile'
 }
 </script>

@@ -65,10 +65,10 @@ public class UserController
     }
 
     @PutMapping("")
-    public void editUser(@RequestHeader HttpHeaders headers, @RequestBody User editedUser)
+    public User editUser(@RequestHeader HttpHeaders headers, @RequestBody User editedUser)
     {
         String token= headers.get("Authorization").toString().substring(8);
-        userService.editUser(userRepository.findByUsername(jwtUtil.extractUsername(token.substring(0,token.length()-1))),editedUser);
+        return userService.editUser(userRepository.findByUsername(jwtUtil.extractUsername(token.substring(0,token.length()-1))),editedUser);
     }
 
     @PostMapping

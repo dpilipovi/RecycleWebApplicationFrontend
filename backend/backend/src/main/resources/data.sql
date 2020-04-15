@@ -1,14 +1,14 @@
 insert into user values(1,'Ilica 27','admin@email.com','admin','admin',1,'$2a$10$tbPePOo.rqP5QEpA.lUqyOAT9rb5uVfXvCK6.qIOf.DpgtUuiMQT6','admin');
 insert into user values(2,'Vrbik 8','pperic@email.com','Pero','Peric',1,'$2a$10$tbPePOo.rqP5QEpA.lUqyOAT9rb5uVfXvCK6.qIOf.DpgtUuiMQT6','pperic');
 
-insert into schedule values(1,'Ilica','Plastika','Petak');
-insert into schedule values(2,'Ilica','Papir','Srijeda');
-insert into schedule values(3,'Vrbik','Staklo','Utorak');
+insert into schedule values(1,'Ilica','Friday','Plastic');
+insert into schedule values(2,'Ilica','Wednesday','Paper');
+insert into schedule values(3,'Vrbik','Tuesday','Glass');
 
 
-insert into type values(1,'Plastika');
-insert into type values(2,'Papir');
-insert into type values(3,'Staklo');
+insert into type values(1,'Plastic');
+insert into type values(2,'Paper');
+insert into type values(3,'Glass');
 insert into type values(4,'Metal');
 
 

@@ -34,10 +34,16 @@ public class ScheduleController
         
     }
     
-    @GetMapping("")
+    /*@GetMapping("")
     public List<Schedule> getByAddress(@RequestParam String address)
     {
         return repository.findByAddress(address);
+    }*/
+
+    @GetMapping("")
+    public List<Schedule> getSchedule()
+    {
+        return repository.findAll();
     }
 
 }

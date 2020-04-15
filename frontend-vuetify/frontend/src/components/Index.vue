@@ -1,0 +1,286 @@
+<template>
+    <v-content class="grey lighten-3"  >
+        <section id="hero">
+        <v-row no-gutters>
+          <v-img
+            height="94.9vh"
+            src="../assets/images/background7.jpg"
+          >
+          <div class="background-layer">
+            <v-theme-provider dark>
+              <v-container fill-height data-aos="fade-up" data-aos-duration="1000">
+                <v-row
+                  align="center"
+                  class="white--text mx-auto"
+                  justify="center"
+                >
+                  <v-col
+                    class="white--text text-center"
+                    cols="12"
+                    tag="h1"
+                  >
+                    <span
+                      class="font-weight-light"
+                      :class="[$vuetify.breakpoint.smAndDown ? 'display-1' : 'display-2']"
+                    >
+                      WELCOME TO
+                    </span>
+
+                    <br>
+
+                    <span
+                      :class="[$vuetify.breakpoint.smAndDown ? 'display-3': 'display-4']"
+                      class="font-weight-black"
+                    >
+                      RECYCLE WEB
+                    </span>
+
+                  </v-col>
+
+                  <v-btn
+                    class="align-self-end"
+                    fab
+                    outlined
+                    @click="$vuetify.goTo('#about-me')"
+                  >
+                    <v-icon>mdi-chevron-double-down</v-icon>
+                  </v-btn>
+                </v-row>
+              </v-container>
+            </v-theme-provider>
+             </div>
+          </v-img>
+        </v-row>
+      </section>
+       <section id="about-me" >
+        <div class="py-12"></div>
+
+        <v-container class="text-center" data-aos="fade-up" data-aos-duration="1000" >
+          <h2 class="display-2 font-weight-bold mb-3">COLLECTION SCHEDULES</h2>
+          <div class="py-3"></div>
+          <v-data-iterator
+      :items="raspored"
+      :items-per-page.sync="itemsPerPage"
+      :page="page"
+      :search="search"
+      hide-default-footer
+    >
+      <template v-slot:header>
+        <v-toolbar
+          dark
+          color="blue darken-3"
+          class="mb-1"
+        >
+          <v-text-field
+            v-model="search"
+            clearable
+            flat
+            solo-inverted
+            hide-details
+            label="Search"
+          ></v-text-field>
+          <template v-if="$vuetify.breakpoint.mdAndUp">
+            <v-spacer></v-spacer>
+            <v-btn-toggle
+              v-model="sortDesc"
+              mandatory
+            >
+              <v-btn
+                large
+                depressed
+                color="blue"
+                :value="false"
+              >
+                <v-icon>mdi-arrow-up</v-icon>
+              </v-btn>
+              <v-btn
+                large
+                depressed
+                color="blue"
+                :value="true"
+              >
+                <v-icon>mdi-arrow-down</v-icon>
+              </v-btn>
+            </v-btn-toggle>
+          </template>
+        </v-toolbar>
+      </template>
+
+      <template >
+        <v-row>
+          <v-col
+            v-for="r in raspored"
+            :key="r.address"
+            cols="12"
+            sm="6"
+            md="4"
+            lg="3"
+          >
+            <v-card>
+              <v-card-title class="subheading font-weight-bold">{{ r.address }}</v-card-title>
+
+              <v-divider></v-divider>
+              <v-list dense>
+                <v-list-item
+                  v-for="(key, index) in keys"
+                  :key="index"
+                >
+                  <v-list-item-content :class="{ 'blue--text': sortBy === key }">{{ key }}:</v-list-item-content>
+                  <v-list-item-content class="align-end" :class="{ 'blue--text': sortBy === key }">{{ r[key.toLowerCase()] }}</v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-card>
+          </v-col>
+        </v-row>
+      </template>
+
+      <template v-slot:footer>
+        <v-row class="mt-2" align="center" justify="center">
+          <span class="grey--text">Items per page</span>
+          <v-menu offset-y>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                dark
+                text
+                color="primary"
+                class="ml-2"
+                v-on="on"
+              >
+                {{ itemsPerPage }}
+                <v-icon>mdi-chevron-down</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item
+                v-for="(number, index) in itemsPerPageArray"
+                :key="index"
+                @click="updateItemsPerPage(number)"
+              >
+                <v-list-item-title>{{ number }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+
+          <v-spacer></v-spacer>
+
+          <span
+            class="mr-4
+            grey--text"
+          >
+            Page {{ page }} of {{ numberOfPages }}
+          </span>
+          <v-btn
+            fab
+            dark
+            color="blue darken-3"
+            class="mr-1"
+            @click="formerPage"
+          >
+            <v-icon>mdi-chevron-left</v-icon>
+          </v-btn>
+          <v-btn
+            fab
+            dark
+            color="blue darken-3"
+            class="ml-1"
+            @click="nextPage"
+          >
+            <v-icon>mdi-chevron-right</v-icon>
+          </v-btn>
+        </v-row>
+      </template>
+    </v-data-iterator>
+        <div class="py-12 hidden-sm-and-down"></div>
+        <div class="py-12 hidden-sm-and-down"></div>
+        <div class="py-12 hidden-sm-and-down"></div>
+        </v-container>
+      </section>
+      <div class="py-12 hidden-sm-and-down"></div>
+      <div class="py-5"></div>
+
+        <Contact/>
+     </v-content>
+</template>
+  <script>     
+  import Contact from "@/components/Contact"
+  
+  export default {
+    data() {
+      return {
+        raspored: [],
+        selectedAddress: '',
+        hide: true,
+        error: false,
+        itemsPerPageArray: [4, 8, 12],
+        search: '',
+        filter: {},
+        page: 1,
+        itemsPerPage: 4,
+        keys: [
+          'Type',
+          'Day'
+        ],
+      }
+    },
+   mounted() {
+
+    this.$store.dispatch('getSchedule')
+    .then(response =>
+    {
+        this.raspored=response;
+        //console.log(this.raspored)
+    })
+
+
+     if(this.$store.getters.loggedIn==true) {
+       this.$store.dispatch('setProfile')
+        .then()
+        {
+           // console.log("proslo")
+        }
+     }
+    if (localStorage.getItem('reloaded')) {
+        // The page was just reloaded. Clear the value from local storage
+        // so that it will reload the next time this page is visited.
+        localStorage.removeItem('reloaded');
+    } else {
+        // Set a flag so that we know not to reload the page twice.
+        localStorage.setItem('reloaded', '1');
+        location.reload();
+    }
+},
+    methods: {
+       nextPage () {
+        if (this.page + 1 <= this.numberOfPages) this.page += 1
+      },
+      formerPage () {
+        if (this.page - 1 >= 1) this.page -= 1
+      },
+      updateItemsPerPage (number) {
+        this.itemsPerPage = number
+      },
+    },
+    computed: {
+    isComplete () {
+      
+      if(this.selectedAddress!="" || this.selectedAddress==null) return true
+      return false
+    }, 
+    numberOfPages () {
+        return Math.ceil(this.raspored.length / this.itemsPerPage)
+    }
+  },
+  name: 'Index',
+  components: {
+    Contact
+  }
+}
+</script>
+<style scoped>
+.background-layer
+{
+    background: rgba(0,0,0,0.3);
+    height:94.9vh;
+}
+
+</style>
