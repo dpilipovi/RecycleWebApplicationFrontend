@@ -1,11 +1,11 @@
 <template>
-    <v-app id="register" class="grey lighten-3">
       <v-content>
+         <v-img height="93.2vh" src="../assets/images/login_background.jpg">
         <v-container fluid fill-height>
           <v-layout align-center justify-center>
             <v-flex xs12 sm8 md4>
-              <v-card class="mx-auto" max-width="500">
-                <v-card-title class="teal">Register</v-card-title>
+              <v-card class="mx-auto" max-width="500" color="white--text">
+                <v-card-title class="teal" >Register</v-card-title>
                 <v-card-text>
                   <v-form
                     align="center"
@@ -15,6 +15,7 @@
                     lazy-validation
                   >
                     <v-text-field
+                      color="teal"
                       v-model="firstname"
                       :rules="nameRules"
                       label="Firstname"
@@ -22,6 +23,7 @@
                     ></v-text-field>
 
                     <v-text-field
+                      color="teal"
                       v-model="lastname"
                       :rules="nameRules"
                       label="Lastname"
@@ -29,6 +31,7 @@
                     ></v-text-field>
 
                     <v-text-field
+                      color="teal"
                       v-model="username"
                       :rules="nameRules"
                       label="Username"
@@ -36,6 +39,7 @@
                     ></v-text-field>
 
                     <v-text-field
+                      color="teal"
                       v-model="email"
                       :rules="emailRules"
                       label="E-mail"
@@ -43,6 +47,7 @@
                     ></v-text-field>
 
                     <v-text-field
+                      color="teal"
                       v-model="address"
                       :rules="nameRules"
                       label="Address"
@@ -50,16 +55,29 @@
                     ></v-text-field>
 
                     <v-text-field
+                      color="teal"
                       :value="password"
                       label="Password"
                       :append-icon="value ? 'mdi-eye' : 'mdi-eye-off'"
                       @click:append="() => (value = !value)"
                       :type="value ? 'password' : 'text'"
-                      :rules="[rules.password]"
+                      :rules="passwordRules"
                       @input="(_) => (password = _)"
                     ></v-text-field>
 
+                     <v-text-field
+                      color="teal"
+                      :value="password2"
+                      label="Repeat password"
+                      :append-icon="value ? 'mdi-eye' : 'mdi-eye-off'"
+                      @click:append="() => (value = !value)"
+                      :type="value ? 'password' : 'text'"
+                      :rules="password2Rules"
+                      @input="(_) => (password2 = _)"
+                    ></v-text-field>
+
                     <v-checkbox
+                      color="teal"
                       v-model="checkbox"
                       :rules="[(v) => !!v || 'You must agree to continue!']"
                       label="Do you agree?"
@@ -70,17 +88,17 @@
                       :disabled="!valid"
                       color="success"
                       class="mr-4"
-                      @click="validate"
+                      @click="register"
                     >
-                      Validate
+                      Register!
                     </v-btn>
 
-                    <v-btn color="error" class="mr-4" @click="reset">
+                    <!-- <v-btn color="warning" class="mr-4" @click="reset">
                       Reset Form
-                    </v-btn>
+                    </v-btn> -->
 
-                    <v-btn color="warning" @click="resetValidation">
-                      Reset Validation
+                     <v-btn color="primary" to="/login"> 
+                      Login
                     </v-btn>
                   </v-form>
                 </v-card-text>
@@ -88,75 +106,8 @@
             </v-flex>
           </v-layout>
         </v-container>
+         </v-img>
       </v-content>
-    </v-app>
-  <!-- <div class="hero-body">
-        <div class="column is-4 is-offset-4">
-           <div class="field">
-            <p class="control has-icons-left">
-                <input class="input" type="text" placeholder="Ime" v-model="name">
-                <span class="icon is-small is-left">
-                <i class="fa fa-user"></i>
-                </span>
-            </p>
-            </div>
-             <div class="field">
-            <p class="control has-icons-left">
-                <input class="input" type="text" placeholder="Prezime" v-model="lastname">
-                <span class="icon is-small is-left">
-                <i class="fa fa-user"></i>
-                </span>
-            </p>
-            </div>
-            <div class="field">
-            <p class="control has-icons-left">
-                <input class="input" type="text" placeholder="Korisničko ime" v-model="username">
-                <span class="icon is-small is-left">
-                <i class="fa fa-user"></i>
-                </span>
-            </p>
-            </div>
-           <div class="field">
-           <p class="control has-icons-left has-icons-right">
-             <input class="input" type="email" placeholder="Email" v-model="email">
-             <span class="icon is-small is-left">
-               <i class="fa fa-envelope"></i>
-             </span>
-           </p>
-         </div>
-         <div class="field">
-            <p class="control has-icons-left">
-              <input class="input" type="text" placeholder="Adresa" v-model="address">
-              <span class="icon is-small is-left">
-                <i class="fa fa-home"></i>
-              </span>
-            </p>
-          </div>
-         <div class="field">
-           <p class="control has-icons-left">
-             <input class="input" type="password" placeholder="Lozinka" v-model="pass">
-             <span class="icon is-small is-left">
-               <i class="fa fa-lock"></i>
-             </span>
-           </p>
-         </div>
-         <div class="field">
-            <p class="control has-icons-left">
-              <input class="input" type="password" placeholder="Ponovi lozinku" v-model="pass2">
-              <span class="icon is-small is-left">
-                <i class="fa fa-lock"></i>
-              </span>
-            </p>
-          </div>
-         <div class="field">
-           <p class="control">
-             <button class="button is-info" @click="register()" :disabled="!isComplete">
-               Register
-             </button>
-           </p>
-         </div>
-       </div>       
-    </div> -->
 </template>
 <script>
 import http from "../http-common";
@@ -165,14 +116,26 @@ export default {
   data() {
     return {
       username: "",
-      pass: "",
+      password: "",
       email: "",
       address: "",
-      pass2: "",
+      password2: "",
       name: "",
       lastname: "",
+      firstname: "",
+      checkbox: false,
       valid: true,
       value: true,
+       passwordRules: [
+         v => !!v || "Password is required",
+        (v) => (v && v.length >= 8) || "Password must be at least 8 characters",
+
+              
+      ],
+      password2Rules: [
+         v => (!!v && v) === this.password ||
+              'Values do not match'
+      ],
       nameRules: [
         (v) => !!v || "Name is required",
         (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
@@ -180,18 +143,8 @@ export default {
       emailRules: [
         (v) => !!v || "E-mail is required",
         (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
-      ],
-      rules: {
-        required: (value) => !!value || "Required.",
-        password: (value) => {
-          const pattern =
-            "/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/";
-          return (
-            pattern.test(value) ||
-            "Min. 8 characters with at least one capital letter, a number and a special character."
-          );
-        },
-      },
+      ]
+      
     };
   },
   methods: {
@@ -207,8 +160,8 @@ export default {
     register() {
       this.data = {
         username: this.username,
-        password: this.pass,
-        firstname: this.name,
+        password: this.password,
+        firstname: this.firstname,
         lastname: this.lastname,
         email: this.email,
         address: this.address,
@@ -217,7 +170,7 @@ export default {
         .post("/register", this.data)
         .then((response) => {
           console.log(response.data);
-          if (response.data == true) this.$router.push("/login");
+          this.$router.push("/login");
         })
         .catch((e) => {
           console.log(e);

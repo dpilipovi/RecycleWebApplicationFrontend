@@ -3,9 +3,10 @@
 <v-app-bar
     color="teal"
       data-aos="fade-down" data-aos-duration="1000">
-    <v-toolbar color="teal" max-height="64px" extended elevation=0>
+    <v-toolbar color="teal" max-height="64px" extended elevation=0 data-aos="fade-down" data-aos-duration="1000">
       <v-app-bar-nav-icon @click="drawer = !drawer" class="hidden-md-and-up"></v-app-bar-nav-icon>
-      <v-toolbar-title><v-icon>recycle</v-icon>Recycle</v-toolbar-title>
+    
+    <v-toolbar-title class="headline font-weight-medium"><v-icon size=30>mdi-recycle</v-icon>RECYCLE</v-toolbar-title>
       <v-spacer></v-spacer>
       <div class="hidden-sm-and-down">
         <v-btn text to="/">Home</v-btn>
@@ -76,4 +77,5 @@ export default {
   name: "Navbar"
 };
 </script>
-<style scoped></style>
+<style scoped>
+</style>

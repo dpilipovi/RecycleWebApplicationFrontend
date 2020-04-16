@@ -26,7 +26,7 @@ public class RegisterController
     private UserRepository repository;
 
     @PostMapping("")
-    public User addUser(@RequestBody User user) throws Exception
+    public User addUser(@RequestBody User user)
     {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return  repository.save(user);

@@ -69,12 +69,6 @@ export const store = new Vuex.Store({
                     context.commit('retrieveToken', token);
                     //console.log("state token: "+this.state.token)
                     resolve(response);
-                /*
-                this.$store.state.token = response.data;
-                // console.log("response data "+response.data);
-                console.log("token: "+ this.$store.state.token)
-                this.$router.push('/');
-                */
                 })
                 .catch(e => {
                 console.log(e);
@@ -83,14 +77,14 @@ export const store = new Vuex.Store({
             })
         },
 
-        setProfile(context)
+        getProfile(context)
         {
             return new Promise((resolve,reject) =>
             {
                 //console.log(http.defaults)
                 //console.log(this.state.token)
                 http
-                .get("/user"/*,{headers: {"Authorization": this.state.token}}*/)
+                .get("/user")
                 .then(response => {
                     const profile = response.data;
                     localStorage.setItem('profile', profile);

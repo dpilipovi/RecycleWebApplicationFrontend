@@ -1,5 +1,9 @@
 <template>
-    <div class="hero-body">
+<v-container>
+    
+
+</v-container>
+    <!-- <div class="hero-body">
      <div class="container has-text-centered" >
         <h1 class="title" style="display:inline">{{profile.firstname}} {{profile.lastname}}</h1>
         <div class="phone"></div>
@@ -59,7 +63,7 @@
 
 
     </div>
-    </div>
+    </div> -->
 </template>
 <script>
 
@@ -295,10 +299,6 @@ export default {
 }
 </script>
 <style scoped>
-template
-{
-    background-image: url(../assets/images/img2.jpeg);
-}
 p
 {
     color:black;

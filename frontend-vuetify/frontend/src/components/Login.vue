@@ -1,30 +1,34 @@
 <template>
-  <v-app id="inspire" class="grey lighten-3">
-    <v-content>
+    <v-content id="inspire">
+      <v-img height="93.2vh" src="../assets/images/login_background.jpg">
       <v-container
-        fluid
         fill-height
       >
         <v-layout
           align-center
           justify-center
+          
         >
           <v-flex
             xs12
             sm8
             md4
           >
-            <v-card class="elevation-12">
+
+          <v-content xs6 sm4 md2></v-content>
+            <v-card class="elevation-12 ">
               <v-toolbar
                 color="teal"
                 flat
+                class="text--white"
               >
-                <v-toolbar-title>Login form</v-toolbar-title>
+                <v-toolbar-title class="white--text">Login form</v-toolbar-title>
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
                 <v-form>
                   <v-text-field
+                    color="teal"
                     label="Username"
                     name="username"
                     prepend-icon="person"
@@ -33,6 +37,7 @@
                   ></v-text-field>
 
                   <v-text-field
+                    color="teal"
                     id="password"
                     label="Password"
                     name="password"
@@ -44,44 +49,14 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="teal"  @click="login()">Login </v-btn>
+                <v-btn color="teal"  @click="login()" dark>Login </v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
         </v-layout>
       </v-container>
+      </v-img>
     </v-content>
-  </v-app>
-<!-- <div class="hero-body is-desktop is-vcentered">
-        <div class="column is-4 is-offset-4">
-           <div class="field">
-           <p class="control has-icons-left has-icons-right">
-             <input class="input" type="text" placeholder="Username" v-model="username"> 
-             <span class="icon is-small is-left">
-               <i class="fa fa-user"></i>
-             </span>
-             <span class="icon is-small is-right">
-               <i class="fa fa-check"></i> 
-             </span>
-           </p>
-         </div>
-         <div class="field">
-           <p class="control has-icons-left">
-             <input class="input" type="password" placeholder="Lozinka" v-model="pass">
-             <span class="icon is-small is-left">
-               <i class="fa fa-lock"></i>
-             </span>
-           </p>
-         </div>
-         <div class="field">
-           <p class="control">
-             <button class="button is-info" @click="login()" :disabled="!isComplete">
-               Login
-             </button>
-           </p>
-         </div>
-       </div>
-    </div> -->
 </template>
 <script>
 export default {
@@ -91,18 +66,7 @@ export default {
        password: ''
       }
     },
-    mounted()
-    {
-      if (localStorage.getItem('redirected')) 
-      {
-        localStorage.removeItem('redirected');
-        location.reload();  
-    } else 
-    {
-        // Set a flag so that we know not to reload the page twice.
-        localStorage.setItem('redirected', '1');
-    }
-    },
+   
     methods: {
       login(){
       
@@ -117,8 +81,15 @@ export default {
       this.$store.dispatch('setToken', this.data)
       .then(response =>
       {
-        console.log(response)
-          this.$router.push('/');
+        if(response)
+        {
+          this.$store.dispatch('getProfile').then(response =>
+          {
+           console.log(response)
+           this.$router.push('/')
+          })
+        }
+        
       })
     
       }
@@ -127,13 +98,5 @@ export default {
 }
 </script>
 <style scoped>
-.input
-{
-  background:rgba(0, 0, 0, 0.6);
-  color:white;
-}
-::placeholder
-{
-  color:gray;
-}
+
 </style>

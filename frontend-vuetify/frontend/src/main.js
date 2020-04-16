@@ -5,7 +5,7 @@ import {store} from './store/store'
 import vuetify from './plugins/vuetify';
 import AOS from "aos";
 import "aos/dist/aos.css";
-import 'material-design-icons-iconfont/dist/material-design-icons.css'
+
 
 Vue.config.productionTip = false
 
