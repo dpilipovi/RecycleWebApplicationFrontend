@@ -1,12 +1,11 @@
 <template>
-  <div id="app-register">
-    <v-app id="register">
+    <v-app id="register" class="grey lighten-3">
       <v-content>
         <v-container fluid fill-height>
           <v-layout align-center justify-center>
             <v-flex xs12 sm8 md4>
               <v-card class="mx-auto" max-width="500">
-                <v-card-title>Register</v-card-title>
+                <v-card-title class="teal">Register</v-card-title>
                 <v-card-text>
                   <v-form
                     align="center"
@@ -91,7 +90,6 @@
         </v-container>
       </v-content>
     </v-app>
-  </div>
   <!-- <div class="hero-body">
         <div class="column is-4 is-offset-4">
            <div class="field">

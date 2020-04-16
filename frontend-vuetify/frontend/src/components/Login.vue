@@ -1,6 +1,5 @@
 <template>
-<div id="app">
-  <v-app id="inspire">
+  <v-app id="inspire" class="grey lighten-3">
     <v-content>
       <v-container
         fluid
@@ -18,7 +17,6 @@
             <v-card class="elevation-12">
               <v-toolbar
                 color="teal"
-                dark
                 flat
               >
                 <v-toolbar-title>Login form</v-toolbar-title>
@@ -46,7 +44,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="teal" dark @click="login()">Login </v-btn>
+                <v-btn color="teal"  @click="login()">Login </v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -54,7 +52,6 @@
       </v-container>
     </v-content>
   </v-app>
-</div>
 <!-- <div class="hero-body is-desktop is-vcentered">
         <div class="column is-4 is-offset-4">
            <div class="field">
