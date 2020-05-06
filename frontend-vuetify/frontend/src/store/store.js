@@ -82,11 +82,12 @@ export const store = new Vuex.Store({
             return new Promise((resolve,reject) =>
             {
                 //console.log(http.defaults)
-                //console.log(this.state.token)
+                console.log(this.state.token)
                 http
                 .get("/user")
                 .then(response => {
                     const profile = response.data;
+                    console.log(profile)
                     localStorage.setItem('profile', profile);
                     context.commit('setProfile', profile);
 
@@ -125,6 +126,7 @@ export const store = new Vuex.Store({
         return new Promise((resolve,reject) =>
             {
                 //console.log("year/month = "+data.year+"/"+data.month);
+                console.log("username = "+this.state.profile.username)
 
                 http.get("/user/data_month", {params: {username: this.state.profile.username, year: data.year, month: data.month}})
                 .then(response => {
@@ -144,7 +146,7 @@ export const store = new Vuex.Store({
         {
         return new Promise((resolve,reject) =>
             {
-
+                console.log("username = "+this.state.profile.username)
                 http.get("/user/data_year", {params: {username: this.state.profile.username, year: data}})
                 .then(response => {
 

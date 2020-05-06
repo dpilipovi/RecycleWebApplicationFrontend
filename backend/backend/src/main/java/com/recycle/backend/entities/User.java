@@ -1,5 +1,6 @@
 package com.recycle.backend.entities;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -12,8 +13,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="user")
-public class User
+public class User implements Serializable
 {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 6950100003761418181L;
+
+    
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")

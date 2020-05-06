@@ -1,6 +1,34 @@
 <template>
 <v-container>
-    
+    <v-col class="text-center" cols="12" tag="h1">
+                        <span
+                          class="font-weight-light"
+                          :class="[
+                            $vuetify.breakpoint.smAndDown
+                              ? 'display-1'
+                              : 'display-2',
+                          ]"
+                          >{{profile.firstname}} {{profile.lastname}}</span
+                        >
+    </v-col>
+    <v-row>
+        <v-col class="d-flex" cols="2" >
+        <v-select
+          :items="years"
+          label="Year"
+          dense
+          solo
+        ></v-select>
+      </v-col>
+      <v-col class="d-flex" cols="2" >
+        <v-select
+          :items="months"
+          label="Month"
+          dense
+          solo
+        ></v-select>
+      </v-col>
+    </v-row>
 
 </v-container>
     <!-- <div class="hero-body">
