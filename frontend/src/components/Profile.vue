@@ -1,5 +1,51 @@
 <template>
-    <div class="hero-body">
+<v-container>
+    <v-col class="text-center" cols="12" tag="h1">
+                        <span
+                          class="font-weight-light"
+                          :class="[
+                            $vuetify.breakpoint.smAndDown
+                              ? 'display-1'
+                              : 'display-2',
+                          ]"
+                          >{{profile.firstname}} {{profile.lastname}}</span
+                        >
+    </v-col>
+    <v-row>
+        <v-col class="d-flex" cols="2" >
+        <v-select
+          :items="years"
+          label="Year"
+          dense
+          solo
+          v-model="selectedYear"
+          @change="yearChange()"
+        ></v-select>
+      </v-col>
+      <v-col class="d-flex" cols="2" >
+        <v-select
+          :items="months"
+          label="Month"
+          dense
+          solo
+          v-model="selectedMonth"
+          @change="getRecycleData()"
+        ></v-select>
+      </v-col>
+    </v-row>
+
+    <v-row>
+        <v-col class="d-flex" cols="6">
+            <div  v-for="(r,index) in recycleData" :key="index">
+                <!--<p><progress class="progress is-danger" :data-label="r.amount +'kg'" :value="r.amount" :max="max" ></progress>{{r.type.name}}</p>
+                <br>-->
+                    <v-progress-linear height="20px" rounded striped :value="r.amount" color="purple" :max="max" :data-label="r.amount + 'kg'"></v-progress-linear>
+            </div>
+        </v-col>
+    </v-row>
+
+</v-container>
+    <!-- <div class="hero-body">
      <div class="container has-text-centered" >
         <h1 class="title" style="display:inline">{{profile.firstname}} {{profile.lastname}}</h1>
         <div class="phone"></div>
@@ -59,12 +105,14 @@
 
 
     </div>
-    </div>
+    </div> -->
 </template>
 <script>
+
 export default {
      data() {
       return {
+        allData: this.$store.state.profile.user_recycle,
         recycleData: [],
         sum: 0,
         max: 0,
@@ -72,8 +120,8 @@ export default {
         months : [],
         currentYear : 0,
         currentMonth : 0,
-        selectedMonth : null,
-        selectedYear : null,
+        selectedMonth :  new Date().getMonth()+1,
+        selectedYear :  new Date().getFullYear(),
         profile : this.$store.state.profile,
         defaultPage : true,
         achievementData: []
@@ -81,8 +129,9 @@ export default {
     },
     created()
     {
-        let suma=0;
-        let maks=0;
+        console.log(this.allData)
+       // let suma=0;
+      //  let maks=0;
 
         let currentTime = new Date();
 
@@ -110,76 +159,57 @@ export default {
 
             this.months.reverse();
 
-      let data=
-      {
-          year: this.currentYear,
-          month: this.currentMonth
-      }
 
-        this.$store.dispatch('getProfileDataForMonth',data )
-        .then(response =>
-        {
-          this.recycleData = response;
+        //let achievementData=[{type: "PLASTIKA", amount:0, source:"'../assets/images/plastic.jpeg'"},{type: "PAPIR", amount:0, source:"'../assets/images/paper.jpeg'"},{type: "STAKLO", amount:0, source:"'../assets/images/glass.jpeg'"},{type: "METAL", amount:0, source:"'../assets/images/metal.jpeg'"}]
 
-
-
-            response.forEach(function(data)
-             {
-                //console.log(data.year +" "+ currentTime.getFullYear())
-                //console.log(data.month +" "+ (currentTime.getMonth()+1))
-                if(data.year == currentTime.getFullYear() && data.month == currentTime.getMonth()+1)
-                {
-                 suma+=data.amount
-                 if(data.amount>maks) maks=data.amount;
-                }
-
-            })
-
-            this.max=maks;
-            //console.log(this.max)
-            this.sum=suma;
-           // console.log(this.sum)
-            console.log(response)
-        })
-
-
-        let achievementData=[{type: "PLASTIKA", amount:0, source:"'../assets/images/plastic.jpeg'"},{type: "PAPIR", amount:0, source:"'../assets/images/paper.jpeg'"},{type: "STAKLO", amount:0, source:"'../assets/images/glass.jpeg'"},{type: "METAL", amount:0, source:"'../assets/images/metal.jpeg'"}]
-
-        this.$store.dispatch('getProfileDataAll' )
-        .then(response =>
-        {
-            console.log(response)
-
-
-          response.forEach(function(data)
-          {
-              if(data.type.name=="Plastika") achievementData[0].amount+=data.amount;
-              if(data.type.name=="Papir") achievementData[1].amount+=data.amount;
-              if(data.type.name=="Staklo") achievementData[2].amount+=data.amount;
-              if(data.type.name=="Metal") achievementData[3].amount+=data.amount;
-
-          })
-
-            this.achievementData=achievementData;
-        })
+      
 
     },
     methods:
     {
-        getRecycleData(selectedYear,selectedMonth)
+        getRecycleData()
         {
             this.defaultPage = false;
-            this.months= [];
 
             this.recycleData = [{type:{name:"Plastika"}, amount:0},{type :{name:"Papir"}, amount:0},{type:{name:"Staklo"}, amount:0},{type:{name:"Metal"}, amount:0}]
 
-            let data=
-            {
-                year:this.selectedYear,
-                month:this.selectedMonth
-            }
 
-            if(this.year < (new Date().getFullYear())) for(let i=1;i<13;i++) months.push(i);
+            let suma=0;
+            let maks=0;
+
+
+        
+
+            let papir=0;
+            let plastika=0;
+            let staklo=0;
+            let metal=0;
+
+            this.allData.forEach(function(recycle)
+            {
+                if(recycle.type.name=="Papir") papir+=recycle.amount;//this.recycleData[0].amount+=data.amount;
+                if(recycle.type.name=="Plastika") plastika+=recycle.amount;//this.recycleData[1].amount+=data.amount;
+                if(recycle.type.name=="Staklo")  staklo+=recycle.amount;//this.recycleData[2].amount+=data.amount;
+                if(recycle.type.name=="Metal")  metal+=recycle.amount;//this.recycleData[3].amount+=data.amount;
+
+                suma+=recycle.amount
+                if(recycle.amount>maks) maks=recycle.amount;
+            })
+
+            this.recycleData[0].amount=plastika;
+            this.recycleData[1].amount=papir;
+            this.recycleData[2].amount=staklo;
+            this.recycleData[3].amount=metal;
+
+            this.max=maks;
+            //console.log(this.max)
+            this.sum=suma;
+        // console.log(this.sum)
+            
+        },
+        yearChange()
+        {
+              if(this.selectedYear < (new Date().getFullYear())) for(let i=1;i<13;i++) this.months.push(i);
             else{
                 let i = new Date().getMonth()+1;
 
@@ -190,114 +220,15 @@ export default {
                 }
 
                 this.months.reverse();
-
             }
 
-            let suma=0;
-            let maks=0;
-
-
-            if(selectedMonth=="all" && selectedYear=="all") this.$store.dispatch('getProfileDataAll')
-            .then(response =>
-            {
-
-                console.log(response)
-                //this.recycleData=response;
-
-                let papir=0;
-                let plastika=0;
-                let staklo=0;
-                let metal=0;
-
-                response.forEach(function(data)
-                {
-                    if(data.type.name=="Papir") papir+=data.amount;//this.recycleData[0].amount+=data.amount;
-                    if(data.type.name=="Plastika") plastika+=data.amount;//this.recycleData[1].amount+=data.amount;
-                    if(data.type.name=="Staklo")  staklo+=data.amount;//this.recycleData[2].amount+=data.amount;
-                    if(data.type.name=="Metal")  metal+=data.amount;//this.recycleData[3].amount+=data.amount;
-
-                    suma+=data.amount
-                    if(data.amount>maks) maks=data.amount;
-                })
-
-                this.recycleData[0].amount=plastika;
-                this.recycleData[1].amount=papir;
-                this.recycleData[2].amount=staklo;
-                this.recycleData[3].amount=metal;
-
-                this.max=maks;
-                //console.log(this.max)
-                this.sum=suma;
-            // console.log(this.sum)
-                console.log(response)
-            })
-
-            if(selectedMonth=="all"  && selectedYear!="all" && selectedYear!=null) this.$store.dispatch('getProfileDataForYear', selectedYear)
-            .then(response =>
-            {
-                console.log(response)
-               // this.recycleData=response;
-                 //this.recycleData = [{type:{name:"Papir"}, amount:0},{type :{name:"Plastika"}, amount:0},{type:{name:"Staklo"}, amount:0},{type:{name:"Metal"}, amount:0}]
-
-                let papir=0;
-                let plastika=0;
-                let staklo=0;
-                let metal=0;
-
-                response.forEach(function(data)
-                {
-                     if(data.type.name=="Papir") papir+=data.amount;//this.recycleData[0].amount+=data.amount;
-                    if(data.type.name=="Plastika") plastika+=data.amount;//this.recycleData[1].amount+=data.amount;
-                    if(data.type.name=="Staklo")  staklo+=data.amount;//this.recycleData[2].amount+=data.amount;
-                    if(data.type.name=="Metal")  metal+=data.amount;//this.recycleData[3].amount+=data.amount;
-
-                    suma+=data.amount
-                    if(data.amount>maks) maks=data.amount;
-                })
-
-                this.recycleData[0].amount=plastika;
-                this.recycleData[1].amount=papir;
-                this.recycleData[2].amount=staklo;
-                this.recycleData[3].amount=metal;
-
-                this.max=maks;
-                //console.log(this.max)
-                this.sum=suma;
-                // console.log(this.sum)
-                console.log(response)
-
-             })
-
-             if(selectedMonth!=null && selectedMonth!="all" && selectedYear!=null && selectedYear!="all") this.$store.dispatch('getProfileDataForMonth', data)
-            .then(response =>
-            {
-                console.log(response)
-                this.recycleData=response;
-
-                response.forEach(function(data)
-                {
-                    suma+=data.amount
-                    if(data.amount>maks) maks=data.amount;
-                })
-
-                this.max=maks;
-                //console.log(this.max)
-                this.sum=suma;
-                // console.log(this.sum)
-                console.log(response)
-
-             })
-
-
+            this.getRecycleData();
         }
     }
+    
 }
 </script>
 <style scoped>
-template
-{
-    background-image: url(../assets/images/img2.jpeg);
-}
 p
 {
     color:black;

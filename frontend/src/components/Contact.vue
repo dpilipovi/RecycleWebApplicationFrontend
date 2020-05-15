@@ -1,58 +1,68 @@
 <template>
-    <div class="hero-body">
-			<div class="container has-text-centered">
-				<div class="columns is-8 is-variable ">
-					<div class="column is-two-thirds has-text-left">
-						<h1 class="title is-1">Contact Us</h1>
-						<p class="is-size-4 has-text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla eligendi soluta
-							voluptate facere molestiae consequatur.</p>
-                        <br>
-						<div class="social-media">
-							<a href="https://facebook.com" target="_blank" class="button is-light is-large"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
-							<a href="https://instagram.com" target="_blank" class="button is-light is-large"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-							<a href="https://twitter.com" target="_blank" class="button is-light is-large"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-						</div>
-					</div>
-					<div class="column is-one-third has-text-left">
-						<div class="field">
-							<label class="label">Name</label>
-							<div class="control">
-								<input class="input is-medium" type="text">
-							</div>
-						</div>
-						<div class="field">
-							<label class="label">Email</label>
-							<div class="control">
-								<input class="input is-medium" type="text">
-							</div>
-						</div>
-						<div class="field">
-							<label class="label">Message</label>
-							<div class="control">
-								<textarea class="textarea is-medium"></textarea>
-							</div>
-						</div>
-						<div class="control">
-							<button type="submit" class="button is-link is-fullwidth has-text-weight-medium is-medium has-text-black">Send Message</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+<v-content>
+ <v-container data-aos="fade-up" data-aos-duration="1000">
+          <h2 class="display-2 font-weight-bold mb-3 text-uppercase text-center">Contact us</h2>
+
+          <v-responsive
+            class="mx-auto mb-12"
+            width="56"
+          >
+            <v-divider class="mb-1"></v-divider>
+
+            <v-divider></v-divider>
+          </v-responsive>
+
+          <v-theme-provider light>
+            <v-row>
+              <v-col cols="12">
+                <v-text-field
+                  flat
+                  label="Name*"
+                  solo
+                ></v-text-field>
+              </v-col>
+
+              <v-col cols="12">
+                <v-text-field
+                  flat
+                  label="Email*"
+                  solo
+                ></v-text-field>
+              </v-col>
+
+              <v-col cols="12">
+                <v-text-field
+                  flat
+                  label="Subject*"
+                  solo
+                ></v-text-field>
+              </v-col>
+
+              <v-col cols="12">
+                <v-textarea
+                  flat
+                  label="Message*"
+                  solo
+                ></v-textarea>
+              </v-col>
+
+              <v-col
+                class="mx-auto"
+                cols="auto"
+              >
+                <v-btn
+                  color="accent"
+                  x-large
+                >
+                  Submit
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-theme-provider>
+        </v-container>
+
+        <div class="py-6"></div>
+    </v-content>
 </template>
 <style scoped>
-.input
-{
-  background:rgba(0, 0, 0, 0.6);
-  color:white;
-}
-textarea
-{
-    background:rgba(0, 0, 0, 0.6);
-  color:white;
-}
-::placeholder
-{
-  color:gray;
-}
 </style>

@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 import Index from '@/components/Index'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
@@ -10,13 +10,9 @@ import EditProfile from '@/components/EditProfile'
 import Admin from '@/components/Admin'
 import {store} from '../store/store'
 
+Vue.use(VueRouter)
 
-
-Vue.use(Router)
-
-export default new Router({
-
-  routes: [
+  const routes = [
     {
       path: '/',
       name: 'Index',
@@ -76,5 +72,11 @@ export default new Router({
       }
     }
   ],
-   mode: 'history'
+
+ router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
 })
+
+export default router

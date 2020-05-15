@@ -61,38 +61,34 @@ export const store = new Vuex.Store({
             return new Promise((resolve,reject) =>
             {
                 http
-                .post("/login", credentials)
+                .post("/authenticate", credentials)
                 .then(response => {
-                    const token = "Bearer "+response.data;
+                    const token = "Bearer "+response.data.token;
                    // console.log("setter "+ token)
                     localStorage.setItem('token', token);
                     context.commit('retrieveToken', token);
                     //console.log("state token: "+this.state.token)
                     resolve(response);
-                /*
-                this.$store.state.token = response.data;
-                // console.log("response data "+response.data);
-                console.log("token: "+ this.$store.state.token)
-                this.$router.push('/');
-                */
                 })
                 .catch(e => {
                 console.log(e);
-                reject(error)
+                reject(e)
                 });
             })
         },
 
-        setProfile(context)
+        getProfile(context)
         {
             return new Promise((resolve,reject) =>
             {
                 //console.log(http.defaults)
-                //console.log(this.state.token)
+                console.log(this.state.token)
                 http
-                .get("/user"/*,{headers: {"Authorization": this.state.token}}*/)
+                .get("/user/current-user")
                 .then(response => {
+                    console.log(response)
                     const profile = response.data;
+                    console.log(profile)
                     localStorage.setItem('profile', profile);
                     context.commit('setProfile', profile);
 
@@ -105,15 +101,15 @@ export const store = new Vuex.Store({
             })
         },
 
-        setSchedule(context,selectedAddress)
+        getSchedule()
         {
             return new Promise((resolve,reject) =>
             {
                 http
-                .get("/schedule",{ params: {address: selectedAddress}})
+                .get("/schedule")
                 .then(response => {
 
-               // console.log(response.data);
+                console.log(response.data);
                 resolve(response.data);
 
                 })
@@ -125,65 +121,6 @@ export const store = new Vuex.Store({
             })
         },
 
-
-        getProfileDataForMonth(context,data)
-        {
-        return new Promise((resolve,reject) =>
-            {
-                //console.log("year/month = "+data.year+"/"+data.month);
-
-                http.get("/user/data_month", {params: {username: this.state.profile.username, year: data.year, month: data.month}})
-                .then(response => {
-
-               // console.log(response.data);
-                resolve(response.data);
-
-                })
-                .catch(e => {
-                console.log(e);
-                reject(e)
-                });
-
-            })
-        },
-        getProfileDataForYear(context,data)
-        {
-        return new Promise((resolve,reject) =>
-            {
-
-                http.get("/user/data_year", {params: {username: this.state.profile.username, year: data}})
-                .then(response => {
-
-               // console.log(response.data);
-                resolve(response.data);
-
-                })
-                .catch(e => {
-                console.log(e);
-                reject(e)
-                });
-
-            })
-        },
-        getProfileDataAll(context)
-        {
-        return new Promise((resolve,reject) =>
-            {
-
-                http.get("/user/data", {params: {username: this.state.profile.username}})
-                .then(response => {
-
-               // console.log(response.data);
-                resolve(response.data);
-
-                })
-                .catch(e => {
-                console.log(e);
-                reject(e)
-                });
-
-            })
-        },
         editUser(context,data)
         {
         return new Promise((resolve,reject) =>

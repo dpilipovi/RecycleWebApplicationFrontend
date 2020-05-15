@@ -1,5 +1,5 @@
 <template>
-    
+<p>LOGGED OUT </p>
 </template>
 <script>
 export default {
@@ -8,6 +8,7 @@ export default {
         this.$store.dispatch('destroyToken')
         .then(response =>
       {
+        console.log(response)
         this.$router.push('/')
       })
     }
