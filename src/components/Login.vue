@@ -1,0 +1,102 @@
+<template>
+    <v-content id="inspire">
+      <v-img height="93.2vh" src="../assets/images/login_background.jpg">
+      <v-container
+        fill-height
+      >
+        <v-layout
+          align-center
+          justify-center
+          
+        >
+          <v-flex
+            xs12
+            sm8
+            md4
+          >
+
+          <v-content xs6 sm4 md2></v-content>
+            <v-card class="elevation-12 ">
+              <v-toolbar
+                color="teal"
+                flat
+                class="text--white"
+              >
+                <v-toolbar-title class="white--text">Login form</v-toolbar-title>
+                <v-spacer></v-spacer>
+              </v-toolbar>
+              <v-card-text>
+                <v-form>
+                  <v-text-field
+                    color="teal"
+                    label="Username"
+                    name="username"
+                    prepend-icon="person"
+                    type="text"
+                    v-model="username"
+                  ></v-text-field>
+
+                  <v-text-field
+                    color="teal"
+                    id="password"
+                    label="Password"
+                    name="password"
+                    prepend-icon="lock"
+                    type="password"
+                    v-model="password"
+                  ></v-text-field>
+                </v-form>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="teal"  @click="login()" dark>Login </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
+      </v-img>
+    </v-content>
+</template>
+<script>
+export default {
+      data() {
+      return {
+       username: '',
+       password: ''
+      }
+    },
+   
+    methods: {
+      login(){
+      
+      if(!this.username || !this.password) return
+      this.data=
+      {
+        username: this.username,
+        password: this.password
+
+      }
+
+      this.$store.dispatch('setToken', this.data)
+      .then(response =>
+      {
+        if(response.data.token)
+        {
+          this.$store.dispatch('getProfile').then(response =>
+          {
+           console.log(response)
+           this.$router.push('/')
+          })
+        }
+        
+      })
+    
+      }
+    },
+  name: 'Login'
+}
+</script>
+<style scoped>
+
+</style>
