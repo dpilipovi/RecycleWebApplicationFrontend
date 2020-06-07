@@ -35,11 +35,12 @@
     </v-row>
 
     <v-row>
-        <v-col class="d-flex" cols="6">
+        <v-col cols="6" >
             <div  v-for="(r,index) in recycleData" :key="index">
                 <!--<p><progress class="progress is-danger" :data-label="r.amount +'kg'" :value="r.amount" :max="max" ></progress>{{r.type.name}}</p>
                 <br>-->
-                    <v-progress-linear height="20px" rounded striped :value="r.amount" color="purple" :max="max" :data-label="r.amount + 'kg'"></v-progress-linear>
+                  {{r.type}}  <v-progress-linear height="20px" rounded :value="r.amount*multiplier" color="primary" ><strong>{{r.amount}}kg</strong></v-progress-linear>
+                    <br>
             </div>
         </v-col>
     </v-row>
@@ -124,7 +125,8 @@ export default {
         selectedYear :  new Date().getFullYear(),
         profile : this.$store.state.profile,
         defaultPage : true,
-        achievementData: []
+        achievementData: [],
+        multiplier: 0
       }
     },
     created()
@@ -171,15 +173,14 @@ export default {
         {
             this.defaultPage = false;
 
-            this.recycleData = [{type:{name:"Plastika"}, amount:0},{type :{name:"Papir"}, amount:0},{type:{name:"Staklo"}, amount:0},{type:{name:"Metal"}, amount:0}]
+            this.recycleData = [{type:"Plastic", amount:0},{type :"Paper", amount:0},{type:"Glass", amount:0},{type:"Metal", amount:0}]
 
+            let yearMonth=this.selectedYear+"-"+this.to2digit(this.selectedMonth);
+
+            console.log(yearMonth)
 
             let suma=0;
             let maks=0;
-
-
-        
-
             let papir=0;
             let plastika=0;
             let staklo=0;
@@ -187,13 +188,19 @@ export default {
 
             this.allData.forEach(function(recycle)
             {
-                if(recycle.type.name=="Papir") papir+=recycle.amount;//this.recycleData[0].amount+=data.amount;
-                if(recycle.type.name=="Plastika") plastika+=recycle.amount;//this.recycleData[1].amount+=data.amount;
-                if(recycle.type.name=="Staklo")  staklo+=recycle.amount;//this.recycleData[2].amount+=data.amount;
-                if(recycle.type.name=="Metal")  metal+=recycle.amount;//this.recycleData[3].amount+=data.amount;
+                if(yearMonth == recycle.yearMonth)
+                {
+                console.log(recycle)
+
+
+                if(recycle.type.toLowerCase()==="paper") papir+=recycle.amount;//this.recycleData[0].amount+=data.amount;
+                if(recycle.type.toLowerCase()=="plastic") plastika+=recycle.amount;//this.recycleData[1].amount+=data.amount;
+                if(recycle.type.toLowerCase()=="glass")  staklo+=recycle.amount;//this.recycleData[2].amount+=data.amount;
+                if(recycle.type.toLowerCase()=="metal")  metal+=recycle.amount;//this.recycleData[3].amount+=data.amount;
 
                 suma+=recycle.amount
                 if(recycle.amount>maks) maks=recycle.amount;
+                }
             })
 
             this.recycleData[0].amount=plastika;
@@ -202,9 +209,10 @@ export default {
             this.recycleData[3].amount=metal;
 
             this.max=maks;
+            this.multiplier = 100/this.max;
             //console.log(this.max)
             this.sum=suma;
-        // console.log(this.sum)
+         console.log(this.recycleData)
             
         },
         yearChange()
@@ -223,6 +231,10 @@ export default {
             }
 
             this.getRecycleData();
+        },
+        to2digit(month)
+        {
+             return ('00' + month).slice(-2);
         }
     }
     

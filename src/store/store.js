@@ -1,10 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import http from "../http-common";
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
+
+    plugins: [createPersistedState()],
 
     state :
     {
@@ -24,7 +27,7 @@ export const store = new Vuex.Store({
     {
         retrieveToken(state, token)
         {
-            //console.log("getter "+ token)
+            console.log(token)
             state.token= token;
         },
         destroyToken(state)
