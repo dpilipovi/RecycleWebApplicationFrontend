@@ -120,7 +120,7 @@
                   <v-row>
                     <v-col
                       v-for="item in props.items"
-                      :key="item.address"
+                      :key="item.id"
                       cols="12"
                       sm="6"
                       md="4"
@@ -255,7 +255,7 @@ export default {
       sortDesc: false,
       page: 1,
       itemsPerPage: 4,
-      sortBy: "address",
+      sortBy: "Address",
       keys: ["Address", "Type", "Day"],
       items: [],
     };
@@ -270,6 +270,8 @@ export default {
       return Math.ceil(this.items.length / this.itemsPerPage);
     },
     filteredKeys() {
+      //this.keys = ["Address", "Type", "Day"]
+      console.log(this.keys)
       return this.keys.filter((key) => key !== `Address`);
     },
   },
@@ -282,6 +284,12 @@ export default {
     },
     updateItemsPerPage(number) {
       this.itemsPerPage = number;
+    },
+    // eslint-disable-next-line vue/no-dupe-keys
+    filteredKeys(item) {
+      //this.keys = ["Address", "Type", "Day"]
+      console.log(this.keys)
+      return this.keys.filter((key) => key !== item);
     },
   },
   components: {

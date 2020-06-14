@@ -1,17 +1,29 @@
 <template>
-<v-container>
-    <v-col class="text-center" cols="12" tag="h1">
+<v-img height="93.2vh" src="../assets/images/profile_background4.jpg">
+<div class="background">
+<v-container >
+    <v-row>
+    <v-col cols="4"></v-col>
+    <v-col class="text-center" cols="4" tag="h1">
                         <span
-                          class="font-weight-light"
+                          class="font-weight-medium tamno-siva"
                           :class="[
                             $vuetify.breakpoint.smAndDown
                               ? 'display-1'
                               : 'display-2',
                           ]"
-                          >{{profile.firstname}} {{profile.lastname}}</span
-                        >
+                          >{{profile.firstname}} {{profile.lastname}}</span>
     </v-col>
-    <v-row>
+    <v-col cols="4" align="end"><v-btn to="/editProfile">Edit profile</v-btn></v-col>
+    </v-row>              
+    <v-row >
+       <!-- <v-col class="d-flex" cols="6"></v-col>-->
+        <v-col class="d-flex" cols="2" tag="h1">
+            <p class="font-weight-bold tamno-siva">Recycle history</p>
+        </v-col>
+    </v-row>
+    <v-row >
+        <!--<v-col class="d-flex" cols="6"></v-col>-->
         <v-col class="d-flex" cols="2" >
         <v-select
           :items="years"
@@ -34,12 +46,12 @@
       </v-col>
     </v-row>
 
-    <v-row>
+    <v-row >
         <v-col cols="6" >
             <div  v-for="(r,index) in recycleData" :key="index">
                 <!--<p><progress class="progress is-danger" :data-label="r.amount +'kg'" :value="r.amount" :max="max" ></progress>{{r.type.name}}</p>
                 <br>-->
-                  {{r.type}}  <v-progress-linear height="20px" rounded :value="r.amount*multiplier" color="primary" ><strong>{{r.amount}}kg</strong></v-progress-linear>
+                  <span class="font-weight-medium">{{r.type}}</span>  <v-progress-linear  height="20px" rounded :value="r.amount*multiplier" color="grey darken-2" ><strong>{{r.amount}}kg</strong></v-progress-linear>
                     <br>
             </div>
         </v-col>
@@ -107,6 +119,8 @@
 
     </div>
     </div> -->
+</div>
+</v-img>
 </template>
 <script>
 
@@ -326,6 +340,19 @@ font-weight: bold;
 .desktop-float-right
 {
     float:right;
+}
+.background
+{
+    background-color: rgba(0,0,0,0.2);
+    height: 93.2vh;
+}
+.background2
+{
+    background-color: rgba(128,128,128,0.05);
+}
+.tamno-siva
+{
+    color: #424242;
 }
 
 @media screen and (max-width: 768px){

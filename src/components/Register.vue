@@ -69,9 +69,9 @@
                       color="teal"
                       :value="password2"
                       label="Repeat password"
-                      :append-icon="value ? 'mdi-eye' : 'mdi-eye-off'"
-                      @click:append="() => (value = !value)"
-                      :type="value ? 'password' : 'text'"
+                      :append-icon="value2 ? 'mdi-eye' : 'mdi-eye-off'"
+                      @click:append="() => (value2 = !value2)"
+                      :type="value2 ? 'password' : 'text'"
                       :rules="password2Rules"
                       @input="(_) => (password2 = _)"
                     ></v-text-field>
@@ -126,6 +126,7 @@ export default {
       checkbox: false,
       valid: true,
       value: true,
+      value2: true,
        passwordRules: [
          v => !!v || "Password is required",
         (v) => (v && v.length >= 8) || "Password must be at least 8 characters",
@@ -138,7 +139,7 @@ export default {
       ],
       nameRules: [
         (v) => !!v || "Name is required",
-        (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
+        (v) => (v && v.length <= 20) || "Name must be less than 20 characters",
       ],
       emailRules: [
         (v) => !!v || "E-mail is required",

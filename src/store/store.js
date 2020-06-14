@@ -128,15 +128,18 @@ export const store = new Vuex.Store({
         {
         return new Promise((resolve,reject) =>
             {
-                console.log(data.user)
+                console.log(data)
 
-                http.put("/user", data.user )
+                http.put("/user", data )
                 .then(response => {
 
                 console.log(response.data);
 
                /* if(data.flag) */
+               localStorage.removeItem('token');
+               localStorage.removeItem('profile');
                context.dispatch('destroyToken')
+               
 
                 /*const profile = response.data;
                 localStorage.setItem('profile', profile);
