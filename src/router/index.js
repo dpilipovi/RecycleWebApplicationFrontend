@@ -8,6 +8,9 @@ import Logout from '@/components/Logout'
 import Contact from '@/components/Contact'
 import EditProfile from '@/components/EditProfile'
 import Admin from '@/components/Admin'
+import Users from '@/components/Users'
+import Schedules from '@/components/Schedules'
+import Vehicles from '@/components/Vehicles'
 import {store} from '../store/store'
 
 Vue.use(VueRouter)
@@ -41,7 +44,31 @@ Vue.use(VueRouter)
     {
       path: '/admin',
       name: 'Admin',
-      component: Admin
+      component: Admin,
+      children:[{
+        path: 'users',
+        name: 'Users',
+        component: Users,
+      },
+      {
+        path: 'schedules',
+        name: 'Schedules',
+        component: Schedules,
+      },
+      {
+        path: 'vehicles',
+        name: 'Vehicles',
+        component: Vehicles,
+        }],
+      beforeEnter: (to, from, next) =>
+      {
+        if(store.getters.isAdmin) next()
+        else
+        {
+          alert("Nemate pravo pristupa, niste admin!")
+          next({name : 'Login'})
+        } 
+      }
     },
     {
       path: '/profile',
@@ -70,7 +97,49 @@ Vue.use(VueRouter)
           next({name : 'Login'})
         } 
       }
-    }
+    },
+    /*{
+      path: '/admin/users',
+      name: 'Users',
+      component: Users,
+      beforeEnter: (to, from, next) =>
+      {
+        if(store.getters.loggedIn) next()
+        else
+        {
+          alert("Nemate pravo pristupa, niste admin!")
+          next({name : 'Login'})
+        } 
+      }
+    },
+    {
+      path: '/admin/schedules',
+      name: 'Schedules',
+      component: Schedules,
+      beforeEnter: (to, from, next) =>
+      {
+        if(store.getters.loggedIn) next()
+        else
+        {
+          alert("Nemate pravo pristupa, niste admin!")
+          next({name : 'Login'})
+        } 
+      }
+    },
+    {
+      path: '/admin/vehicles',
+      name: 'Vehicles',
+      component: Vehicles,
+      beforeEnter: (to, from, next) =>
+      {
+        if(store.getters.loggedIn) next()
+        else
+        {
+          alert("Nemate pravo pristupa, niste admin!")
+          next({name : 'Login'})
+        } 
+      }
+    }*/
   ],
 
  router = new VueRouter({

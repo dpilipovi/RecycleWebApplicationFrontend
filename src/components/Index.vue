@@ -271,7 +271,7 @@ export default {
     },
     filteredKeys() {
       //this.keys = ["Address", "Type", "Day"]
-      console.log(this.keys)
+    //  console.log(this.keys)
       return this.keys.filter((key) => key !== `Address`);
     },
   },

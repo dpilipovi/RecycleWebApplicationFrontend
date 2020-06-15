@@ -24,8 +24,11 @@
               <v-list-item-title>Log in</v-list-item-title>
             </v-list-item>
             <v-list-item v-if="loggedIn" to="/profile">
-              <v-list-item-title>Profile</v-list-item-title>
-            </v-list-item>
+          <v-list-item-title>Profile</v-list-item-title>
+        </v-list-item>
+        <v-list-item v-if="isAdmin && loggedIn" to="/admin">
+          <v-list-item-title>Admin</v-list-item-title>
+        </v-list-item>
             <v-list-item v-if="loggedIn" to="/logout">
               <v-list-item-title>Log out</v-list-item-title>
             </v-list-item>
@@ -52,6 +55,9 @@
         <v-list-item v-if="loggedIn" to="/profile">
           <v-list-item-title>Profile</v-list-item-title>
         </v-list-item>
+        <v-list-item v-if="isAdmin && loggedIn" to="/admin">
+          <v-list-item-title>Admin</v-list-item-title>
+        </v-list-item>
         <v-list-item v-if="loggedIn" to="/logout">
           <v-list-item-title>Log out</v-list-item-title>
         </v-list-item>
@@ -72,6 +78,14 @@ export default {
   computed: {
     loggedIn() {
       return this.$store.getters.loggedIn;
+    },
+    isAdmin()
+    {
+      if(this.$store.state.profile != null)
+      {
+     return this.$store.getters.isAdmin
+      }
+      return false;
     }
   },
   name: "Navbar"

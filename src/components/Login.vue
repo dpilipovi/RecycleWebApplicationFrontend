@@ -83,11 +83,10 @@ export default {
       {
         if(response.data.token)
         {
-          this.$store.dispatch('getProfile').then(response =>
-          {
-           console.log(response)
+          this.$store.dispatch('getProfile').then(
            this.$router.push('/')
-          })
+           //  setTimeout( () => this.$router.push({ path: '/'}), 1000);
+          )
         }
         
       })

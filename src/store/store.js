@@ -20,6 +20,11 @@ export const store = new Vuex.Store({
         {
             //console.log("loggedIn "+state.token)
             return state.token!=null
+        },
+
+        isAdmin(state)
+        {
+           return state.profile.authorities.includes("ROLE_ADMIN") ? true : false
         }
 
     },
@@ -27,7 +32,7 @@ export const store = new Vuex.Store({
     {
         retrieveToken(state, token)
         {
-            console.log(token)
+            //console.log(token)
             state.token= token;
         },
         destroyToken(state)
@@ -39,6 +44,7 @@ export const store = new Vuex.Store({
         setProfile(state, profile)
         {
             state.profile=profile;
+            console.log("profile set "+profile)
         },
 
 
@@ -48,15 +54,14 @@ export const store = new Vuex.Store({
     {
         destroyToken(context)
         {
-            if(context.getters.loggedIn)
-            {
                 //console.log("remove token")
                 localStorage.removeItem('token');
                 localStorage.removeItem('profile');
+                http.defaults.headers['Authorization'] = null
                 //console.log(localStorage.getItem('token'));
                 context.commit('destroyToken');
 
-            }
+            
         },
 
         setToken(context, credentials)
@@ -67,9 +72,10 @@ export const store = new Vuex.Store({
                 .post("/authenticate", credentials)
                 .then(response => {
                     const token = "Bearer "+response.data.token;
-                   // console.log("setter "+ token)
+                  //  console.log("setter "+ token)
                     localStorage.setItem('token', token);
                     context.commit('retrieveToken', token);
+                    http.defaults.headers['Authorization'] = token
                     //console.log("state token: "+this.state.token)
                     resolve(response);
                 })
@@ -84,14 +90,14 @@ export const store = new Vuex.Store({
         {
             return new Promise((resolve,reject) =>
             {
-                //console.log(http.defaults)
+                console.log(http.defaults)
                 console.log(this.state.token)
                 http
                 .get("/user/current-user")
                 .then(response => {
-                    console.log(response)
+                   // console.log(response)
                     const profile = response.data;
-                    console.log(profile)
+                  //  console.log(profile)
                     localStorage.setItem('profile', profile);
                     context.commit('setProfile', profile);
 
@@ -99,6 +105,7 @@ export const store = new Vuex.Store({
                 })
                 .catch(e => {
                 console.log(e);
+                localStorage.removeItem("token")
                 reject(e)
                 });
             })
@@ -112,7 +119,7 @@ export const store = new Vuex.Store({
                 .get("/schedule")
                 .then(response => {
 
-                console.log(response.data);
+              //  console.log(response.data);
                 resolve(response.data);
 
                 })
@@ -154,7 +161,23 @@ export const store = new Vuex.Store({
                 });
 
             })
-        }
+        },
+        getUsers()
+        {
+            return new Promise((resolve,reject) =>
+            {
+                http.get("/user")
+                .then(response =>
+                    {
+                        console.log(response)
+                        resolve(response.data)
+                    })
+                    .catch(e => {
+                        console.log(e);
+                        reject(e)
+                        });
+            })
+        },
 
     }
 })
