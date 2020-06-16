@@ -60,7 +60,14 @@
                 append-icon="home"
               ></v-text-field>
 
+              <v-checkbox
+                  color="#424242"
+                  v-model="changePassword"
+                  label="Change password"
+              ></v-checkbox>
+
               <v-text-field
+                v-show="changePassword"
                 color="#424242"
                 v-model="user.password"
                 label="Password"
@@ -73,6 +80,7 @@
               ></v-text-field>
 
               <v-text-field
+                v-show="changePassword"
                 color="#424242"
                 :value="pass2"
                 label="Repeat password"
@@ -85,7 +93,7 @@
               ></v-text-field>
             </v-form>
             <v-spacer></v-spacer>
-            <v-btn :disabled="!valid" color="success" @click="updateProfile()" dark>Edit</v-btn>
+            <v-btn :disabled="!valid && changePassword==true" color="success" @click="updateProfile()" dark>Edit</v-btn>
             <v-btn color="red" to="/profile" dark>Cancel</v-btn>
           </v-flex>
         </v-layout>
@@ -113,6 +121,7 @@ export default {
       valid: false,
       value: true,
       value2: true,
+      changePassword: false,
        passwordRules: [
          v => !!v || "Password is required",
         (v) => (v && v.length >= 8) || "Password must be at least 8 characters",
@@ -150,6 +159,8 @@ export default {
       this.$refs.form.validate()
     },
     updateProfile() {
+
+      if(this.changePassword == false) this.user.password="dont change" 
    
       this.$store.dispatch("editUser", this.user).then(response => {
         console.log(response);

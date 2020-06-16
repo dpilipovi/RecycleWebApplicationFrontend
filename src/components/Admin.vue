@@ -56,7 +56,7 @@ export default {
     {
         let d = new Date()
         this.datum = d.getDate() +"."+(d.getMonth()+1)+"."+d.getFullYear()+"."
-        console.log(this.datum)
+        //console.log(this.datum)
     },
     name: 'Admin'
 }

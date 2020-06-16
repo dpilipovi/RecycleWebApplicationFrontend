@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import http from "../http-common";
 import createPersistedState from "vuex-persistedstate";
+import axios from "axios"
 
 Vue.use(Vuex);
 
@@ -44,7 +45,7 @@ export const store = new Vuex.Store({
         setProfile(state, profile)
         {
             state.profile=profile;
-            console.log("profile set "+profile)
+           // console.log("profile set "+profile)
         },
 
 
@@ -90,8 +91,8 @@ export const store = new Vuex.Store({
         {
             return new Promise((resolve,reject) =>
             {
-                console.log(http.defaults)
-                console.log(this.state.token)
+               // console.log(http.defaults)
+               // console.log(this.state.token)
                 http
                 .get("/user/current-user")
                 .then(response => {
@@ -120,7 +121,7 @@ export const store = new Vuex.Store({
                 .then(response => {
 
               //  console.log(response.data);
-                resolve(response.data);
+                resolve(response);
 
                 })
                 .catch(e => {
@@ -130,6 +131,68 @@ export const store = new Vuex.Store({
 
             })
         },
+
+        addSchedule(context, data)
+        {
+            return new Promise((resolve,reject) =>
+            {
+                http
+                .post("/schedule",data)
+                .then(response => {
+
+                resolve(response);
+
+                })
+                .catch(e => {
+                console.log(e);
+                reject(e)
+                });
+
+            })
+        },
+
+        
+        editSchedule(context,data)
+        {
+            return new Promise((resolve,reject) =>
+            {
+
+                http
+                .put("/schedule",data)
+                .then(response => {
+
+                resolve(response);
+
+                })
+                .catch(e => {
+                console.log(e);
+                reject(e)
+                });
+
+            })
+        },
+
+        
+        deleteSchedule(context, data)
+        {
+            return new Promise((resolve,reject) =>
+            {
+                
+                http
+                .delete(`/schedule/${data}`)
+                .then(response => {
+
+                resolve(response);
+
+                })
+                .catch(e => {
+                console.log(e);
+                reject(e)
+                });
+
+            })
+        },
+
 
         editUser(context,data)
         {
@@ -169,8 +232,8 @@ export const store = new Vuex.Store({
                 http.get("/user")
                 .then(response =>
                     {
-                        console.log(response)
-                        resolve(response.data)
+                        //console.log(response)
+                        resolve(response)
                     })
                     .catch(e => {
                         console.log(e);
@@ -178,6 +241,193 @@ export const store = new Vuex.Store({
                         });
             })
         },
+        getUserProfile(context,username)
+        {
+            return new Promise((resolve,reject) =>
+            {
+               
+                http
+                .get("/user/"+username)
+                .then(response => {
+                    resolve(response.data);
+                })
+                .catch(e => {  
+                console.log(e);
+                reject(e)
+                });
+            })
+        },
+
+        editUserFromAdmin(context,data)
+        {
+        return new Promise((resolve,reject) =>
+            {
+                http.put("/user", data )
+                .then(response => {
+
+
+               if(data.username === this.state.profile.username)
+               {
+               localStorage.removeItem('token');
+               localStorage.removeItem('profile');
+               context.dispatch('destroyToken')
+               }
+               
+                resolve(response);
+
+                })
+                .catch(e => {
+                console.log(e);
+                reject(e)
+                });
+
+            })
+        },
+
+        makeAdmin(context, data)
+        {
+
+            return new Promise((resolve,reject) =>
+            {
+                http.put("/user/makeAdmin/"+data)
+                .then(response => {
+
+                    resolve(response)
+
+            })
+            .catch(e => {
+                reject(e)
+                });
+            
+            })
+          
+
+        },
+
+        deleteUser(context, data)
+        {
+            return new Promise((resolve,reject) =>
+            {
+                http.delete("/user/"+data)
+                .then(response => {
+
+                    resolve(response)
+
+            })
+            .catch(e => {
+                reject(e)
+                });
+            
+            })
+            
+        },
+
+        addUser(context, data)
+        {
+            return new Promise((resolve,reject) =>
+        {
+            http.post("/user", data)
+            .then(response => {
+                
+                 resolve(response);
+ 
+                 })
+                 .catch(e => {
+                 reject(e)
+                 });
+          })
+
+        },
+
+        getVehicles()
+        {
+            return new Promise((resolve,reject) =>
+        {
+            http.get("/vehicle" )
+            .then(response => {
+                
+                 resolve(response);
+ 
+                 })
+                 .catch(e => {
+                 reject(e)
+                 });
+          })
+
+        },
+
+        
+        addVehicle(context, data)
+        {
+            return new Promise((resolve,reject) =>
+        {
+            http.post("/vehicle", data )
+            .then(response => {
+                
+                 resolve(response);
+ 
+                 })
+                 .catch(e => {
+                 reject(e)
+                 });
+          })
+
+        },
+
+        
+        editVehicle(context, data)
+        {
+            return new Promise((resolve,reject) =>
+        {
+            http.put("/vehicle", data )
+            .then(response => {
+                
+                 resolve(response);
+ 
+                 })
+                 .catch(e => {
+                 reject(e)
+                 });
+          })
+
+        },
+
+
+        
+        deleteVehicle(context, data)
+        {
+            return new Promise((resolve,reject) =>
+        {
+            http.delete(`/vehicle/${data}` )
+            .then(response => {
+                
+                 resolve(response);
+ 
+                 })
+                 .catch(e => {
+                 reject(e)
+                 });
+          })
+
+        },
+
+        getLongitudeAndLatitude(context,data)
+        {
+            return new Promise((resolve,reject) =>
+            {
+            axios
+            .get(
+              `https://maps.googleapis.com/maps/api/geocode/json?address=${data},+Zagreb,+HR&key=AIzaSyAIFsjNZOTpPJpJ9rQei3Y8F2gAJ6OQoR4`)
+              .then(response => {
+                
+                resolve(response);
+
+                })
+                .catch(e => {
+                reject(e)
+                });
+            })
+        }
 
     }
 })

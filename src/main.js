@@ -5,7 +5,14 @@ import {store} from './store/store'
 import vuetify from './plugins/vuetify';
 import AOS from "aos";
 import "aos/dist/aos.css";
+import * as VueGoogleMaps from "vue2-google-maps";
 
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: "AIzaSyAIFsjNZOTpPJpJ9rQei3Y8F2gAJ6OQoR4",
+    libraries: 'places', // necessary for places input
+  }
+});
 
 Vue.config.productionTip = false
 

@@ -58,55 +58,7 @@
     </v-row>
 
 </v-container>
-    <!-- <div class="hero-body">
-     <div class="container has-text-centered" >
-        <h1 class="title" style="display:inline">{{profile.firstname}} {{profile.lastname}}</h1>
-        <div class="phone"></div>
-        <router-link class="button is-danger is-rounded desktop-float-right" to="/editProfile" >Edit profile </router-link>
-        <br>
-        <br>
-        <div class="columns">
-        <div class="field">
-        <div class="control">
-            <div class="select is-danger is-rounded ">
-            <select v-model="selectedYear" >
-                <option :value="null" :disabled="true">Odaberite godinu</option>
-                <option value="all">ALL</option>
-                <option v-for="(year,index) in years" :value="year" :selected="year==currentYear" :key="index">{{year}}</option>
-            </select>
-            </div>
-        </div>
-        </div>
-        <div class="field">
-        <div class="control">
-            <div class="select is-danger is-rounded">
-            <select v-model="selectedMonth" :disabled="selectedYear==null">
-                <option :value="null" :disabled="true">Odaberite mjesec</option>
-                <option value="all">ALL</option>
-                <option v-for="(month,index) in months" :value="month" :selected="month==currentMonth" :key="index" :disabled="selectedYear=='all'"  >{{month}}</option>
-            </select>
-            </div>
-        </div>
-        </div>
-        <div class="phone"></div>
-            <button class="button is-danger is-rounded"  @click="getRecycleData(selectedYear,selectedMonth)" :disabled="selectedMonth==null || selectedYear==null || (selectedYear=='all' && selectedMonth!='all') ">Pretraži</button>
-        </div>
-        <br>
-        <div class="columns">
-            <div class="column info" >
-                <p :hidden="!defaultPage">UKUPNO PRIKUPLJENO PROŠLI MJESEC = {{sum}} kg</p>
-                <p :hidden="defaultPage" v-if="selectedYear>0 && selectedMonth>0">UKUPNO PRIKUPLJENO {{selectedMonth}}. MJESEC {{selectedYear}}. = {{sum}} kg</p>
-                <p :hidden="defaultPage" v-if="selectedYear>0 && selectedMonth=='all'">UKUPNO PRIKUPLJENO U {{selectedYear}}. GODINI = {{sum}} kg</p>
-                <p :hidden="defaultPage" v-if="selectedMonth=='all' && selectedYear=='all'">UKUPNO PRIKUPLJENO = {{sum}} kg</p>
-                <br>
-            </div>
-            <div class="column">
-                <div  v-for="(r,index) in recycleData" :key="index">
-                    <p><progress class="progress is-danger" :data-label="r.amount +'kg'" :value="r.amount" :max="max" ></progress>{{r.type.name}}</p>
-                    <br>
-                </div>
-            </div>
-        </div>
+ <!--
         <h2>POSTIGNUĆA:</h2>
         <div class="columns">
             <div class="column" v-for="(a,index) in achievementData" :key="index" >
@@ -115,10 +67,7 @@
                 <div class="smanjen"><progress class="progress is-success" :value="a.amount" max="100"></progress> </div>
                 </div>
         </div>
-
-
-    </div>
-    </div> -->
+ -->
 </div>
 </v-img>
 </template>
@@ -145,7 +94,7 @@ export default {
     },
     created()
     {
-        console.log(this.allData)
+       // console.log(this.allData)
        // let suma=0;
       //  let maks=0;
 
