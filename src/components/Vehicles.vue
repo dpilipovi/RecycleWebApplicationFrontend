@@ -263,9 +263,9 @@ export default {
 
     showLocation(item) {
       this.currentPlace = item.location;
-      console.log(this.location)
+      //console.log(this.location)
       var index = this.markers.findIndex(x => x.position === this.location)
-      console.log(index)
+      //console.log(index)
       this.center = this.markers[index].position;
       this.locationDialog = true;
     },

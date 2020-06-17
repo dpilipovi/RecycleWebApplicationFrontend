@@ -6,6 +6,14 @@ import vuetify from './plugins/vuetify';
 import AOS from "aos";
 import "aos/dist/aos.css";
 import * as VueGoogleMaps from "vue2-google-maps";
+import VideoBackground from 'vue-responsive-video-background-player'
+import VueVideoSection from 'vue-video-section'
+
+
+Vue.component('vue-video-section', VueVideoSection)
+
+Vue.component('video-background', VideoBackground);
+
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -13,6 +21,8 @@ Vue.use(VueGoogleMaps, {
     libraries: 'places', // necessary for places input
   }
 });
+
+//Vue.component('video-bg', VideoBg)
 
 Vue.config.productionTip = false
 

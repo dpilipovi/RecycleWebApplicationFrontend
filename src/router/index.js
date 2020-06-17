@@ -98,48 +98,7 @@ Vue.use(VueRouter)
         } 
       }
     },
-    /*{
-      path: '/admin/users',
-      name: 'Users',
-      component: Users,
-      beforeEnter: (to, from, next) =>
-      {
-        if(store.getters.loggedIn) next()
-        else
-        {
-          alert("Nemate pravo pristupa, niste admin!")
-          next({name : 'Login'})
-        } 
-      }
-    },
-    {
-      path: '/admin/schedules',
-      name: 'Schedules',
-      component: Schedules,
-      beforeEnter: (to, from, next) =>
-      {
-        if(store.getters.loggedIn) next()
-        else
-        {
-          alert("Nemate pravo pristupa, niste admin!")
-          next({name : 'Login'})
-        } 
-      }
-    },
-    {
-      path: '/admin/vehicles',
-      name: 'Vehicles',
-      component: Vehicles,
-      beforeEnter: (to, from, next) =>
-      {
-        if(store.getters.loggedIn) next()
-        else
-        {
-          alert("Nemate pravo pristupa, niste admin!")
-          next({name : 'Login'})
-        } 
-      }
-    }*/
+   
   ],
 
  router = new VueRouter({
