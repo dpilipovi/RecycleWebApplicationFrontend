@@ -86,7 +86,7 @@
         <v-icon @click="deleteItem(item)">mdi-trash-can</v-icon>
       </template>
       <template v-slot:item.location="{ item }">
-        <v-icon @click="showLocation(item)">mdi-google-maps</v-icon>
+        <v-icon @click="addMarker(item)">mdi-google-maps</v-icon>
       </template>
     </v-data-table>
 
@@ -144,7 +144,7 @@ export default {
       ],
       valid: true,
       center: { lat: 45.813208, lng: 15.977374 },
-      location: {lat: null, lng: null},
+      location: {lat: 0, lng: 0},
       markers: [],
       places: [],
       locationDialog: false,
@@ -155,6 +155,7 @@ export default {
       longitude: null,
       zoom: 15,
       geocoder: null,
+      currentPlace: null
     };
   },
   computed: {
@@ -165,42 +166,26 @@ export default {
   mounted() {
     this.$store.dispatch("getVehicles").then((response) => {
       this.vehicles = response.data;
-      this.init();
     });
   },
 
   methods: {
-    init() {
+  
+    addMarker(item) {
 
-      let that = this
-
-      if (this.vehicles != null) {
-        this.vehicles.forEach(function(v) {
-          
-
-        that.$store.dispatch('getLongitudeAndLatitude', v.location)
+      this.$store.dispatch('getLongitudeAndLatitude', item.location)
         .then((response) => {
-          console.log(response)
-          that.location.lat =response.data.results[0].geometry.location.lat
-          that.location.lng =response.data.results[0].geometry.location.lng
-          console.log(that.location)
-
-          that.addMarker()
+          this.location.lat =response.data.results[0].geometry.location.lat
+          this.location.lng =response.data.results[0].geometry.location.lng
         })
         .catch((error) => {
           console.log(error);
         });
-        });
-      }
-    },
 
-   
-    addMarker() {
-
-      this.markers.push({ position: this.location });
-      this.places.push(this.currentPlace);
-      // this.center = marker;
-      this.currentPlace = null;
+      /*if(!this.markers.includes(this.location))*/ this.markers.push({ position: this.location });
+      /*if(!this.places.includes(item.location))*/ this.places.push(item.location);
+      this.showLocation(item)
+        
     },
 
     editItem(item) {
@@ -214,6 +199,8 @@ export default {
       const index = this.vehicles.indexOf(item);
       confirm("Are you sure you want to delete this item?") &&
         this.vehicles.splice(index, 1);
+        this.markers.splice(index, 1);
+        this.places.splice(index, 1);
 
       this.$store.dispatch("deleteVehicle", item.id).then((response) => {
         if (response.status == 204) this.displaySnackbar("Vozilo izbrisano!");
@@ -275,12 +262,15 @@ export default {
     },
 
     showLocation(item) {
-      console.log(this.markers)
-      this.center = this.markers[item.id-1].position;
-     console.log(this.markers[item.id-1].position)
+      this.currentPlace = item.location;
+      console.log(this.location)
+      var index = this.markers.findIndex(x => x.position === this.location)
+      console.log(index)
+      this.center = this.markers[index].position;
       this.locationDialog = true;
     },
-  },
+  
+  }
 };
 </script>
 

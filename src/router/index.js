@@ -5,7 +5,7 @@ import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Profile from '@/components/Profile'
 import Logout from '@/components/Logout'
-import Contact from '@/components/Contact'
+import About from '@/components/About'
 import EditProfile from '@/components/EditProfile'
 import Admin from '@/components/Admin'
 import Users from '@/components/Users'
@@ -37,9 +37,9 @@ Vue.use(VueRouter)
       component: Logout
     },
     {
-      path: '/contact',
-      name: 'Contact',
-      component: Contact
+      path: '/about',
+      name: 'About',
+      component: About
     },
     {
       path: '/admin',

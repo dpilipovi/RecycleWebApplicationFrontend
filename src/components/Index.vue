@@ -262,7 +262,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getSchedule").then((response) => {
-      this.items = response;
+      this.items = response.data;
     });
   },
   computed: {
