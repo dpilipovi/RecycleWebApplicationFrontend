@@ -22,34 +22,41 @@
                 flat
                 class="text--white"
               >
-                <v-toolbar-title class="white--text">Login form</v-toolbar-title>
+                <v-toolbar-title class="white--text">{{$t('login.title')}}</v-toolbar-title>
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
-                <v-form>
+                <v-form 
+                    align="center"
+                    justify="end"
+                    ref="form"
+                    v-model="valid"
+                    lazy-validation>
                   <v-text-field
                     color="teal"
-                    label="Username"
+                    :label="$t('login.username')"
                     name="username"
                     prepend-icon="person"
                     type="text"
                     v-model="username"
+                    :rules="nameRules"
                   ></v-text-field>
 
                   <v-text-field
                     color="teal"
                     id="password"
-                    label="Password"
+                    :label="$t('login.password')"
                     name="password"
                     prepend-icon="lock"
                     type="password"
                     v-model="password"
+                    :rules="passwordRules"
                   ></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="teal"  @click="login()" dark>Login </v-btn>
+                <v-btn color="teal" :disabled="!valid" @click="login()" class="white--text">{{$t('login.button')}} </v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -63,12 +70,24 @@ export default {
       data() {
       return {
        username: '',
-       password: ''
+       password: '',
+       nameRules: [
+        (v) => !!v || this.$t('login.username_required')
+      ],
+       passwordRules: [
+        (v) => !!v || this.$t('login.password_required')
+      ],
+      valid: false,
       }
     },
    
     methods: {
-      login(){
+
+    validate () {
+      this.$refs.form.validate()
+     },
+
+    login(){
       
       if(!this.username || !this.password) return
       this.data=

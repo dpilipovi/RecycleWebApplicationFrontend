@@ -1,9 +1,9 @@
 <template>
   <v-card class="mx-auto" max-width="1300" shaped>
-    <v-card-title class="font-weight-bold">Vehicles</v-card-title>
+    <v-card-title class="font-weight-bold">{{$t('admin.vehicles_title')}}</v-card-title>
     <v-divider color="teal"></v-divider>
     <div class="py-3"></div>
-    <v-btn @click="dialog = true">ADD VEHICLE</v-btn>
+    <v-btn @click="dialog = true">{{$t('admin.vehicles_add_button')}}</v-btn>
     <v-dialog v-model="dialog" max-width="500px">
       <v-card>
         <v-card-title>
@@ -16,8 +16,8 @@
                 <v-text-field
                   color="primary"
                   v-model="editedItem.brand"
-                  :rules="nameRules"
-                  label="Brand"
+                  :rules="brandRules"
+                  :label="$t('admin.vehicle_brand')"
                   required
                 ></v-text-field>
 
@@ -25,7 +25,7 @@
                   color="primary"
                   v-model="editedItem.firstRegistrationYear"
                   :rules="yearRules"
-                  label="First registration year"
+                  :label="$t('admin.vehicle_registration')"
                   required
                   number
                 ></v-text-field>
@@ -36,9 +36,9 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="close">Cancel</v-btn>
+          <v-btn color="primary" text @click="close">{{$t('admin.button_cancel')}}</v-btn>
           <v-btn color="primary" :disabled="!valid" text @click="save"
-            >save</v-btn
+            >{{$t('admin.button_save')}}</v-btn
           >
         </v-card-actions>
       </v-card>
@@ -65,7 +65,7 @@
       <v-text-field
         v-model="search"
         append-icon="search"
-        label="Search"
+        :label="$t('admin.search')"
         single-line
         hide-details
         color="teal"
@@ -94,7 +94,7 @@
       <v-snackbar v-model="snackBar" :color="snackBarColor">
         {{ snackBarText }}
         <v-btn text @click="snackBar = false" :timeout="timeout">
-          OK
+          {{$t('admin.button_ok')}}
         </v-btn>
       </v-snackbar>
     </div>
@@ -113,11 +113,11 @@ export default {
       snackBarColor: null,
       timeout: 2000,
       headers: [
-        { text: "BRAND", value: "brand" },
-        { text: "FIRST REGISTRATION YEAR", value: "firstRegistrationYear" },
-        { text: "Edit", value: "edit", sortable: false },
-        { text: "Delete", value: "delete", sortable: false },
-        { text: "Location", value: "location", sortable: false },
+        { text: this.$t('admin.table_brand'), value: "brand" },
+        { text: this.$t('admin.table_registration'), value: "firstRegistrationYear" },
+        { text: this.$t('admin.edit'), value: "edit", sortable: false },
+        { text: this.$t('admin.delete'), value: "delete", sortable: false },
+        { text: this.$t('admin.location'), value: "location", sortable: false },
       ],
       editedIndex: -1,
       editedItem: {
@@ -132,15 +132,15 @@ export default {
         firstRegistrationYear: null,
         location: "",
       },
-      nameRules: [
-        (v) => !!v || "Name is required",
-        (v) => (v && v.length <= 20) || "Name must be less than 20 characters",
+      brandRules: [
+        (v) => !!v || this.$t('admin.required_brand'),
+        (v) => (v && v.length <= 50) || this.$t('admin.length_brand'),
       ],
       yearRules: [
-        (v) => !!v || "Required",
+        (v) => !!v || this.$t('admin.required_registration'),
         (v) =>
           v <= new Date().getFullYear ||
-          "First registration needs to be in past",
+          this.$t('admin.past_registration')
       ],
       valid: true,
       center: { lat: 45.813208, lng: 15.977374 },
@@ -160,7 +160,7 @@ export default {
   },
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Vehicle" : "Edit Vehicle";
+      return this.editedIndex === -1 ? this.$t('admin.new_vehicle') : this.$t('admin.edit_vehicle');
     },
   },
   mounted() {
@@ -197,15 +197,18 @@ export default {
 
     deleteItem(item) {
       const index = this.vehicles.indexOf(item);
-      confirm("Are you sure you want to delete this item?") &&
+      if(confirm(this.$t('admin.agree'))) 
+      {
         this.vehicles.splice(index, 1);
         this.markers.splice(index, 1);
         this.places.splice(index, 1);
 
       this.$store.dispatch("deleteVehicle", item.id).then((response) => {
-        if (response.status == 204) this.displaySnackbar("Vozilo izbrisano!");
-        else this.displayErrorSnackbar("Dogodila se greška!");
+        if (response.status == 204) this.displaySnackbar(this.$t('admin.vehicle_deleted'));
+        else this.displayErrorSnackbar(this.$t('admin.error'));
+
       });
+      }
     },
 
     showDetails(item) {
@@ -232,18 +235,18 @@ export default {
           .dispatch("editVehicle", this.editedItem)
           .then((response) => {
             if (response.status == 200) {
-              this.displaySnackbar("Vozilo izmijenjeno!");
+              this.displaySnackbar(this.$t('admin.vehicle_edited'));
               this.editedIndex = -1;
-            } else this.displayErrorSnackbar("Dogodila se greška!");
+            } else this.displayErrorSnackbar(this.$t('admin.error'));
           });
       } else {
         this.$store.dispatch("addVehicle", this.editedItem).then((response) => {
           if (response.status == 201) {
-            this.displaySnackbar("Vozilo dodano!");
+            this.displaySnackbar(this.$t('admin.vehicle_added'));
 
             var vehicle = response.data;
             this.vehicles.push(vehicle);
-          } else this.displayErrorSnackbar("Dogodila se greška!");
+          } else this.displayErrorSnackbar(this.$t('admin.error'));
         });
       }
       this.close();

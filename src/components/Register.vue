@@ -5,7 +5,7 @@
           <v-layout align-center justify-center>
             <v-flex xs12 sm8 md4>
               <v-card class="mx-auto" max-width="500" color="white--text">
-                <v-card-title class="teal" >Register</v-card-title>
+                <v-card-title class="teal" >{{$t('register.title')}}</v-card-title>
                 <v-card-text>
                   <v-form
                     align="center"
@@ -17,24 +17,24 @@
                     <v-text-field
                       color="teal"
                       v-model="firstname"
-                      :rules="nameRules"
-                      label="Firstname"
+                      :rules="firstnameRules"
+                      :label="$t('register.firstname')"
                       required
                     ></v-text-field>
 
                     <v-text-field
                       color="teal"
                       v-model="lastname"
-                      :rules="nameRules"
-                      label="Lastname"
+                      :rules="lastnameRules"
+                       :label="$t('register.lastname')"
                       required
                     ></v-text-field>
 
                     <v-text-field
                       color="teal"
                       v-model="username"
-                      :rules="nameRules"
-                      label="Username"
+                      :rules="usernameRules"
+                       :label="$t('register.username')"
                       required
                     ></v-text-field>
 
@@ -42,22 +42,22 @@
                       color="teal"
                       v-model="email"
                       :rules="emailRules"
-                      label="E-mail"
+                      :label="$t('register.email')"
                       required
                     ></v-text-field>
 
                     <v-text-field
                       color="teal"
                       v-model="address"
-                      :rules="nameRules"
-                      label="Address"
+                      :rules="addressRules"
+                      :label="$t('register.address')"
                       required
                     ></v-text-field>
 
                     <v-text-field
                       color="teal"
                       :value="password"
-                      label="Password"
+                      :label="$t('register.password')"
                       :append-icon="value ? 'mdi-eye' : 'mdi-eye-off'"
                       @click:append="() => (value = !value)"
                       :type="value ? 'password' : 'text'"
@@ -68,7 +68,7 @@
                      <v-text-field
                       color="teal"
                       :value="password2"
-                      label="Repeat password"
+                      :label="$t('register.password2')"
                       :append-icon="value2 ? 'mdi-eye' : 'mdi-eye-off'"
                       @click:append="() => (value2 = !value2)"
                       :type="value2 ? 'password' : 'text'"
@@ -79,8 +79,8 @@
                     <v-checkbox
                       color="teal"
                       v-model="checkbox"
-                      :rules="[(v) => !!v || 'You must agree to continue!']"
-                      label="Do you agree?"
+                      :rules="[(v) => !!v ||  $t('register.agree')]"
+                      :label="$t('register.agree2')"
                       required
                     ></v-checkbox>
 
@@ -90,7 +90,7 @@
                       class="mr-4"
                       @click="register"
                     >
-                      Register!
+                    {{$t('register.register_button')}}
                     </v-btn>
 
                     <!-- <v-btn color="warning" class="mr-4" @click="reset">
@@ -98,7 +98,7 @@
                     </v-btn> -->
 
                      <v-btn color="primary" to="/login"> 
-                      Login
+                      {{$t('register.login_button')}}
                     </v-btn>
                   </v-form>
                 </v-card-text>
@@ -124,27 +124,37 @@ export default {
       lastname: "",
       firstname: "",
       checkbox: false,
-      valid: true,
+      valid: false,
       value: true,
       value2: true,
        passwordRules: [
-         v => !!v || "Password is required",
-        (v) => (v && v.length >= 8) || "Password must be at least 8 characters",
-
-              
+         v => !!v || this.$t('register.required_password'),
+        (v) => (v && v.length >= 8) || this.$t('register.length_password')
       ],
       password2Rules: [
          v => (!!v && v) === this.password ||
-              'Values do not match'
+              this.$t('register.not_match_password'),
       ],
-      nameRules: [
-        (v) => !!v || "Name is required",
-        (v) => (v && v.length <= 20) || "Name must be less than 20 characters",
+      firstnameRules: [
+        (v) => !!v || this.$t('register.required_firstname'),
+        (v) => (v && v.length <= 20) || this.$t('register.length_firstname'),
       ],
       emailRules: [
-        (v) => !!v || "E-mail is required",
-        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
-      ]
+        (v) => !!v || this.$t('register.required_email'),
+        (v) => /.+@.+\..+/.test(v) || this.$t('register.valid_email'),
+      ],
+      addressRules: [
+        (v) => !!v || this.$t('register.required_address'),
+        (v) => (v && v.length <= 250) || this.$t('admin.length_address'),
+      ],
+      lastnameRules: [
+        (v) => !!v || this.$t('register.required_lastname'),
+        (v) => (v && v.length <= 50) || this.$t('register.length_lastname'),
+      ],
+       usernameRules: [
+        (v) => !!v || this.$t('register.required_username'),
+        (v) => (v && v.length <= 50) || this.$t('register.length_username'),
+      ],
       
     };
   },

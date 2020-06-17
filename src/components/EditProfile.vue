@@ -10,7 +10,7 @@
                               ? 'display-1'
                               : 'display-2',
                           ]"
-          >Edit profile</span>
+          >{{$t('edit_profile.title')}}</span>
         </v-col>
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
@@ -18,8 +18,8 @@
               <v-text-field
                 color="#424242"
                 v-model="user.firstname"
-                :rules="nameRules"
-                label="First name"
+                :rules="firstnameRules"
+                :label="$t('edit_profile.firstname')"
                 required
                 append-icon="person"
               ></v-text-field>
@@ -27,8 +27,8 @@
               <v-text-field
                 color="#424242"
                 v-model="user.lastname"
-                :rules="nameRules"
-                label="Last name"
+                :rules="lastnameRules"
+                :label="$t('edit_profile.lastname')"
                 required
                 append-icon="person"
               ></v-text-field>
@@ -36,8 +36,8 @@
               <v-text-field
                 color="#424242"
                 v-model="user.username"
-                :rules="nameRules"
-                label="Username"
+                :rules="usernameRules"
+                :label="$t('edit_profile.username')"
                 required
                 append-icon="person"
               ></v-text-field>
@@ -46,7 +46,7 @@
                 color="#424242"
                 v-model="user.email"
                 :rules="emailRules"
-                label="E-mail"
+                :label="$t('edit_profile.email')"
                 required
                 append-icon="mail"
               ></v-text-field>
@@ -54,8 +54,8 @@
               <v-text-field
                 color="#424242"
                 v-model="user.address"
-                :rules="nameRules"
-                label="Address"
+                :rules="addressRules"
+                :label="$t('edit_profile.address')"
                 required
                 append-icon="home"
               ></v-text-field>
@@ -63,14 +63,14 @@
               <v-checkbox
                   color="#424242"
                   v-model="changePassword"
-                  label="Change password"
+                  :label="$t('edit_profile.change_password')"
               ></v-checkbox>
 
               <v-text-field
                 v-show="changePassword"
                 color="#424242"
                 v-model="user.password"
-                label="Password"
+                :label="$t('edit_profile.password')"
                 :append-icon="value ? 'mdi-eye' : 'mdi-eye-off'"
                 @click:append="() => (value = !value)"
                 :type="value ? 'password' : 'text'"
@@ -83,7 +83,7 @@
                 v-show="changePassword"
                 color="#424242"
                 :value="pass2"
-                label="Repeat password"
+                :label="$t('edit_profile.password2')"
                 :append-icon="value2 ? 'mdi-eye' : 'mdi-eye-off'"
                 @click:append="() => (value2 = !value2)"
                 :type="value2 ? 'password' : 'text'"
@@ -93,8 +93,8 @@
               ></v-text-field>
             </v-form>
             <v-spacer></v-spacer>
-            <v-btn :disabled="!valid && changePassword==true" color="success" @click="updateProfile()" dark>Edit</v-btn>
-            <v-btn color="red" to="/profile" dark>Cancel</v-btn>
+            <v-btn :disabled="!valid && changePassword==true" color="success" @click="updateProfile()" dark>{{$t('edit_profile.edit_button')}}</v-btn>
+            <v-btn color="red" to="/profile" dark>{{$t('edit_profile.cancel_button')}}</v-btn>
           </v-flex>
         </v-layout>
       </v-container>
@@ -122,24 +122,34 @@ export default {
       value: true,
       value2: true,
       changePassword: false,
-       passwordRules: [
-         v => !!v || "Password is required",
-        (v) => (v && v.length >= 8) || "Password must be at least 8 characters",
-
-              
+      passwordRules: [
+         v => !!v || this.$t('register.required_password'),
+        (v) => (v && v.length >= 8) || this.$t('register.length_password')
       ],
       password2Rules: [
          v => (!!v && v) === this.password ||
-              'Values do not match'
+              this.$t('register.not_match_password'),
       ],
-      nameRules: [
-        (v) => !!v || "Name is required",
-        (v) => (v && v.length <= 20) || "Name must be less than 20 characters",
+      firstnameRules: [
+        (v) => !!v || this.$t('register.required_firstname'),
+        (v) => (v && v.length <= 20) || this.$t('register.length_firstname'),
       ],
       emailRules: [
-        (v) => !!v || "E-mail is required",
-        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
-      ]
+        (v) => !!v || this.$t('register.required_email'),
+        (v) => /.+@.+\..+/.test(v) || this.$t('register.valid_email'),
+      ],
+      addressRules: [
+        (v) => !!v || this.$t('register.required_address'),
+        (v) => (v && v.length <= 250) || this.$t('admin.length_address'),
+      ],
+      lastnameRules: [
+        (v) => !!v || this.$t('register.required_lastname'),
+        (v) => (v && v.length <= 50) || this.$t('register.length_lastname'),
+      ],
+       usernameRules: [
+        (v) => !!v || this.$t('register.required_username'),
+        (v) => (v && v.length <= 50) || this.$t('register.length_username'),
+      ],
     };
   },
   created() {

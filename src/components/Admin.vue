@@ -46,9 +46,9 @@ export default {
       return {
         drawer: true,
         items: [
-          { title: 'Users', icon: 'mdi-account', link: '/admin/users' },
-          { title: 'Schedules', icon: 'mdi-calendar',  link: '/admin/schedules'  },
-          { title: 'Vehicles', icon: 'mdi-truck',  link: '/admin/vehicles' }
+          { title: this.$t('admin.users'), icon: 'mdi-account', link: '/admin/users' },
+          { title: this.$t('admin.schedules'), icon: 'mdi-calendar',  link: '/admin/schedules'  },
+          { title: this.$t('admin.vehicles'), icon: 'mdi-truck',  link: '/admin/vehicles' }
         ],
       }
     },

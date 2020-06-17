@@ -1,9 +1,9 @@
 <template>
   <v-card class="mx-auto" max-width="1300" shaped>
-    <v-card-title class="font-weight-bold">SCHEDULES</v-card-title>
+    <v-card-title class="font-weight-bold">{{$t('admin.schedules_title')}}</v-card-title>
     <v-divider color="teal"></v-divider>
     <div class="py-3"></div>
-    <v-btn @click="dialog = true">ADD SCHEDULE</v-btn>
+    <v-btn @click="dialog = true">{{$t('admin.schedules_button_add')}}</v-btn>
     <v-dialog v-model="dialog" max-width="500px">
       <v-card>
         <v-card-title>
@@ -16,13 +16,13 @@
                 <v-text-field
                   color="primary"
                   v-model="editedItem.address"
-                  :rules="nameRules"
-                  label="Address"
+                  :rules="addressRules"
+                  :label="$t('admin.address')"
                   required
                 ></v-text-field>
 
-                <v-select :items="days" label="Day" v-model="editedItem.day" required></v-select
-                ><v-select :items="types" label="Type" v-model="editedItem.type" required></v-select>
+                <v-select :items="days" item-text="text" item-value="value" :label="$t('admin.day')" v-model="editedItem.day" required></v-select
+                ><v-select :items="types" item-text="text" item-value="value" :label="$t('admin.type')" v-model="editedItem.type" required></v-select>
               </v-form>
             </v-row>
           </v-container>
@@ -30,13 +30,13 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="close">Cancel</v-btn>
+          <v-btn color="primary" text @click="close">{{$t('admin.button_cancel')}}</v-btn>
           <v-btn
             color="primary"
             :disabled="!valid"
             text
             @click="save"
-            >save</v-btn
+            >{{$t('admin.button_save')}}</v-btn
           >
         </v-card-actions>
       </v-card>
@@ -75,7 +75,7 @@
       <v-snackbar v-model="snackBar" :color="snackBarColor">
         {{ snackBarText }}
         <v-btn text @click="snackBar = false" :timeout="timeout">
-          OK
+          {{$t('admin.button_ok')}}
         </v-btn>
       </v-snackbar>
     </div>
@@ -94,15 +94,26 @@ export default {
       snackBarColor: null,
       timeout: 2000,
       headers: [
-        { text: "ADDRESS", value: "address" },
-        { text: "DAY", value: "day" },
-        { text: "TYPE", value: "type" },
-        { text: "EDIT", value: "edit", sortable: false },
-        { text: "DELETE", value: "delete", sortable: false }
+        { text: this.$t('admin.table_address'), value: "address" },
+        { text: this.$t('admin.table_day'), value: "day" },
+        { text: this.$t('admin.table_type'), value: "type" },
+        { text: this.$t('admin.edit'), value: "edit", sortable: false },
+        { text: this.$t('admin.delete'), value: "delete", sortable: false }
         
       ],
-      days: ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-      types: ["Glass","Plastic","Paper","Metal"],
+      days: [
+            {text: this.$t('days.monday'), value: 1},
+            {text: this.$t('days.tuesday'), value: 2},
+            {text: this.$t('days.wednesday'), value: 3},
+            {text: this.$t('days.thursday'), value: 4},
+            {text: this.$t('days.friday'), value: 5}
+      ],
+      types: [
+            {text: this.$t('types.plastic'), value: this.$t('types.plastic','en') },
+            {text: this.$t('types.glass'), value: this.$t('types.glass','en') },
+            {text: this.$t('types.metal'), value: this.$t('types.metal','en') },
+            {text: this.$t('types.paper'), value: this.$t('types.paper','en') },
+      ],
       editedIndex: -1,
       editedItem: {
         id: null,
@@ -116,9 +127,9 @@ export default {
         day: "",
         address: "",
       },
-       nameRules: [
-        (v) => !!v || "Address is required",
-        (v) => (v && v.length <= 50) || "Address must be less than 50 characters",
+       addressRules: [
+        (v) => !!v || this.$t('admin.required_address'),
+        (v) => (v && v.length <= 250) || this.$t('admin.length_address'),
       ],
       valid: true,
       dialog: false
@@ -126,12 +137,21 @@ export default {
   },
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Schedule" : "Edit Schedule";
+      return this.editedIndex === -1 ? this.$t('admin.new_schedule') : this.$t('admin.edit_schedule');
     },
   },
   mounted() {
+
+    var that = this
+
     this.$store.dispatch("getSchedule").then((response) => {
       this.schedules = response.data;
+
+       this.schedules.forEach(function(item) {
+    
+        that.format(item)
+
+     });
     });
    },
 
@@ -146,18 +166,19 @@ export default {
 
      deleteItem(item) {
       const index = this.schedules.indexOf(item);
-      confirm("Are you sure you want to delete this item?") &&
+      if(confirm(this.$t('admin.agree')))
+      {
         this.schedules.splice(index, 1)
 
         this.$store.dispatch("deleteSchedule", item.id)
         .then((response) =>
             {
-              if(response.status == 204) this.displaySnackbar("Raspored izbrisan!")
+              if(response.status == 204) this.displaySnackbar(this.$t('admin.schedule_deleted'))
            
-              else this.displayErrorSnackbar("Dogodila se greška!")
+              else this.displayErrorSnackbar(this.$t('admin.error'))
 
             })
-    
+      }
     },
 
     showLocation(item) {
@@ -177,20 +198,31 @@ export default {
     },
 
    save() {
+
       if (this.editedIndex > -1) {
-     
+        
         Object.assign(this.schedules[this.editedIndex], this.editedItem);
-        console.log(this.editedItem)
+       
         this.$store.dispatch("editSchedule", this.editedItem)
         .then((response) =>
         {
          if(response.status == 200) 
          {
-           this.displaySnackbar("Raspored izmijenjenjen!")
+           var schedule = response.data
+
+           this.format(schedule)
+
+           console.log(schedule)
+
+           this.schedules.splice(this.editedIndex, 1, schedule)
+
+           console.log(this.schedules)
+          
+           this.displaySnackbar(this.$t('admin.schedule_edited'))
            this.editedIndex = -1
          }
              
-          else this.displayErrorSnackbar("Dogodila se greška!")
+          else this.displayErrorSnackbar(this.$t('admin.error'))
             
         
           });
@@ -200,12 +232,14 @@ export default {
         .then((response) => {
          if(response.status == 201)
         {
-         this.displaySnackbar("Raspored dodan!")
+         this.displaySnackbar(this.$t('admin.schedule_added'))
 
          var schedule = response.data;
          this.schedules.push(schedule)
+
+
         }
-        else this.displayErrorSnackbar("Dogodila se greška!")
+        else this.displayErrorSnackbar(this.$t('admin.error'))
         
     });
       
@@ -226,6 +260,20 @@ export default {
       this.snackBarText = text
       this.snackBar = true
       this.snackBarColor = "red"
+    },
+
+    format(item)
+    {
+        if (item.day == 1) item.day = this.$t('days.monday')
+        if (item.day == 2) item.day = this.$t('days.tuesday')
+        if (item.day == 3) item.day = this.$t('days.wednesday')
+        if (item.day == 4) item.day = this.$t('days.thursday')
+        if (item.day == 5) item.day = this.$t('days.friday')
+
+        if (item.type == "Glass") item.type = this.$t('types.glass')
+        if (item.type == "Plastic") item.type = this.$t('types.plastic')
+        if (item.type == "Metal") item.type = this.$t('types.metal')
+        if (item.type == "Paper") item.type = this.$t('types.paper')
     }
   }
 };

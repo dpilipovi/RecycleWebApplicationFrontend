@@ -25,7 +25,7 @@
                               ? 'display-1'
                               : 'display-2',
                           ]"
-                          >WELCOME TO</span
+                          >{{$t('index.welcome1')}}</span
                         >
 
                         <br />
@@ -37,7 +37,7 @@
                               : 'display-4',
                           ]"
                           class="font-weight-black"
-                          >RECYCLE WEB</span
+                          >{{$t('index.welcome2')}}</span
                         >
                       </v-col>
 
@@ -66,7 +66,7 @@
                     $vuetify.breakpoint.smAndDown ? 'display-2' : 'display-3',
                   ]"
                   class="font-weight-bold"
-                  >COLLECTION SCHEDULE</span
+                  >{{$t('index.schedule')}}</span
                 >
               </v-row>
               <div class="py-12 hidden-sm-and-down"></div>
@@ -89,7 +89,7 @@
                       flat
                       solo-inverted
                       hide-details
-                      label="Search"
+                      :label="$t('index.search')"
                       prepend-inner-icon="search"
                     ></v-text-field>
                     <template v-if="$vuetify.breakpoint.mdAndUp">
@@ -100,7 +100,7 @@
                         solo-inverted
                         hide-details
                         :items="keys"
-                        label="Sort by"
+                        :label="$t('index.address')"
                         prepend-inner-icon="search"
                       ></v-select>
                       <v-spacer></v-spacer>
@@ -140,7 +140,7 @@
                           >
                             <v-list-item-content
                               :class="{ 'blue--text': sortBy === key }"
-                              >{{ key }}:</v-list-item-content
+                              >{{ $t('index.'+key.toLowerCase()) }}:</v-list-item-content
                             >
                             <v-list-item-content
                               class="align-end"
@@ -158,7 +158,7 @@
 
                 <template v-slot:footer>
                   <v-row class="mt-2" align="center" justify="center">
-                    <span class="grey--text">Items per page</span>
+                    <span class="grey--text">{{$t('index.items_per_page')}}</span>
                     <v-menu offset-y>
                       <template v-slot:activator="{ on }">
                         <v-btn dark text color="primary" class="ml-2" v-on="on">
@@ -180,7 +180,7 @@
                     <v-spacer></v-spacer>
 
                     <span class="mr-4 grey--text"
-                      >Page {{ page }} of {{ numberOfPages }}</span
+                      >{{$t('index.page')}} {{ page }} {{$t('index.of')}} {{ numberOfPages }}</span
                     >
                     <v-btn
                       fab
@@ -255,7 +255,8 @@ export default {
       sortDesc: false,
       page: 1,
       itemsPerPage: 4,
-      sortBy: "Address",
+      sortBy: "this.$t('index.address')",
+      //keys: [this.$t('index.address'), this.$t('index.type'), this.$t('index.day')],
       keys: ["Address", "Type", "Day"],
       items: [],
     };
@@ -263,8 +264,26 @@ export default {
   mounted() {
     this.$store.dispatch("getSchedule").then((response) => {
       this.items = response.data;
+
+      let that = this
+      
+     this.items.forEach(function(item) {
+    
+        if (item.day == 1) item.day = that.$t('days.monday')
+        if (item.day == 2) item.day = that.$t('days.tuesday')
+        if (item.day == 3) item.day = that.$t('days.wednesday')
+        if (item.day == 4) item.day = that.$t('days.thursday')
+        if (item.day == 5) item.day = that.$t('days.friday')
+
+        if (item.type == "Glass") item.type = that.$t('types.glass')
+        if (item.type == "Plastic") item.type = that.$t('types.plastic')
+        if (item.type == "Metal") item.type = that.$t('types.metal')
+        if (item.type == "Paper") item.type = that.$t('types.paper')
+     
+     });
     });
   },
+    
   computed: {
     numberOfPages() {
       return Math.ceil(this.items.length / this.itemsPerPage);
@@ -272,7 +291,7 @@ export default {
     filteredKeys() {
       //this.keys = ["Address", "Type", "Day"]
     //  console.log(this.keys)
-      return this.keys.filter((key) => key !== `Address`);
+      return this.keys.filter((key) => key !== `Address`/*this.$t('index.address')*/);
     },
   },
   methods: {

@@ -1,7 +1,7 @@
 <template>
 <v-content>
  <v-container data-aos="fade-up" data-aos-duration="1000">
-          <h2 class="display-2 font-weight-bold mb-3 text-uppercase text-center">Contact us</h2>
+          <h2 class="display-2 font-weight-bold mb-3 text-uppercase text-center">{{$t('contact.title')}}</h2>
 
           <v-responsive
             class="mx-auto mb-12"
@@ -17,32 +17,36 @@
               <v-col cols="12">
                 <v-text-field
                   flat
-                  label="Name*"
+                  :label="$t('contact.name')"
                   solo
+                  required
                 ></v-text-field>
               </v-col>
 
               <v-col cols="12">
                 <v-text-field
                   flat
-                  label="Email*"
+                  :label="$t('contact.email')"
                   solo
+                  required
                 ></v-text-field>
               </v-col>
 
               <v-col cols="12">
                 <v-text-field
                   flat
-                  label="Subject*"
+                  :label="$t('contact.subject')"
                   solo
+                  required
                 ></v-text-field>
               </v-col>
 
               <v-col cols="12">
                 <v-textarea
                   flat
-                  label="Message*"
+                  :label="$t('contact.message')"
                   solo
+                  required
                 ></v-textarea>
               </v-col>
 
@@ -54,7 +58,7 @@
                   color="accent"
                   x-large
                 >
-                  Submit
+                  {{$t('contact.submit')}}
                 </v-btn>
               </v-col>
             </v-row>

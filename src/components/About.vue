@@ -18,11 +18,11 @@
                               ? 'display-1'
                               : 'display-2',
                           ]"
-                    >WE ARE A RECYCLING FAMILY</span>
+                    >{{$t('about.title')}}</span>
 
                   </v-col>
                   <v-col class="text-center" cols="12">
-                  <v-btn dark to="/register">JOIN US </v-btn>
+                  <v-btn dark to="/register">{{$t('about.join_us')}} </v-btn>
                   </v-col>
                   <div class="py-12"></div>
                   <div class="py-12"></div>
@@ -51,7 +51,7 @@
                               ? 'display-1'
                               : 'display-2',
                           ]"
-                    >WE WANT A CLEAN PLANET, NOT A DIRTY ONE</span>
+                    >{{$t('about.message')}}</span>
                       <div class="py-3"></div>
 
                 <v-carousel>
@@ -64,13 +64,15 @@
                 ></v-carousel-item>
             </v-carousel>
                   </v-col>
-
                   <v-btn class="align-self-end" fab outlined @click="$vuetify.goTo('#top')">
                     <v-icon >mdi-chevron-double-up</v-icon>
                   </v-btn>
                 </v-row>
               </v-container>
     </section>
+    <div class="py-12"></div>
+    <div class="py-12"></div>
+    <div class="py-6"></div>
   </v-content>
 </template>
   

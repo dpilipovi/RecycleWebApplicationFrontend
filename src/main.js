@@ -8,6 +8,7 @@ import "aos/dist/aos.css";
 import * as VueGoogleMaps from "vue2-google-maps";
 import VideoBackground from 'vue-responsive-video-background-player'
 import VueVideoSection from 'vue-video-section'
+import i18n from './i18n'
 
 
 Vue.component('vue-video-section', VueVideoSection)
@@ -30,8 +31,10 @@ new Vue({
   created() {
     AOS.init({ once: true});
   },
+
   router,
   store,
   vuetify,
+  i18n,
   render: h => h(App)
 }).$mount('#app')

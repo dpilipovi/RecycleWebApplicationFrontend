@@ -1,9 +1,9 @@
 <template>
   <v-card class="mx-auto" max-width="1300" shaped>
-    <v-card-title class="font-weight-bold">USERS</v-card-title>
+    <v-card-title class="font-weight-bold">{{$t('admin.users_title')}}</v-card-title>
     <v-divider color="teal"></v-divider>
     <div class="py-3"></div>
-    <v-btn @click="dialogAdd=true">ADD USER </v-btn>
+    <v-btn @click="dialogAdd=true"> {{$t('admin.users_button_add')}}</v-btn>
     <v-dialog v-model="dialog" max-width="500px">
       <v-card>
         <v-card-title>
@@ -16,24 +16,24 @@
                 <v-text-field
                   color="primary"
                   v-model="editedItem.firstname"
-                  :rules="nameRules"
-                  label="Firstname"
+                  :rules="firstnameRules"
+                  :label="$t('admin.firstname')"
                   required
                 ></v-text-field>
 
                 <v-text-field
                   color="primary"
                   v-model="editedItem.lastname"
-                  :rules="nameRules"
-                  label="Lastname"
+                  :rules="lastnameRules"
+                  :label="$t('admin.lastname')"
                   required
                 ></v-text-field>
 
                 <v-text-field
                   color="primary"
                   v-model="editedItem.username"
-                  :rules="nameRules"
-                  label="Username"
+                  :rules="usernameRules"
+                  :label="$t('admin.username')"
                   required
                 ></v-text-field>
 
@@ -41,29 +41,29 @@
                   color="primary"
                   v-model="editedItem.email"
                   :rules="emailRules"
-                  label="E-mail"
+                  :label="$t('admin.email')"
                   required
                 ></v-text-field>
 
                 <v-text-field
                   color="primary"
                   v-model="editedItem.address"
-                  :rules="nameRules"
-                  label="Address"
+                  :rules="addressRules"
+                  :label="$t('admin.address')"
                   required
                 ></v-text-field>
 
                 <v-checkbox
                   color="primary"
                   v-model="changePassword"
-                  label="Change password"
+                  :label="$t('admin.change_password')"
                 ></v-checkbox>
 
                 <v-text-field
                   v-show="changePassword"
                   color="primary"
                   :value="password"
-                  label="Password"
+                  :label="$t('admin.password')"
                   :append-icon="value ? 'mdi-eye' : 'mdi-eye-off'"
                   @click:append="() => (value = !value)"
                   :type="value ? 'password' : 'text'"
@@ -75,7 +75,7 @@
                   v-show="changePassword"
                   color="primary"
                   :value="password2"
-                  label="Repeat password"
+                  :label="$t('admin.password2')"
                   :append-icon="value2 ? 'mdi-eye' : 'mdi-eye-off'"
                   @click:append="() => (value2 = !value2)"
                   :type="value2 ? 'password' : 'text'"
@@ -86,7 +86,7 @@
                 <v-checkbox
                   color="primary"
                   v-model="admin"
-                  label="Make admin"
+                  :label="$t('admin.make_admin')"
                   v-show="!initialAdmin"
                 ></v-checkbox>
               </v-form>
@@ -96,13 +96,13 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="close">Cancel</v-btn>
+          <v-btn color="primary" text @click="close">{{$t('admin.button_cancel')}}</v-btn>
           <v-btn
             color="primary"
             :disabled="!valid && changePassword == true"
             text
             @click="save"
-            >save</v-btn
+            >{{$t('admin.button_save')}}</v-btn
           >
         </v-card-actions>
       </v-card>
@@ -121,24 +121,24 @@
                 <v-text-field
                   color="primary"
                   v-model="editedItem.firstname"
-                  :rules="nameRules"
-                  label="Firstname"
+                  :rules="firstnameRules"
+                  :label="$t('admin.firstname')"
                   required
                 ></v-text-field>
 
                 <v-text-field
                   color="primary"
                   v-model="editedItem.lastname"
-                  :rules="nameRules"
-                  label="Lastname"
+                  :rules="lastnameRules"
+                  :label="$t('admin.lastname')"
                   required
                 ></v-text-field>
 
                 <v-text-field
                   color="primary"
                   v-model="editedItem.username"
-                  :rules="nameRules"
-                  label="Username"
+                  :rules="usernameRules"
+                  :label="$t('admin.username')"
                   required
                 ></v-text-field>
 
@@ -146,22 +146,22 @@
                   color="primary"
                   v-model="editedItem.email"
                   :rules="emailRules"
-                  label="E-mail"
+                  :label="$t('admin.email')"
                   required
                 ></v-text-field>
 
                 <v-text-field
                   color="primary"
                   v-model="editedItem.address"
-                  :rules="nameRules"
-                  label="Address"
+                  :rules="addressRules"
+                  :label="$t('admin.address')"
                   required
                 ></v-text-field>
 
                 <v-text-field
                   color="primary"
                   :value="password"
-                  label="Password"
+                   :label="$t('admin.password')"
                   :append-icon="value ? 'mdi-eye' : 'mdi-eye-off'"
                   @click:append="() => (value = !value)"
                   :type="value ? 'password' : 'text'"
@@ -172,7 +172,7 @@
                 <v-text-field
                   color="primary"
                   :value="password2"
-                  label="Repeat password"
+                   :label="$t('admin.password2')"
                   :append-icon="value2 ? 'mdi-eye' : 'mdi-eye-off'"
                   @click:append="() => (value2 = !value2)"
                   :type="value2 ? 'password' : 'text'"
@@ -183,7 +183,7 @@
                 <v-checkbox
                   color="primary"
                   v-model="admin"
-                  label="Make admin"
+                  :label="$t('admin.make_admin')"
                 ></v-checkbox>
               </v-form>
             </v-row>
@@ -192,13 +192,13 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="close">Cancel</v-btn>
+          <v-btn color="primary" text @click="close">{{$t('admin.button_cancel')}}</v-btn>
           <v-btn
             color="primary"
             :disabled="!valid && changePassword == true"
             text
             @click="save"
-            >Save</v-btn
+            >{{$t('admin.button_save')}}</v-btn
           >
         </v-card-actions>
 
@@ -207,7 +207,7 @@
 
     <v-dialog v-model="detailDialog" max-width="750px">
       <v-card>
-      <v-card-title class="font-weight-bold tamno-siva">Recycle history</v-card-title>
+      <v-card-title class="font-weight-bold tamno-siva">{{$t('admin.recycle_history')}}</v-card-title>
 
       <v-card-text>
       <v-container>  
@@ -216,7 +216,7 @@
         <v-col class="d-flex" cols="2">
           <v-select
             :items="years"
-            label="Year"
+            :label="$t('admin.year')"
             dense
             solo
             v-model="selectedYear"
@@ -226,7 +226,7 @@
         <v-col class="d-flex" cols="2">
           <v-select
             :items="months"
-            label="Month"
+            :label="$t('admin.month')"
             dense
             solo
             v-model="selectedMonth"
@@ -254,7 +254,7 @@
       </v-card-text>
       <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="close">Close</v-btn>
+          <v-btn color="primary" text @click="close">{{$t('admin.button_close')}}</v-btn>
       </v-card-actions>
       </v-card>
     </v-dialog>
@@ -263,7 +263,7 @@
       <v-text-field
         v-model="search"
         append-icon="search"
-        label="Search"
+        :label="$t('admin.search')"
         single-line
         hide-details
         color="teal"
@@ -302,7 +302,7 @@
           :timeout="timeout"
           
         >
-          OK
+          {{$t('admin.button_ok')}}
         </v-btn>
     </v-snackbar>
   </div>
@@ -336,15 +336,15 @@ export default {
       snackBarColor: null,
       timeout: 2000,
       headers: [
-        { text: "FIRST NAME", value: "firstname" },
-        { text: "LAST NAME", value: "lastname" },
-        { text: "USERNAME", value: "username" },
-        { text: "ADDRESS", value: "address" },
-        { text: "EMAIL", value: "email" },
-        { text: "ROLE", value: "authorities" },
-        { text: "EDIT", value: "edit", sortable: false },
-        { text: "DELETE", value: "delete", sortable: false },
-        { text: "DETAILS", value: "details", sortable: false },
+        { text: this.$t('admin.users_firstname'), value: "firstname" },
+        { text: this.$t('admin.users_lastname'), value: "lastname" },
+        { text: this.$t('admin.users_username'), value: "username" },
+        { text: this.$t('admin.users_address'), value: "address" },
+        { text: this.$t('admin.users_email'), value: "email" },
+        { text: this.$t('admin.users_role'), value: "authorities" },
+        { text: this.$t('admin.edit'), value: "edit", sortable: false },
+        { text: this.$t('admin.delete'), value: "delete", sortable: false },
+        { text: this.$t('admin.details'), value: "details", sortable: false },
       ],
 
       editedIndex: -1,
@@ -376,25 +376,38 @@ export default {
       value: true,
       value2: true,
       passwordRules: [
-        (v) => !!v || "Password is required",
-        (v) => (v && v.length >= 8) || "Password must be at least 8 characters",
+         v => !!v || this.$t('register.required_password'),
+        (v) => (v && v.length >= 8) || this.$t('register.length_password')
       ],
       password2Rules: [
-        (v) => (!!v && v) === this.password || "Values do not match",
+         v => (!!v && v) === this.password ||
+              this.$t('register.not_match_password'),
       ],
-      nameRules: [
-        (v) => !!v || "Name is required",
-        (v) => (v && v.length <= 20) || "Name must be less than 20 characters",
+      firstnameRules: [
+        (v) => !!v || this.$t('register.required_firstname'),
+        (v) => (v && v.length <= 20) || this.$t('register.length_firstname'),
       ],
       emailRules: [
-        (v) => !!v || "E-mail is required",
-        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+        (v) => !!v || this.$t('register.required_email'),
+        (v) => /.+@.+\..+/.test(v) || this.$t('register.valid_email'),
+      ],
+      addressRules: [
+        (v) => !!v || this.$t('register.required_address'),
+        (v) => (v && v.length <= 250) || this.$t('admin.length_address'),
+      ],
+      lastnameRules: [
+        (v) => !!v || this.$t('register.required_lastname'),
+        (v) => (v && v.length <= 50) || this.$t('register.length_lastname'),
+      ],
+       usernameRules: [
+        (v) => !!v || this.$t('register.required_username'),
+        (v) => (v && v.length <= 50) || this.$t('register.length_username'),
       ],
     };
   },
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New User" : "Edit User";
+      return this.editedIndex === -1 ? this.$t('admin.new_user') : this.$t('admin.edit_user');
     },
   },
   created() {
@@ -448,17 +461,20 @@ export default {
 
     deleteItem(item) {
       const index = this.users.indexOf(item);
-      confirm("Are you sure you want to delete this item?") &&
+      if(confirm(this.$t('admin.agree')))
+      { 
         this.users.splice(index, 1)
 
         this.$store.dispatch("deleteUser", item.username)
         .then((response) =>
             {
-              if(response.status == 204) this.displaySnackbar("Korisnik izbrisan!")
+              if(response.status == 204) this.displaySnackbar(this.$t('admin.user_deleted'))
            
-              else this.displayErrorSnackbar("Dogodila se greška!")
+              else this.displayErrorSnackbar(this.$t('admin.error'))
 
             })
+
+      }
     
     },
 
@@ -488,17 +504,17 @@ export default {
         this.$store.dispatch("editUserFromAdmin", this.editedItem)
         .then((response) =>
         {
-         if(response.status == 200) this.displaySnackbar("Korisnik izmijenjen!")
+         if(response.status == 200) this.displaySnackbar(this.$t('admin.user_edited'))
              
-          else this.displayErrorSnackbar("Dogodila se greška!")
+          else this.displayErrorSnackbar(this.$t('admin.error'))
             
           if (this.admin == true && this.dialogAdd==false) {
             this.$store.dispatch("makeAdmin", this.editedItem.username)
             .then((response) =>
             {
-              if(response.status == 200) this.displaySnackbar("Korisnik izmijenjen!")
+              if(response.status == 200) this.displaySnackbar(this.$t('admin.user_edited'))
 
-              else this.displayErrorSnackbar("Dogodila se greška!")
+              else this.displayErrorSnackbar(this.$t('admin.user_error'))
             
               this.users[this.editedIndex].authorities = new Array(
                 "ROLE_ADMIN"
@@ -515,12 +531,12 @@ export default {
         .then((response) => {
          if(response.status == 201)
         {
-         this.displaySnackbar("Korisnik dodan!")
+         this.displaySnackbar(this.$t('admin.user_added'))
 
          var user = response.data;
          this.users.push(user)
         }
-        else this.displayErrorSnackbar("Dogodila se greška!")
+        else this.displayErrorSnackbar(this.$t('admin.user_error'))
         
     });
         
@@ -539,10 +555,10 @@ export default {
       this.defaultPage = false;
 
       this.recycleData = [
-        { type: "Plastic", amount: 0 },
-        { type: "Paper", amount: 0 },
-        { type: "Glass", amount: 0 },
-        { type: "Metal", amount: 0 },
+        { type: this.$t('types.plastic'), amount: 0 },
+        { type: this.$t('types.paper'), amount: 0 },
+        { type: this.$t('types.glass'), amount: 0 },
+        { type: this.$t('types.metal'), amount: 0 },
       ];
 
       let yearMonth =

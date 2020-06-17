@@ -1,0 +1,228 @@
+{
+    "index":
+    { 
+        "welcome1": "DOBRO DOŠLI NA",
+        "welcome2": "RECIKILIRANJE WEB",
+        "schedule": "RASPORED PRIKUPLJANJA",
+        "items_per_page": "Broj predmeta po stranici",
+        "page": "Stranica",
+        "of": "od",
+        "search": "Pretraži",
+        "address": "Adresa",
+        "type": "Tip",
+        "day": "Dan"
+
+    },
+
+    "days":
+    {
+        "monday": "Ponedjeljak",
+        "tuesday": "Utorak",
+        "wednesday": "Srijeda",
+        "thursday": "Četvrtak",
+        "friday": "Petak"
+    },
+
+    "types":
+    {
+        "glass": "Staklo",
+        "paper": "Papir",
+        "plastic": "Plastika",
+        "metal": "Metal"
+    },
+
+    "contact":
+    {
+        "title": "Kontaktirajte nas",
+        "name": "Ime",
+        "email": "e-pošta",
+        "subject": "Naslov",
+        "message": "Poruka",
+        "submit": "Pošalji"
+    },
+    
+    "about":
+    {
+        "title": "MI SMO OBITELJ KOJA RECIKLIRA",
+        "join_us": "PRIDRUŽI SE",
+        "message": "ŽELIMO ČISTU PLANETU, NE PRLJAVU"
+    },
+
+    "register":
+    {
+        "title": "Registracija",
+        "username": "Korisničko ime",
+        "firstname": "Ime",
+        "lastname": "Prezime",
+        "password": "Lozinka",
+        "password2": "Ponovite lozinku",
+        "email": "e-pošta",
+        "address": "Adresa",
+        "agree1": "Morate potvrditi za nastavak!",
+        "agree2": "Jeste li sigurnu?",
+        "register_button": "Registracija",
+        "login_button": "Prijava",
+        "required_password": "Potrebno je unijeti lozinku",
+        "length_password": "Lozinka mora sadržavati barem 8 znakova!",
+        "not_match_password": "Lozinke se ne poklapaju!",
+        "required_firstname": "Potrebno je unijeti ime!",
+        "length_firstname": "Ime ne može sadržavati više od 20 znakova",
+        "required_lastname": "Potrebno je unijeti prezime!",
+        "length_lastname": "Prezime ne može sadržavati više od 50 znakova",
+        "required_address": "Potrebno je unijeti adresu!",
+        "length_address": "Adrasa ne može sadržavati više od 250 znakova",
+        "required_email": "Potrebno je unijeti e-poštu",
+        "valid_email": "e-pošta mora biti ispravna",
+        "required_username": "Potrebno je unijeti korisničko ime",
+        "length_username": "Korisničko ime ne može sadržavati više od 20 znakova"
+  
+    },
+  
+    "login":
+    {
+        "title": "Prijava",
+        "username": "Korisničko ime",
+        "password": "Lozinka",
+        "username_required": "Potrebno je unijeti korisničko ime",
+        "password_required": "Potrebno je unijeti lozinku",
+        "button": "Prijava"
+    },
+
+    "profile":
+    {
+        "edit_button": "Uredi profil",
+        "history": "Povijest recikliranja"
+    },
+
+    "edit_profile":
+    {
+        "title": "Uređivanje profila",
+        "username": "Korisničko ime",
+        "firstname": "Ime",
+        "lastname": "Prezime",
+        "password": "Lozinka",
+        "password2": "Ponovite lozinku",
+        "email": "e-pošta",
+        "address": "Adresa",
+        "agree1": "Morate potvrditi za nastavak!",
+        "agree2": "Jeste li sigurnu?",
+        "edit_button": "Izmijeni",
+        "cancel_button": "Otkaži",
+        "required_password": "Potrebno je unijeti lozinku",
+        "length_password": "Lozinka mora sadržavati barem 8 znakova!",
+        "not_match_password": "Lozinke se ne poklapaju!",
+        "required_firstname": "Potrebno je unijeti ime!",
+        "length_firstname": "Ime ne može sadržavati više od 20 znakova",
+        "required_lastname": "Potrebno je unijeti prezime!",
+        "length_lastname": "Prezime ne može sadržavati više od 50 znakova",
+        "required_address": "Potrebno je unijeti adresu!",
+        "length_address": "Adrasa ne može sadržavati više od 250 znakova",
+        "required_email": "Potrebno je unijeti e-poštu",
+        "valid_email": "e-pošta mora biti ispravna",
+        "required_username": "Potrebno je unijeti korisničko ime",
+        "length_username": "Korisničko ime ne može sadržavati više od 20 znakova",
+        "change_password": "Promijeni lozinku"
+    },
+
+    "navbar":
+  {
+    "title": "RECYCLE",
+    "home": "Početna",
+    "about": "O nama",
+    "profile": "Profil",
+    "admin": "Admin",
+    "language": "Jezik",
+    "logout": "Odjava",
+    "login": "Prijava",
+    "register": "Registracija",
+    "croatian": "Hrvatski",
+    "english": "English"
+  },
+
+  "admin":
+  {
+    "users": "Korisnici",
+    "schedules": "Raspored",
+    "vehicles": "Vozila",
+    "users_title": "KORISNICI",
+    "users_button_add": "DODAJ KORISNIKA",
+    "search": "Pretraga",
+    "users_firstname": "IME",
+    "users_lastname": "PREZIME",
+    "users_username": "KORISNIČKO IME",
+    "users_address": "ADRESA",
+    "users_email": "E-POŠTA",
+    "users_role": "ULOGA",
+    "edit": "IZMJENA",
+    "delete": "BRISANJE",
+    "details": "DETALJI",
+    "rows_per_page": "Redaka po stranici",
+    "of": "od",
+    "required_password": "Potrebno je unijeti lozinku",
+    "length_password": "Lozinka mora sadržavati barem 8 znakova!",
+    "not_match_password": "Lozinke se ne poklapaju!",
+    "required_firstname": "Potrebno je unijeti ime!",
+    "length_firstname": "Ime ne može sadržavati više od 20 znakova",
+    "required_lastname": "Potrebno je unijeti prezime!",
+    "length_lastname": "Prezime ne može sadržavati više od 50 znakova",
+    "required_address": "Potrebno je unijeti adresu!",
+    "length_address": "Adrasa ne može sadržavati više od 250 znakova",
+    "required_email": "Potrebno je unijeti e-poštu",
+    "valid_email": "e-pošta mora biti ispravna",
+    "required_username": "Potrebno je unijeti korisničko ime",
+    "length_username": "Korisničko ime ne može sadržavati više od 20 znakova",
+    "change_password": "Promijeni lozinku",
+    "username": "Korisničko ime",
+    "firstname": "Ime",
+    "lastname": "Prezime",
+    "password": "Lozinka",
+    "password2": "Ponovite lozinku",
+    "email": "e-pošta",
+    "address": "Adresa",
+    "make_admin": "Admin",
+    "button_save": "Spremi",
+    "button_cancel": "Otkaži",
+    "new_user": "NOVI KORISNIK",
+    "edit_user": "UREĐIVANJE KORISNIKA",
+    "year": "Godina",
+    "month": "Mjesec",
+    "button_close": "Zatvori",
+    "button_ok": "DOBRO",
+    "agree": "Jeste li sigurni da želite obrisati podatak?",
+    "user_deleted": "Korisnik izbrisan!",
+    "user_created": "Korisnik kreiran!",
+    "user_edited": "Korisnik uređen!",
+    "error": "Dogodila se pogreška!",
+    "recycle_history": "Povijest recikliranja",
+    "schedules_title": "RASPOREDI",
+    "schedules_button_add": "DODAJ RASPORED",
+    "new_schedule": "NOVI RASPORED",
+    "edit_schedule": "UREĐIVANJE RASPOREDA",
+    "table_day": "DAN",
+    "table_type": "TIP",
+    "table_address": "ADRESA",
+    "schedule_deleted": "Raspored izbrisan!",
+    "schedule_added": "Raspored kreiran!",
+    "schedule_edited": "Raspored izmijenjen!",
+    "day": "Dan",
+    "type": "Tip",
+    "vehicles_title": "VOZILA",
+    "vehicles_add_button": "DODAJ VOZILO",
+    "vehicle_brand": "Marka vozila",
+    "vehicle_registration": "Godina prve registracije",
+    "table_brand": "MARKA VOZILA",
+    "table_registration": "GODINA PRVE REGISTRACIJE",
+    "location": "LOKACIJA",
+    "new_vehicle": "NOVO VOZILO",
+    "edit_vehicle": "UREĐIVANJE VOZILA",
+    "required_brand": "Potrebno je unijeti marku vozila",
+    "length_brand": "Marka vozila ne smije sadržavati više od 50 znakova!",
+    "required_registration": "Potrebno je unijeti godinu prve registracije!",
+    "past_registration": "Godina prve registracije mora biti u prošlosti",
+    "vehicle_deleted": "Vozilo izbrisano!",
+    "vehicle_added": "Vozilo kreirano!",
+    "vehicle_edited": "Vozilo izmijenjeno!"
+
+  }
+   
+  }

@@ -14,12 +14,12 @@
                           ]"
                           >{{profile.firstname}} {{profile.lastname}}</span>
     </v-col>
-    <v-col cols="4" align="end"><v-btn to="/editProfile">Edit profile</v-btn></v-col>
+    <v-col cols="4" align="end"><v-btn to="/editProfile">{{$t('profile.edit_button')}}</v-btn></v-col>
     </v-row>              
     <v-row >
        <!-- <v-col class="d-flex" cols="6"></v-col>-->
-        <v-col class="d-flex" cols="2" tag="h1">
-            <p class="font-weight-bold tamno-siva">Recycle history</p>
+        <v-col class="d-flex" cols="3" tag="h1">
+            <p class="font-weight-bold tamno-siva">{{$t('profile.history')}}</p>
         </v-col>
     </v-row>
     <v-row >
@@ -135,8 +135,8 @@ export default {
         getRecycleData()
         {
             this.defaultPage = false;
-
-            this.recycleData = [{type:"Plastic", amount:0},{type :"Paper", amount:0},{type:"Glass", amount:0},{type:"Metal", amount:0}]
+            
+            this.recycleData = [{type: this.$t('types.plastic'), amount:0},{type : this.$t('types.paper'), amount:0},{type: this.$t('types.glass'), amount:0},{type: this.$t('types.metal'), amount:0}]
 
             let yearMonth=this.selectedYear+"-"+this.to2digit(this.selectedMonth);
 
