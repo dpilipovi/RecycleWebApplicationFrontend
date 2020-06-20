@@ -499,24 +499,26 @@ export default {
         if (this.changePassword == true)
           this.editedItem.password = this.password;
         else this.editedItem.password = "dont change";
-
+        const index = this.editedIndex
         Object.assign(this.users[this.editedIndex], this.editedItem);
+      
         this.$store.dispatch("editUserFromAdmin", this.editedItem)
         .then((response) =>
         {
          if(response.status == 200) this.displaySnackbar(this.$t('admin.user_edited'))
              
           else this.displayErrorSnackbar(this.$t('admin.error'))
-            
-          if (this.admin == true && this.dialogAdd==false) {
-            this.$store.dispatch("makeAdmin", this.editedItem.username)
+          
+          if (this.admin == true && this.initialAdmin==false && this.dialogAdd==false) {
+
+            this.$store.dispatch("makeAdmin", response.data.username)
             .then((response) =>
             {
               if(response.status == 200) this.displaySnackbar(this.$t('admin.user_edited'))
 
               else this.displayErrorSnackbar(this.$t('admin.user_error'))
             
-              this.users[this.editedIndex].authorities = new Array(
+              this.users[index].authorities = new Array(
                 "ROLE_ADMIN"
               );
               this.admin = false;
@@ -572,7 +574,7 @@ export default {
       let staklo = 0;
       let metal = 0;
 
-      this.editedItem.user_recycle.forEach(function(recycle) {
+      this.editedItem.recycles.forEach(function(recycle) {
         if (yearMonth == recycle.yearMonth) {
 
 

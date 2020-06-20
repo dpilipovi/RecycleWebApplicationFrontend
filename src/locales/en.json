@@ -144,6 +144,7 @@
     "users": "Users",
     "schedules": "Schedules",
     "vehicles": "Vehicles",
+    "recycles": "Recycle data",
     "users_title": "USERS",
     "users_button_add": "ADD USER",
     "search": "Search",
@@ -221,7 +222,26 @@
     "past_registration": "First registration needs to be in past",
     "vehicle_deleted": "Vehicle deleted!",
     "vehicle_added": "Vehicle created!",
-    "vehicle_edited": "Vehicle edited!"
+    "vehicle_edited": "Vehicle edited!",
+    "required_amount": "Amount is required!",
+    "min_amount": "Amount must be greater than 0!",
+    "edit_recycle": "EDIT RECYCLE DATA",
+    "add_recycle": "NEW RECYCLE DATA",
+    "table_user": "USER",
+    "table_id": "ID",
+    "table_amount": "AMOUNT (KG)",
+    "table_year_month": "YEAR AND MONTH (YYYYMM)",
+    "recycle_added": "Recycle data created!",
+    "recycle_edited": "Recycle data edited!",
+    "recycle_deleted": "Recycle data deleted",
+    "recycles_title": "RECYCLE DATA",
+    "recycles_button_add": "ADD RECYCLE DATA",
+    "amount": "AMOUNT (KG)",
+    "new_recycle": "NEW RECYCLE DATA",
+    "change_on_active": "Change on active profile!",
+    "recycle_user": "User"
+
+
   }
 
  

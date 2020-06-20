@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import http from "../http-common";
 import createPersistedState from "vuex-persistedstate";
 import axios from "axios"
+import router from '../router/index'
 
 Vue.use(Vuex);
 
@@ -205,16 +206,10 @@ export const store = new Vuex.Store({
 
                 console.log(response.data);
 
-               /* if(data.flag) */
                localStorage.removeItem('token');
                localStorage.removeItem('profile');
                context.dispatch('destroyToken')
                
-
-                /*const profile = response.data;
-                localStorage.setItem('profile', profile);
-                context.commit('setProfile', profile);*/
-
                 resolve(response.data);
 
                 })
@@ -266,11 +261,44 @@ export const store = new Vuex.Store({
                 .then(response => {
 
 
-               if(data.username === this.state.profile.username)
+               if(data.id === this.state.profile.id && (data.username != this.state.profile.username || 'dont change' != data.password))
                {
                localStorage.removeItem('token');
                localStorage.removeItem('profile');
-               context.dispatch('destroyToken')
+               context.dispatch('destroyToken');
+               router.push('/')
+               }
+
+               localStorage.setItem('profile', response.data);
+               context.commit('setProfile', response.data);
+               
+                resolve(response);
+
+                })
+                .catch(e => {
+                console.log(e);
+                reject(e)
+                });
+
+            })
+        },
+
+        editUserRecycleData(context,data)
+        {
+        return new Promise((resolve,reject) =>
+            {
+                http.put("/user", data )
+                .then(response => {
+
+
+              if(data.id === this.state.profile.id)
+               {
+                /*localStorage.removeItem('token');
+                localStorage.removeItem('profile');
+                context.dispatch('destroyToken');
+                router.push('/login')*/
+                localStorage.setItem('profile', response.data);
+                context.commit('setProfile', response.data);
                }
                
                 resolve(response);
@@ -286,10 +314,11 @@ export const store = new Vuex.Store({
 
         makeAdmin(context, data)
         {
+            console.log(data)
 
             return new Promise((resolve,reject) =>
             {
-                http.put("/user/makeAdmin/"+data)
+                http.put(`/user/makeAdmin/${data}`)
                 .then(response => {
 
                     resolve(response)

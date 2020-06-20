@@ -11,6 +11,7 @@ import Admin from '@/components/Admin'
 import Users from '@/components/Users'
 import Schedules from '@/components/Schedules'
 import Vehicles from '@/components/Vehicles'
+import Recycles from '@/components/Recycles'
 import {store} from '../store/store'
 
 Vue.use(VueRouter)
@@ -59,7 +60,13 @@ Vue.use(VueRouter)
         path: 'vehicles',
         name: 'Vehicles',
         component: Vehicles,
-        }],
+        },
+        {
+          path: 'recycles',
+          name: 'Recycles',
+          component: Recycles,
+          }
+      ],
       beforeEnter: (to, from, next) =>
       {
         if(store.getters.isAdmin) next()

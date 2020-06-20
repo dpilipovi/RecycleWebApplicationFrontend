@@ -144,6 +144,7 @@
     "users": "Korisnici",
     "schedules": "Raspored",
     "vehicles": "Vozila",
+    "recycles": "Recikliranja",
     "users_title": "KORISNICI",
     "users_button_add": "DODAJ KORISNIKA",
     "search": "Pretraga",
@@ -221,7 +222,25 @@
     "past_registration": "Godina prve registracije mora biti u prošlosti",
     "vehicle_deleted": "Vozilo izbrisano!",
     "vehicle_added": "Vozilo kreirano!",
-    "vehicle_edited": "Vozilo izmijenjeno!"
+    "vehicle_edited": "Vozilo izmijenjeno!",
+    "required_amount": "Amount is required!",
+    "min_amount": "Količina mora biti veća od 0!",
+    "edit_recycle": "IZMJENA PODATKA O RECIKLIRANJU",
+    "add_recycle": "NOVI PODATAK O RECIKLIRANJU",
+    "table_user": "KORISNIK",
+    "table_id": "ID",
+    "table_amount": "KOLIČINA (KG)",
+    "table_year_month": "GODINA I MJESEC (YYYYMM)",
+    "recycle_added": "Kreiran podatak o recikliranju!",
+    "recycle_edited": "Izmijenjen podatak o recikliranju!",
+    "recycle_deleted": "Izbrisan podatak o recikliranju!",
+    "recycles_title": "RECIKLIRANJA",
+    "recycles_button_add": "DODAJ NOVI PODATAK",
+    "amount": "KOLIČINA (KG)",
+    "new_recycle": "NOVI PODATAK O RECIKLIRANJU",
+    "change_on_active": "Promjena na aktivnom profilu!",
+    "recycle_user": "Korisnik"
+
 
   }
    

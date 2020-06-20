@@ -76,7 +76,7 @@
 export default {
      data() {
       return {
-        allData: this.$store.state.profile.user_recycle,
+        allData: this.$store.state.profile.recycles,
         recycleData: [],
         sum: 0,
         max: 0,
