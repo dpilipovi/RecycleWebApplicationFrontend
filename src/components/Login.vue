@@ -51,6 +51,12 @@
                     v-model="password"
                     :rules="passwordRules"
                   ></v-text-field>
+                  <v-alert
+                  color="error"
+                  :value="error"
+                  icon="warning">
+                 {{ $t('login.error')}}
+                  </v-alert>
                 </v-form>
               </v-card-text>
               <v-card-actions>
@@ -66,6 +72,7 @@
 </template>
 <script>
 export default {
+
       data() {
       return {
        username: '',
@@ -77,6 +84,7 @@ export default {
         (v) => !!v || this.$t('login.password_required')
       ],
       valid: false,
+      error: false
       }
     },
    
@@ -99,15 +107,19 @@ export default {
       this.$store.dispatch('setToken', this.data)
       .then(response =>
       {
-        if(response.data.token)
-        {
-          this.$store.dispatch('getProfile').then(
+        if(response.status == 200)
+          this.$store.dispatch('getProfile')
+          .then( 
            this.$router.push('/')
-           //  setTimeout( () => this.$router.push({ path: '/'}), 1000);
-          )
-        }
-        
+           )
+
       })
+       .catch(error =>
+         {
+           this.error=true;
+           console.log(error)
+         })
+     
     
       }
     },

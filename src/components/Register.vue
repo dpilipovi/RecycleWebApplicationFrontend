@@ -1,6 +1,6 @@
 <template>
       <v-content>
-         <v-img height="93.2vh" src="../assets/images/login_background.jpg">
+         <v-img min-height="93.2vh" src="../assets/images/login_background.jpg">
         <v-container fluid fill-height>
           <v-layout align-center justify-center>
             <v-flex xs12 sm8 md4>
@@ -83,6 +83,13 @@
                       required
                     ></v-checkbox>
 
+                    <v-alert
+                  color="error"
+                  :value="error"
+                  icon="warning">
+                 {{ $t('register.error')}}
+                  </v-alert>
+
                     <v-btn
                       :disabled="!valid"
                       color="success"
@@ -126,6 +133,7 @@ export default {
       valid: false,
       value: true,
       value2: true,
+      error: false,
        passwordRules: [
          v => !!v || this.$t('register.required_password'),
         (v) => (v && v.length >= 8) || this.$t('register.length_password')
@@ -183,7 +191,8 @@ export default {
           this.$router.push("/login");
         })
         .catch((e) => {
-          console.log(e);
+          this.error = true
+          console.log(e)
         });
     },
   },
