@@ -1,7 +1,7 @@
 <template>
   <v-img height="93.2vh" src="../assets/images/profile_background4.jpg">
     <div class="background">
-      <v-container>
+      <v-container data-aos="fade-up">
         <v-col class="text-center" cols="12" tag="h1">
           <span
             class="font-weight-medium tamno-siva"
@@ -14,7 +14,7 @@
         </v-col>
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
-            <v-form align="center" justify="end" ref="form" v-model="valid" lazy-validation>
+            <v-form align="center" justify="end" ref="form" v-model="valid" >
               <v-text-field
                 color="#424242"
                 v-model="user.firstname"

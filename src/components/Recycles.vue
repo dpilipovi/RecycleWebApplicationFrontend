@@ -1,5 +1,6 @@
 <template>
-  <v-card class="mx-auto" max-width="1300" shaped>
+<v-content>
+  <v-card class="mx-auto mb-12" max-width="80%" shaped>
     <v-card-title class="font-weight-bold">{{
       $t("admin.recycles_title")
     }}</v-card-title>
@@ -8,7 +9,7 @@
     <v-btn @click="addDialog = true">{{
       $t("admin.recycles_button_add")
     }}</v-btn>
-    <v-dialog v-model="addDialog" max-width="500px">
+    <v-dialog v-model="addDialog" @input="addDialog => addDialog || close()" max-width="500px" data-aos="fade-up">
       <v-card>
         <v-card-title>
           <span class="headline">{{ formTitle }}</span>
@@ -98,10 +99,10 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="dialog" max-width="500px">
+    <v-dialog v-model="dialog" @input="dialog => dialog || close()" max-width="500px" data-aos="fade-up">
       <v-card>
         <v-card-title>
-          <span class="headline">edit</span>
+          <span class="headline">{{formTitle}}</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -199,6 +200,7 @@
       :search="search"
       :sort-by="['username', 'id']"
       class="elevation-1"
+      data-aos="fade-left"
     >
       <template v-slot:item.edit="{ item }">
         <v-icon @click="editItem(item)">mdi-pencil</v-icon>
@@ -217,6 +219,8 @@
       </v-snackbar>
     </div>
   </v-card>
+</v-content>
+
 </template>
 
 <script>

@@ -12,7 +12,6 @@
                     justify="end"
                     ref="form"
                     v-model="valid"
-                    lazy-validation
                   >
                     <v-text-field
                       color="teal"
@@ -34,7 +33,7 @@
                       color="teal"
                       v-model="username"
                       :rules="usernameRules"
-                       :label="$t('register.username')"
+                      :label="$t('register.username')"
                       required
                     ></v-text-field>
 
@@ -160,7 +159,7 @@ export default {
   },
   methods: {
      validate () {
-      this.$refs.form.validate()
+     this.valid = this.$refs.form.validate()
     },
     reset () {
       this.$refs.form.reset()

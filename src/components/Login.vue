@@ -30,8 +30,7 @@
                     align="center"
                     justify="end"
                     ref="form"
-                    v-model="valid"
-                    lazy-validation>
+                    v-model="valid">
                   <v-text-field
                     color="teal"
                     :label="$t('login.username')"

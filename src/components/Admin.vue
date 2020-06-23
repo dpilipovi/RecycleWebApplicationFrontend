@@ -1,8 +1,9 @@
 <template>
   <v-sheet
-    height="92.4vh"
+    min-height="92.4vh"
     class="overflow-hidden"
     style="position: relative;"
+    data-aos="fade-right"
   >
   
     <v-btn

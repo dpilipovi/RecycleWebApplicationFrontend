@@ -11,7 +11,7 @@
               <v-container fill-height data-aos="fade-up" data-aos-duration="1000">
                 <v-row align="center" class="white--text mx-auto" justify="center">
                   <v-col class="white--text text-center" cols="12" tag="h1">
-                    <span
+                    <span data-aos="fade-up"
                       class="font-weight-bold"
                       :class="[
                             $vuetify.breakpoint.smAndDown
@@ -27,7 +27,7 @@
                   <div class="py-12"></div>
                   <div class="py-12"></div>
                   <div class="py-12"></div>
-                  <v-btn class="align-self-end" fab outlined @click="$vuetify.goTo('#mid')">
+                  <v-btn class="align-self-end" fab outlined @click="$vuetify.goTo('#mid')" data-aos="fade-up">
                     <v-icon >mdi-chevron-double-down</v-icon>
                   </v-btn>
                 </v-row>
@@ -44,7 +44,7 @@
               <v-container fill-height data-aos="fade-up" data-aos-duration="1000">
                 <v-row align="center" class=" mx-auto" justify="center">
                   <v-col class=" text-center" cols="12" tag="h1">
-                    <span
+                    <span data-aos="fade-up"
                       class="font-weight-bold"
                       :class="[
                             $vuetify.breakpoint.smAndDown
@@ -54,7 +54,7 @@
                     >{{$t('about.message')}}</span>
                       <div class="py-3"></div>
 
-                <v-carousel>
+                <v-carousel data-aos="fade-up">
                 <v-carousel-item
                 v-for="(item,i) in images"
                 :key="i"

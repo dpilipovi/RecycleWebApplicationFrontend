@@ -1,10 +1,10 @@
 <template>
-  <v-card class="mx-auto" max-width="1300" shaped>
+  <v-card class="mx-auto mb-12" max-width="80%" shaped>
     <v-card-title class="font-weight-bold">{{$t('admin.schedules_title')}}</v-card-title>
     <v-divider color="teal"></v-divider>
     <div class="py-3"></div>
     <v-btn @click="dialog = true">{{$t('admin.schedules_button_add')}}</v-btn>
-    <v-dialog v-model="dialog" max-width="500px">
+    <v-dialog  v-model="dialog" @input="dialog => dialog || close()" max-width="500px">
       <v-card>
         <v-card-title>
           <span class="headline">{{ formTitle }}</span>
@@ -189,8 +189,6 @@ export default {
 
     close() {
       this.dialog = false;
-      this.locationlDialog = false;
-      this.dialogAdd = false;
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
