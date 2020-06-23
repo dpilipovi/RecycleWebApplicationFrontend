@@ -79,7 +79,7 @@
                     <v-checkbox
                       color="teal"
                       v-model="checkbox"
-                      :rules="[(v) => !!v ||  $t('register.agree')]"
+                      :rules="[(v) => !!v ||  $t('register.agree1')]"
                       :label="$t('register.agree2')"
                       required
                     ></v-checkbox>
