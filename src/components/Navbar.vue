@@ -13,6 +13,8 @@
 
         <v-btn text to="/about">{{$t('navbar.about')}}</v-btn>
 
+       <v-btn v-if="loggedIn" text to="/announcements">{{$t('navbar.announcements')}}</v-btn>
+
 
         <v-menu icon bottom :offset-x="false" :offset-y="true" transition="scale-transition">
           <template v-slot:activator="{ on }">
@@ -47,7 +49,7 @@
           </template>
           <v-list color="teal">
             <v-list-item v-for="lang in langs" :key="lang.value" style="cursor:pointer">
-              <v-list-item-title v-text="lang.text" @click="$i18n.locale = lang.value"></v-list-item-title>
+              <v-list-item-title v-text="lang.text" @click="changeLocale(lang.value)"></v-list-item-title>
             </v-list-item>
           </v-list>
          </v-menu>
@@ -63,6 +65,9 @@
         </v-list-item>
         <v-list-item to="/about">
           <v-list-item-title>{{$t('navbar.about')}}</v-list-item-title>
+        </v-list-item>
+         <v-list-item v-if="!loggedIn" to="/announcements">
+          <v-list-item-title>{{$t('navbar.announcements')}}</v-list-item-title>
         </v-list-item>
         <v-list-item v-if="!loggedIn" to="/login">
           <v-list-item-title>{{$t('navbar.login')}}</v-list-item-title>
@@ -117,6 +122,16 @@ export default {
      return this.$store.getters.isAdmin
       }
       return false;
+    }
+  },
+  methods:
+  {
+    changeLocale(locale)
+    {
+      this.$i18n.locale = locale; 
+      this.$moment.locale(locale)
+      localStorage.setItem('locale', locale)
+     // this.$router.go()
     }
   },
   name: "Navbar"

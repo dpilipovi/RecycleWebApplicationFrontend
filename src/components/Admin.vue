@@ -49,7 +49,8 @@ export default {
           { title: this.$t('admin.users'), icon: 'mdi-account', link: '/admin/users' },
           { title: this.$t('admin.schedules'), icon: 'mdi-calendar',  link: '/admin/schedules'  },
           { title: this.$t('admin.vehicles'), icon: 'mdi-truck',  link: '/admin/vehicles' },
-          { title: this.$t('admin.recycles'), icon: 'mdi-recycle',  link: '/admin/recycles' }
+          { title: this.$t('admin.recycles'), icon: 'mdi-recycle',  link: '/admin/recycles' },
+          { title: this.$t('admin.announcements'), icon: 'mdi-message',  link: '/admin/announcements' }
         ],
       }
     },

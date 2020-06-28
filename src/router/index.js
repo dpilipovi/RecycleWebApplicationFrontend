@@ -12,106 +12,119 @@ import Users from '@/components/Users'
 import Schedules from '@/components/Schedules'
 import Vehicles from '@/components/Vehicles'
 import Recycles from '@/components/Recycles'
-import {store} from '../store/store'
+import Announcements from '@/components/Announcements'
+import AnnouncementsAdmin from '@/components/AnnouncementsAdmin'
+import { store } from '../store/store'
 
 Vue.use(VueRouter)
 
-  const routes = [
-    {
-      path: '/',
-      name: 'Index',
-      component: Index
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login
-    },
-    {
-      path: '/register',
-      name: 'Register',
-      component: Register
-    },
-    {
-      path: '/logout',
-      name: 'Logout',
-      component: Logout
-    },
-    {
-      path: '/about',
-      name: 'About',
-      component: About
-    },
-    {
-      path: '/admin',
-      name: 'Admin',
-      component: Admin,
-      children:[{
-        path: 'users',
-        name: 'Users',
-        component: Users,
-      },
-      {
-        path: 'schedules',
-        name: 'Schedules',
-        component: Schedules,
-      },
-      {
-        path: 'vehicles',
-        name: 'Vehicles',
-        component: Vehicles,
-        },
-        {
-          path: 'recycles',
-          name: 'Recycles',
-          component: Recycles,
-          }
-      ],
-      beforeEnter: (to, from, next) =>
-      {
-        if(store.getters.isAdmin) next()
-        else
-        {
-          alert("Nemate pravo pristupa, niste admin!")
-          next({name : 'Login'})
-        } 
+const routes = [
+  {
+    path: '/',
+    name: 'Index',
+    component: Index
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
+  },
+  {
+    path: '/logout',
+    name: 'Logout',
+    component: Logout
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: About
+  },
+  {
+    path: '/announcements',
+    name: 'Announcements',
+    component: Announcements,
+    beforeEnter: (to, from, next) => {
+      if (store.getters.loggedIn) next()
+      else {
+        alert("Nemate pravo pristupa, molimo ulogirajte se!")
+        next({ name: 'Login' })
       }
+    }
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin,
+    children: [{
+      path: 'users',
+      name: 'Users',
+      component: Users,
     },
     {
-      path: '/profile',
-      name: 'Profile',
-      component: Profile,
-      beforeEnter: (to, from, next) =>
-      {
-        if(store.getters.loggedIn) next()
-        else
-        {
-          alert("Nemate pravo pristupa, molimo ulogirajte se!")
-          next({name : 'Login'})
-        } 
-      }
+      path: 'schedules',
+      name: 'Schedules',
+      component: Schedules,
     },
     {
-      path: '/editProfile',
-      name: 'editProfile',
-      component: EditProfile,
-      beforeEnter: (to, from, next) =>
-      {
-        if(store.getters.loggedIn) next()
-        else
-        {
-          alert("Nemate pravo pristupa, molimo ulogirajte se!")
-          next({name : 'Login'})
-        } 
-      }
+      path: 'vehicles',
+      name: 'Vehicles',
+      component: Vehicles,
     },
-   
-  ],
+    {
+      path: 'recycles',
+      name: 'Recycles',
+      component: Recycles,
+    },
+    {
+      path: 'announcements',
+      name: 'AnnouncementsAdmin',
+      component: AnnouncementsAdmin,
+    }
+    ],
+    beforeEnter: (to, from, next) => {
+      if (store.getters.isAdmin) next()
+      else {
+        alert("Nemate pravo pristupa, niste admin!")
+        next({ name: 'Login' })
+      }
+    }
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
+    beforeEnter: (to, from, next) => {
+      if (store.getters.loggedIn) next()
+      else {
+        alert("Nemate pravo pristupa, molimo ulogirajte se!")
+        next({ name: 'Login' })
+      }
+    }
+  },
+  {
+    path: '/editProfile',
+    name: 'editProfile',
+    component: EditProfile,
+    beforeEnter: (to, from, next) => {
+      if (store.getters.loggedIn) next()
+      else {
+        alert("Nemate pravo pristupa, molimo ulogirajte se!")
+        next({ name: 'Login' })
+      }
+    }
+  },
 
- router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
-})
+],
+
+  router = new VueRouter({
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes
+  })
 
 export default router

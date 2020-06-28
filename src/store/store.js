@@ -14,7 +14,7 @@ export const store = new Vuex.Store({
     state :
     {
         token: localStorage.getItem('token') || null,
-        profile: localStorage.getItem('profile') || null
+        profile: localStorage.getItem('profile') || null,
     },
     getters :
     {
@@ -456,7 +456,82 @@ export const store = new Vuex.Store({
                 reject(e)
                 });
             })
-        }
+        },
+
+        getAnnouncements()
+        {
+            return new Promise((resolve,reject) =>
+            {
+                http
+                .get("/announcement")
+                .then(response => {
+
+                resolve(response);
+
+                })
+                .catch(e => {
+                console.log(e);
+                reject(e)
+                });
+
+            })
+        },
+
+         
+        addAnnouncement(context, data)
+        {
+            return new Promise((resolve,reject) =>
+        {
+            http.post("/announcement", data )
+            .then(response => {
+                
+                 resolve(response);
+ 
+                 })
+                 .catch(e => {
+                 reject(e)
+                 });
+          })
+
+        },
+
+        
+        editAnnouncement(context, data)
+        {
+            return new Promise((resolve,reject) =>
+        {
+            http.put("/announcement", data )
+            .then(response => {
+                
+                 resolve(response);
+ 
+                 })
+                 .catch(e => {
+                 reject(e)
+                 });
+          })
+
+        },
+
+
+        
+        deleteAnnouncement(context, data)
+        {
+            return new Promise((resolve,reject) =>
+        {
+            http.delete(`/announcement/${data}` )
+            .then(response => {
+                
+                 resolve(response);
+ 
+                 })
+                 .catch(e => {
+                 reject(e)
+                 });
+          })
+
+        },
+
 
     }
 })

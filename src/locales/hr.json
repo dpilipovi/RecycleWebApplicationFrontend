@@ -136,7 +136,8 @@
     "login": "Prijava",
     "register": "Registracija",
     "croatian": "Hrvatski",
-    "english": "English"
+    "english": "English",
+    "announcements": "Obavijesti"
   },
 
   "admin":
@@ -239,9 +240,36 @@
     "amount": "KOLIČINA (KG)",
     "new_recycle": "NOVI PODATAK O RECIKLIRANJU",
     "change_on_active": "Promjena na aktivnom profilu!",
-    "recycle_user": "Korisnik"
+    "recycle_user": "Korisnik",
+    "placeholder:": "placeholder",
+    "announcements": "Obavijesti",
+    "announcements_title": "OBAVIJESTI",
+    "announcements_button_add": "DODAJ OBAVIJEST",
+    "announcement_id_table": "ID",
+    "announcement_title_table": "NASLOV",
+    "announcement_created_table": "KREIRANO",
+    "announcement_updated_table": "IZMIJENJENO",
+    "announcement_id": "id",
+    "announcement_title": "Naslov",
+    "announcement_created": "Kreirano",
+    "announcement_updated": "Izmijenjeno",
+    "announcement_message": "Poruka",
+    "new_announcement": "NOVA OBAVIJEST",
+    "edit_announcement": "IZMIJENI OBAVIJEST",
+    "required_title": "Potrebno je unijeti naslov!",
+    "length_title": "Naslov ne smije sadržavati više od 100 znakova!",
+    "required_message": "Potrebno je unijeti poruku!",
+    "announcement_deleted": "Obavijest izbrisana!",
+    "announcement_added": "Obavijest kreirana!",
+    "announcement_edited": "Obavijest izmijenjena!"
 
+  },
+
+  "announcements":
+  {
+    "title": "Obavijesti"
 
   }
+ 
    
   }

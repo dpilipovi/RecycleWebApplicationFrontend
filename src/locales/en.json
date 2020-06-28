@@ -136,7 +136,8 @@
     "login": "Log in",
     "register": "Register",
     "croatian": "Hrvatski",
-    "english": "English"
+    "english": "English",
+    "announcements": "Announcements"
   },
 
   "admin":
@@ -239,10 +240,37 @@
     "amount": "AMOUNT (KG)",
     "new_recycle": "NEW RECYCLE DATA",
     "change_on_active": "Change on active profile!",
-    "recycle_user": "User"
+    "recycle_user": "User",
+    "placeholder:": "placeholder",
+    "announcements": "Announcements",
+    "announcements_title": "ANNOUNCEMENTS",
+    "announcements_button_add": "ADD ANNOUNCEMENT",
+    "announcement_id_table": "ID",
+    "announcement_title_table": "TITLE",
+    "announcement_created_table": "CREATED",
+    "announcement_updated_table": "UPDATED",
+    "announcement_id": "id",
+    "announcement_title": "Title",
+    "announcement_created": "Created",
+    "announcement_updated": "Updated",
+    "announcement_message": "Message",
+    "new_announcement": "NEW ANNOUNCEMENT",
+    "edit_announcement": "EDIT ANNOUNCEMENT",
+    "required_title": "Title is required!",
+    "length_title": "Title must be less than 100 characters!",
+    "required_message": "Message is required!",
+    "announcement_deleted": "Announcement deleted!",
+    "announcement_added": "Announcement created!",
+    "announcement_edited": "Announcement edited!"
+    
 
+
+  },
+
+  "announcements":
+  {
+    "title": "Announcements"
 
   }
-
  
 }

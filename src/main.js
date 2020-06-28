@@ -9,6 +9,16 @@ import * as VueGoogleMaps from "vue2-google-maps";
 import VideoBackground from 'vue-responsive-video-background-player'
 import VueVideoSection from 'vue-video-section'
 import i18n from './i18n'
+import moment from 'moment-timezone'
+import VueMoment from 'vue-moment'
+ 
+
+
+
+Vue.use(VueMoment, {
+    moment,
+})
+
 
 
 Vue.component('vue-video-section', VueVideoSection)
@@ -23,7 +33,7 @@ Vue.use(VueGoogleMaps, {
   }
 });
 
-//Vue.component('video-bg', VideoBg)
+
 
 Vue.config.productionTip = false
 

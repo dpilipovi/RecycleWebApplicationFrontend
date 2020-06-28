@@ -54,13 +54,14 @@
                     >{{$t('about.message')}}</span>
                       <div class="py-3"></div>
 
-                <v-carousel>
+                <v-carousel height="700px">
                 <v-carousel-item
                 v-for="(item,i) in images"
                 :key="i"
                 :src="item.src"
                 reverse-transition="fade-transition"
                 transition="fade-transition"
+                height="auto"
                 ></v-carousel-item>
             </v-carousel>
                   </v-col>
@@ -106,6 +107,12 @@ export default
           {
             src:  require('@/assets/images/recycle4.jpg'),
           },
+         /* {
+            src:  require('@/assets/images/recycle5.jpg'),
+          },
+          {
+            src:  require('@/assets/images/recycle6.jpg'),
+          },*/
           {
             src: require('@/assets/images/clean1.jpg'),
           },
