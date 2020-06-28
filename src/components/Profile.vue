@@ -1,7 +1,7 @@
 <template>
 <v-img height="93.2vh" src="../assets/images/profile_background4.jpg">
 <div class="background">
-<v-container >
+<v-container data-aos="fade-up">
     <v-row>
     <v-col cols="4"></v-col>
     <v-col class="text-center" cols="4" tag="h1">
@@ -48,7 +48,7 @@
 
     <v-row >
         <v-col cols="6" >
-            <div  v-for="(r,index) in recycleData" :key="index">
+            <div  v-for="(r,index) in recycleData" :key="index" data-aos="fade-right">
                 <!--<p><progress class="progress is-danger" :data-label="r.amount +'kg'" :value="r.amount" :max="max" ></progress>{{r.type.name}}</p>
                 <br>-->
                   <span class="font-weight-medium">{{r.type}}</span>  <v-progress-linear  height="20px" rounded :value="r.amount*multiplier" color="grey darken-2" ><strong>{{r.amount}}kg</strong></v-progress-linear>

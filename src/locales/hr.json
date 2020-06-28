@@ -74,7 +74,8 @@
         "required_email": "Potrebno je unijeti e-poštu",
         "valid_email": "e-pošta mora biti ispravna",
         "required_username": "Potrebno je unijeti korisničko ime",
-        "length_username": "Korisničko ime ne može sadržavati više od 20 znakova"
+        "length_username": "Korisničko ime ne može sadržavati više od 20 znakova",
+        "error": "Korisničko ime ili e-pošta već postoji!"
   
     },
   
@@ -85,7 +86,8 @@
         "password": "Lozinka",
         "username_required": "Potrebno je unijeti korisničko ime",
         "password_required": "Potrebno je unijeti lozinku",
-        "button": "Prijava"
+        "button": "Prijava",
+        "error": "Pogrešno korisničko ime ili lozinka"
     },
 
     "profile":
@@ -267,7 +269,9 @@
 
   "announcements":
   {
-    "title": "Obavijesti"
+    "title": "Obavijesti",
+    "created": "Kreirano: ",
+    "updated": "Izmijenjeno: "
 
   }
  

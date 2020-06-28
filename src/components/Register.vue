@@ -1,6 +1,6 @@
 <template>
       <v-content>
-         <v-img height="93.2vh" src="../assets/images/login_background.jpg">
+         <v-img min-height="93.2vh" src="../assets/images/login_background.jpg">
         <v-container fluid fill-height>
           <v-layout align-center justify-center>
             <v-flex xs12 sm8 md4>
@@ -12,7 +12,6 @@
                     justify="end"
                     ref="form"
                     v-model="valid"
-                    lazy-validation
                   >
                     <v-text-field
                       color="teal"
@@ -34,7 +33,7 @@
                       color="teal"
                       v-model="username"
                       :rules="usernameRules"
-                       :label="$t('register.username')"
+                      :label="$t('register.username')"
                       required
                     ></v-text-field>
 
@@ -84,6 +83,13 @@
                       required
                     ></v-checkbox>
 
+                    <v-alert
+                  color="error"
+                  :value="error"
+                  icon="warning">
+                 {{ $t('register.error')}}
+                  </v-alert>
+
                     <v-btn
                       :disabled="!valid"
                       color="success"
@@ -127,6 +133,7 @@ export default {
       valid: false,
       value: true,
       value2: true,
+      error: false,
        passwordRules: [
          v => !!v || this.$t('register.required_password'),
         (v) => (v && v.length >= 8) || this.$t('register.length_password')
@@ -160,7 +167,7 @@ export default {
   },
   methods: {
      validate () {
-      this.$refs.form.validate()
+     this.valid = this.$refs.form.validate()
     },
     reset () {
       this.$refs.form.reset()
@@ -184,7 +191,8 @@ export default {
           this.$router.push("/login");
         })
         .catch((e) => {
-          console.log(e);
+          this.error = true
+          console.log(e)
         });
     },
   },

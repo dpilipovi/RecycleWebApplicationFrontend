@@ -23,6 +23,8 @@
       :items-per-page="itemsPerPage"
       width="80%"
       class="font-weight-black"
+      sort-by="id"
+      sort-desc="true"
     >
       <template v-slot:default="props">
         <v-col
@@ -33,6 +35,8 @@
         >
           <v-card class="mx-auto mb-6" width="80%" shaped>
             <v-card-title> {{ item.title }}</v-card-title>
+            <v-card-text>{{$t('announcements.created')}} {{ item.created | moment('timezone', 'Europe/Zagreb',"dddd, MMMM Do YYYY, h:mm:ss a") }}</v-card-text>
+            <v-card-text v-if="item.updated != null">{{$t('announcements.updated')}} {{ item.updated | moment('timezone', 'Europe/Zagreb',"dddd, MMMM Do YYYY, h:mm:ss a") }}</v-card-text>
             <v-divider color="teal"></v-divider>
             <v-card-text>
               {{ item.message }}
@@ -56,6 +60,7 @@ export default {
   mounted() {
     this.$store.dispatch("getAnnouncements").then((response) => {
       this.announcements = response.data;
+      console.log(this.announcements)
     });
   },
 };

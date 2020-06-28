@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" max-width="1300" shaped>
+  <v-card class="mx-auto mb-12" max-width="80%" shaped>
     <v-card-title class="font-weight-bold">{{$t('admin.vehicles_title')}}</v-card-title>
     <v-divider color="teal"></v-divider>
     <div class="py-3"></div>
@@ -37,20 +37,14 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="primary" text @click="close">{{$t('admin.button_cancel')}}</v-btn>
-          <v-btn color="primary" :disabled="!valid" text @click="save"
-            >{{$t('admin.button_save')}}</v-btn
-          >
+          <v-btn color="primary" :disabled="!valid" text @click="save">{{$t('admin.button_save')}}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
 
     <v-dialog v-model="locationDialog" max-width="1300px">
       <template>
-        <gmap-map
-          :center="center"
-          :zoom="zoom"
-          style="width:100%;  height: 400px;"
-        >
+        <gmap-map :center="center" :zoom="zoom" style="width:100%;  height: 400px;">
           <gmap-marker
             :key="index"
             v-for="(m, index) in markers"
@@ -93,9 +87,7 @@
     <div class="text-center ma-2">
       <v-snackbar v-model="snackBar" :color="snackBarColor">
         {{ snackBarText }}
-        <v-btn text @click="snackBar = false" :timeout="timeout">
-          {{$t('admin.button_ok')}}
-        </v-btn>
+        <v-btn text @click="snackBar = false" :timeout="timeout">{{$t('admin.button_ok')}}</v-btn>
       </v-snackbar>
     </div>
   </v-card>
@@ -113,38 +105,39 @@ export default {
       snackBarColor: null,
       timeout: 2000,
       headers: [
-        { text: this.$t('admin.table_brand'), value: "brand" },
-        { text: this.$t('admin.table_registration'), value: "firstRegistrationYear" },
-        { text: this.$t('admin.edit'), value: "edit", sortable: false },
-        { text: this.$t('admin.delete'), value: "delete", sortable: false },
-        { text: this.$t('admin.location'), value: "location", sortable: false },
+        { text: this.$t("admin.table_brand"), value: "brand" },
+        {
+          text: this.$t("admin.table_registration"),
+          value: "firstRegistrationYear"
+        },
+        { text: this.$t("admin.edit"), value: "edit", sortable: false },
+        { text: this.$t("admin.delete"), value: "delete", sortable: false },
+        { text: this.$t("admin.location"), value: "location", sortable: false }
       ],
       editedIndex: -1,
       editedItem: {
         id: null,
         brand: "",
         firstRegistrationYear: null,
-        location: "",
+        location: ""
       },
       defaultItem: {
         id: null,
         brand: "",
         firstRegistrationYear: null,
-        location: "",
+        location: ""
       },
       brandRules: [
-        (v) => !!v || this.$t('admin.required_brand'),
-        (v) => (v && v.length <= 50) || this.$t('admin.length_brand'),
+        v => !!v || this.$t("admin.required_brand"),
+        v => (v && v.length <= 50) || this.$t("admin.length_brand")
       ],
       yearRules: [
-        (v) => !!v || this.$t('admin.required_registration'),
-        (v) =>
-          v <= new Date().getFullYear ||
-          this.$t('admin.past_registration')
+        v => !!v || this.$t("admin.required_registration"),
+        v => v <= new Date().getFullYear || this.$t("admin.past_registration")
       ],
       valid: true,
       center: { lat: 45.813208, lng: 15.977374 },
-      location: {lat: 0, lng: 0},
+      location: { lat: 0, lng: 0 },
       markers: [],
       places: [],
       locationDialog: false,
@@ -160,32 +153,37 @@ export default {
   },
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? this.$t('admin.new_vehicle') : this.$t('admin.edit_vehicle');
-    },
+      return this.editedIndex === -1
+        ? this.$t("admin.new_vehicle")
+        : this.$t("admin.edit_vehicle");
+    }
   },
   mounted() {
-    this.$store.dispatch("getVehicles").then((response) => {
+    this.$store.dispatch("getVehicles").then(response => {
       this.vehicles = response.data;
     });
   },
 
   methods: {
-  
     addMarker(item) {
-
-      this.$store.dispatch('getLongitudeAndLatitude', item.location)
-        .then((response) => {
-          this.location.lat =response.data.results[0].geometry.location.lat
-          this.location.lng =response.data.results[0].geometry.location.lng
+      this.$store
+        .dispatch("getLongitudeAndLatitude", item.location)
+        .then(response => {
+          this.location.lat = response.data.results[0].geometry.location.lat;
+          this.location.lng = response.data.results[0].geometry.location.lng;
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
+          this.displayErrorSnackbar(this.$t("admin.error"));
         });
 
-      /*if(!this.markers.includes(this.location))*/ this.markers.push({ position: this.location });
-      /*if(!this.places.includes(item.location))*/ this.places.push(item.location);
-      this.showLocation(item)
-        
+      /*if(!this.markers.includes(this.location))*/ this.markers.push({
+        position: this.location
+      });
+      /*if(!this.places.includes(item.location))*/ this.places.push(
+        item.location
+      );
+      this.showLocation(item);
     },
 
     editItem(item) {
@@ -197,17 +195,21 @@ export default {
 
     deleteItem(item) {
       const index = this.vehicles.indexOf(item);
-      if(confirm(this.$t('admin.agree'))) 
-      {
+      if (confirm(this.$t("admin.agree"))) {
         this.vehicles.splice(index, 1);
         this.markers.splice(index, 1);
         this.places.splice(index, 1);
 
-      this.$store.dispatch("deleteVehicle", item.id).then((response) => {
-        if (response.status == 204) this.displaySnackbar(this.$t('admin.vehicle_deleted'));
-        else this.displayErrorSnackbar(this.$t('admin.error'));
-
-      });
+        this.$store
+          .dispatch("deleteVehicle", item.id)
+          .then(response => {
+            if (response.status == 204)
+              this.displaySnackbar(this.$t("admin.vehicle_deleted"));
+          })
+          .catch(error => {
+            console.log(error);
+            this.displayErrorSnackbar(this.$t("admin.error"));
+          });
       }
     },
 
@@ -230,24 +232,34 @@ export default {
     save() {
       if (this.editedIndex > -1) {
         Object.assign(this.vehicles[this.editedIndex], this.editedItem);
-       // console.log(this.editedItem);
+        // console.log(this.editedItem);
         this.$store
           .dispatch("editVehicle", this.editedItem)
-          .then((response) => {
+          .then(response => {
             if (response.status == 200) {
-              this.displaySnackbar(this.$t('admin.vehicle_edited'));
+              this.displaySnackbar(this.$t("admin.vehicle_edited"));
               this.editedIndex = -1;
-            } else this.displayErrorSnackbar(this.$t('admin.error'));
+            }
+          })
+          .catch(error => {
+            console.log(error);
+            this.displayErrorSnackbar(this.$t("admin.error"));
           });
       } else {
-        this.$store.dispatch("addVehicle", this.editedItem).then((response) => {
-          if (response.status == 201) {
-            this.displaySnackbar(this.$t('admin.vehicle_added'));
+        this.$store
+          .dispatch("addVehicle", this.editedItem)
+          .then(response => {
+            if (response.status == 201) {
+              this.displaySnackbar(this.$t("admin.vehicle_added"));
 
-            var vehicle = response.data;
-            this.vehicles.push(vehicle);
-          } else this.displayErrorSnackbar(this.$t('admin.error'));
-        });
+              var vehicle = response.data;
+              this.vehicles.push(vehicle);
+            }
+          })
+          .catch(error => {
+            console.log(error);
+            this.displayErrorSnackbar(this.$t("admin.error"));
+          });
       }
       this.close();
     },
@@ -267,12 +279,11 @@ export default {
     showLocation(item) {
       this.currentPlace = item.location;
       //console.log(this.location)
-      var index = this.markers.findIndex(x => x.position === this.location)
+      var index = this.markers.findIndex(x => x.position === this.location);
       //console.log(index)
       this.center = this.markers[index].position;
       this.locationDialog = true;
-    },
-  
+    }
   }
 };
 </script>

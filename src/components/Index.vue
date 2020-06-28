@@ -7,16 +7,8 @@
             <v-img height="94.9vh" src="../assets/images/background7.jpg">
               <div class="background-layer">
                 <v-theme-provider dark>
-                  <v-container
-                    fill-height
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                  >
-                    <v-row
-                      align="center"
-                      class="white--text mx-auto"
-                      justify="center"
-                    >
+                  <v-container fill-height data-aos="fade-up" data-aos-duration="1000">
+                    <v-row align="center" class="white--text mx-auto" justify="center">
                       <v-col class="white--text text-center" cols="12" tag="h1">
                         <span
                           class="font-weight-light"
@@ -25,8 +17,7 @@
                               ? 'display-1'
                               : 'display-2',
                           ]"
-                          >{{$t('index.welcome1')}}</span
-                        >
+                        >{{$t('index.welcome1')}}</span>
 
                         <br />
 
@@ -37,8 +28,7 @@
                               : 'display-4',
                           ]"
                           class="font-weight-black"
-                          >{{$t('index.welcome2')}}</span
-                        >
+                        >{{$t('index.welcome2')}}</span>
                       </v-col>
 
                       <v-btn
@@ -66,8 +56,7 @@
                     $vuetify.breakpoint.smAndDown ? 'display-2' : 'display-3',
                   ]"
                   class="font-weight-bold"
-                  >{{$t('index.schedule')}}</span
-                >
+                >{{$t('index.schedule')}}</span>
               </v-row>
               <div class="py-12 hidden-sm-and-down"></div>
               <div class="py-12 hidden-md-and-up"></div>
@@ -127,28 +116,27 @@
                       lg="3"
                     >
                       <v-card>
-                        <v-card-title class="subheading font-weight-bold">{{
+                        <v-card-title class="subheading font-weight-bold">
+                          {{
                           item.address
-                        }}</v-card-title>
+                          }}
+                        </v-card-title>
 
                         <v-divider></v-divider>
 
                         <v-list dense>
-                          <v-list-item
-                            v-for="(key, index) in filteredKeys"
-                            :key="index"
-                          >
+                          <v-list-item v-for="(key, index) in filteredKeys" :key="index">
                             <v-list-item-content
                               :class="{ 'blue--text': sortBy === key }"
-                              >{{ $t('index.'+key.toLowerCase()) }}:</v-list-item-content
-                            >
+                            >{{ $t('index.'+key.toLowerCase()) }}:</v-list-item-content>
                             <v-list-item-content
                               class="align-end"
                               :class="{ 'blue--text': sortBy === key }"
-                              >{{
-                                item[key.toLowerCase()]
-                              }}</v-list-item-content
                             >
+                              {{
+                              item[key.toLowerCase()]
+                              }}
+                            </v-list-item-content>
                           </v-list-item>
                         </v-list>
                       </v-card>
@@ -179,25 +167,13 @@
 
                     <v-spacer></v-spacer>
 
-                    <span class="mr-4 grey--text"
-                      >{{$t('index.page')}} {{ page }} {{$t('index.of')}} {{ numberOfPages }}</span
-                    >
-                    <v-btn
-                      fab
-                      dark
-                      color="blue darken-3"
-                      class="mr-1"
-                      @click="formerPage"
-                    >
+                    <span
+                      class="mr-4 grey--text"
+                    >{{$t('index.page')}} {{ page }} {{$t('index.of')}} {{ numberOfPages }}</span>
+                    <v-btn fab dark color="blue darken-3" class="mr-1" @click="formerPage">
                       <v-icon>mdi-chevron-left</v-icon>
                     </v-btn>
-                    <v-btn
-                      fab
-                      dark
-                      color="blue darken-3"
-                      class="ml-1"
-                      @click="nextPage"
-                    >
+                    <v-btn fab dark color="blue darken-3" class="ml-1" @click="nextPage">
                       <v-icon>mdi-chevron-right</v-icon>
                     </v-btn>
                   </v-row>
@@ -207,12 +183,7 @@
           </template>
           <v-row align="center" class="white--text mx-auto" justify="center">
             <div class="py-12 hidden-sm-and-down"></div>
-            <v-btn
-              class="align-self-end"
-              fab
-              outlined
-              @click="$vuetify.goTo('#contact')"
-            >
+            <v-btn class="align-self-end" fab outlined @click="$vuetify.goTo('#contact')">
               <v-icon>mdi-chevron-double-down</v-icon>
             </v-btn>
           </v-row>
@@ -226,12 +197,7 @@
 
         <Contact id="contact" />
         <v-row align="center" class="white--text mx-auto" justify="center">
-          <v-btn
-            class="align-self-end"
-            fab
-            outlined
-            @click="$vuetify.goTo('#home')"
-          >
+          <v-btn class="align-self-end" fab outlined @click="$vuetify.goTo('#home')">
             <v-icon>mdi-chevron-double-up</v-icon>
           </v-btn>
         </v-row>
@@ -249,7 +215,7 @@ export default {
       selectedAddress: "",
       hide: true,
       error: false,
-      itemsPerPageArray: [4, 8, 12],
+      itemsPerPageArray: [4, 8],
       search: "",
       filter: {},
       sortDesc: false,
@@ -258,8 +224,8 @@ export default {
       sortBy: "this.$t('index.address')",
       //keys: [this.$t('index.address'), this.$t('index.type'), this.$t('index.day')],
       keys: ["Address", "Type", "Day"],
-      items: [],
-    };
+      items: []
+    }
   },
   mounted() {
     this.$store.dispatch("getSchedule").then((response) => {

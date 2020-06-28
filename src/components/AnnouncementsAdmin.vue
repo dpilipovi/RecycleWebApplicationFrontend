@@ -54,7 +54,7 @@
            <v-card-text>
            <p>{{$t('admin.announcement_message')}}: {{editedItem.message }}</p>
            <p>{{$t('admin.announcement_created')}}: {{editedItem.created | moment('timezone', 'Europe/Zagreb',"dddd, MMMM Do YYYY, h:mm:ss a")}}</p>
-           <p>{{$t('admin.announcement_updated')}}: {{editedItem.updated | moment("dddd, MMMM Do YYYY, h:mm:ss a")}}</p>
+           <p>{{$t('admin.announcement_updated')}}: {{editedItem.updated | moment('timezone', 'Europe/Zagreb',"dddd, MMMM Do YYYY, h:mm:ss a")}}</p>
            </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>

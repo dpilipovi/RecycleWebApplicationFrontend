@@ -74,8 +74,8 @@
       "required_email": "E-mail is required",
       "valid_email": "E-mail must be valid",
       "required_username": "Username is required",
-      "length_username": "Username must be less than 20 characters"
-
+      "length_username": "Username must be less than 20 characters",
+      "error": "Username or email is already taken!"
   },
 
   "login":
@@ -85,7 +85,8 @@
     "password": "Password",
     "username_required": "Username is required",
     "password_required": "Password is required",
-    "button": "Login"
+    "button": "Login",
+    "error": "Username or password is incorrect!"
   },
 
   "profile":
@@ -269,8 +270,9 @@
 
   "announcements":
   {
-    "title": "Announcements"
-
+    "title": "Announcements",
+    "created": "Created: ",
+    "updated": "Updated: "
   }
  
 }
