@@ -23,6 +23,23 @@
         "friday": "Petak"
     },
 
+    "months":
+    {
+      "jan": "SIJ",
+      "feb": "VELJ",
+      "mar": "OŽU",
+      "apr": "TRA",
+      "may": "SVI",
+      "jun": "LIP",
+      "jul": "SRP",
+      "aug": "KOL",
+      "sep": "RUJ",
+      "oct": "LIS",
+      "nov": "STU",
+      "dec": "PRO",
+      "months": "Mjeseci"
+    },
+
     "types":
     {
         "glass": "Staklo",
@@ -93,7 +110,9 @@
     "profile":
     {
         "edit_button": "Uredi profil",
-        "history": "Povijest recikliranja"
+        "history": "Povijest recikliranja",
+        "all": "SVE",
+        "toggle_graph_button": "PRIKAŽI/SAKRIJ GODIŠNJI GRAF"
     },
 
     "edit_profile":

@@ -23,6 +23,23 @@
     "friday": "Friday"
   },
 
+  "months":
+  {
+    "jan": "JAN",
+    "feb": "FEB",
+    "mar": "MAR",
+    "apr": "APR",
+    "may": "MAY",
+    "jun": "JUN",
+    "jul": "JUL",
+    "aug": "AUG",
+    "sep": "SEP",
+    "oct": "OCT",
+    "nov": "NOV",
+    "dec": "DEC",
+    "months": "Months"
+  },
+
   "types":
   {
     "glass": "Glass",
@@ -92,7 +109,9 @@
   "profile":
   {
     "edit_button": "Edit profile",
-    "history": "Recycle history"
+    "history": "Recycle history",
+    "all": "ALL",
+    "toggle_graph_button": "TOGGLE YEARLY GRAPH"
   },
 
   "edit_profile":
