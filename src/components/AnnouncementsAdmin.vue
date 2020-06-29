@@ -1,5 +1,6 @@
 <template>
-  <v-card class="mx-auto" max-width="1300" shaped>
+<v-content>
+  <v-card class="mx-auto" max-width="1300" shaped data-aos="fade-left">
     <v-card-title class="font-weight-bold">{{$t('admin.announcements_title')}}</v-card-title>
     <v-divider color="teal"></v-divider>
     <div class="py-3"></div>
@@ -95,7 +96,9 @@
 
     </v-data-table>
 
-    <div class="text-center ma-2">
+    
+  </v-card>
+  <div class="text-center ma-2">
       <v-snackbar v-model="snackBar" :color="snackBarColor">
         {{ snackBarText }}
         <v-btn text @click="snackBar = false" :timeout="timeout">
@@ -103,7 +106,7 @@
         </v-btn>
       </v-snackbar>
     </div>
-  </v-card>
+    </v-content>
 </template>
 
 <script>

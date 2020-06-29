@@ -20,6 +20,8 @@ Vue.use(VueMoment, {
   moment,
 })
 
+if (localStorage.getItem("locale") === null) moment.locale('en')
+else moment.locale(localStorage.getItem("locale"))
 
 Vue.use(VueApexCharts)
 

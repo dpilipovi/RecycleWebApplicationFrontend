@@ -1,6 +1,12 @@
 <template>
   <v-content>
-    <v-card class="mx-auto mb-12" max-width="80%" shaped>
+     <div class="text-center ma-2">
+      <v-snackbar v-model="snackBar" :color="snackBarColor">
+        {{ snackBarText }}
+        <v-btn text @click="snackBar = false" :timeout="timeout">{{ $t("admin.button_ok") }}</v-btn>
+      </v-snackbar>
+    </div>
+    <v-card class="mx-auto mb-12" max-width="80%" shaped data-aos="fade-left">
       <v-card-title class="font-weight-bold">
         {{
         $t("admin.recycles_title")
@@ -217,14 +223,8 @@
           <v-icon @click="deleteItem(item)">mdi-trash-can</v-icon>
         </template>
       </v-data-table>
-
-      <div class="text-center ma-2">
-        <v-snackbar v-model="snackBar" :color="snackBarColor">
-          {{ snackBarText }}
-          <v-btn text @click="snackBar = false" :timeout="timeout">{{ $t("admin.button_ok") }}</v-btn>
-        </v-snackbar>
-      </div>
     </v-card>
+
   </v-content>
 </template>
 

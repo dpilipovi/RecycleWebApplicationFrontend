@@ -1,7 +1,7 @@
 <template>
   <v-img min-height="93.2vh" src="../assets/images/board.jpg">
     <v-row align="center" class="mx-auto" justify="center">
-      <v-col class="text-center" cols="12" tag="h1">
+      <v-col class="text-center" cols="12" tag="h1"  data-aos="fade-up">
         <span
           :class="[$vuetify.breakpoint.smAndDown ? 'display-1' : 'display-2']"
           >{{ $t("announcements.title") }}</span
@@ -33,7 +33,7 @@
           cols="12"
           class="mx-auto"
         >
-          <v-card class="mx-auto mb-6" width="80%" shaped>
+          <v-card class="mx-auto mb-6" width="80%" shaped data-aos="fade-up">
             <v-card-title> {{ item.title }}</v-card-title>
             <v-card-text>{{$t('announcements.created')}} {{ item.created | moment('timezone', 'Europe/Zagreb',"dddd, MMMM Do YYYY, h:mm:ss a") }}</v-card-text>
             <v-card-text v-if="item.updated != null">{{$t('announcements.updated')}} {{ item.updated | moment('timezone', 'Europe/Zagreb',"dddd, MMMM Do YYYY, h:mm:ss a") }}</v-card-text>

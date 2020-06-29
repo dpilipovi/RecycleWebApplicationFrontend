@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto mb-12" max-width="80%" shaped>
+  <v-card class="mx-auto mb-12" max-width="80%" shaped data-aos="fade-left">
     <v-card-title class="font-weight-bold">{{$t('admin.users_title')}}</v-card-title>
     <v-divider color="teal"></v-divider>
     <div class="py-3"></div>
