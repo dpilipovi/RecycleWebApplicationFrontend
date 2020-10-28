@@ -22,3 +22,7 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Docker 
+See [Frontend](https://hub.docker.com/repository/docker/dpilipovic98/recycle_web_frontend)
+See [Backend](https://hub.docker.com/repository/docker/dpilipovic98/recycle_web_backend)
