@@ -15,7 +15,7 @@
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
     "material-design-icons-iconfont": "^5.0.1",
-    "moment-timezone": "^0.5.31",
+    "moment-timezone": "^0.5.35",
     "vue": "^2.6.11",
     "vue-apexcharts": "^1.5.3",
     "vue-i18n": "^8.18.2",
